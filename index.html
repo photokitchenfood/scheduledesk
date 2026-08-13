@@ -245,6 +245,7 @@
       </div>
       <div style="display:flex;gap:8px;margin-top:16px">
         <button class="primary genOptionsBtn" id="logGenBtn">FIND FREE DAYS</button>
+        <button id="logClearBtn">CLEAR</button>
       </div>
     </div>
     <div id="logDebug" style="font-size:11px;color:var(--muted);margin-bottom:12px"></div>
@@ -272,6 +273,7 @@
       </div>
       <div style="display:flex;gap:8px;margin-top:16px">
         <button class="primary genOptionsBtn" id="maintGenBtn">FIND FREE DAYS</button>
+        <button id="maintClearBtn">CLEAR</button>
       </div>
     </div>
     <div id="maintDebug" style="font-size:11px;color:var(--muted);margin-bottom:12px"></div>
@@ -1338,6 +1340,23 @@ function showToast(msg){
 document.getElementById('genBtn').addEventListener('click', generateOptions);
 document.getElementById('logGenBtn').addEventListener('click', generateLogisticsOptions);
 document.getElementById('maintGenBtn').addEventListener('click', generateMaintenanceOptions);
+document.getElementById('logClearBtn').addEventListener('click', ()=>{
+  logisticsTask = {name:'', person:'Regie', pinned:null, options:[]};
+  document.getElementById('logTaskName').value = '';
+  document.getElementById('logDebug').textContent = '';
+  showToast('Logistics task cleared');
+  renderCalendar();
+});
+document.getElementById('maintClearBtn').addEventListener('click', ()=>{
+  maintenanceTask = {name:'', pinned:null, options:[]};
+  document.getElementById('maintTaskName').value = '';
+  document.getElementById('maintDuration').value = '2';
+  document.getElementById('maintOptsLabel').style.display = 'none';
+  document.getElementById('maintOpts').innerHTML = '';
+  document.getElementById('maintDebug').textContent = '';
+  showToast('Maintenance task cleared');
+  renderCalendar();
+});
 document.getElementById('account').addEventListener('change', ()=>{
   if(!state) return;
   state.account = document.getElementById('account').value;
