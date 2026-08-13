@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Photokitchen Schedule Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F5F7; --card:#ffffff; --line:#DCDFE4; --line-strong:#B3B9C4;
+    --text:#242220; --text2:#44546F; --muted:#6B7280;
+    --accent:#946F00; --accent-bg:#F8E6A0; --accent-fill:#F5CD47;
+    --button:#0C66E4; --button-hover:#0B5CD1;
+    --purple:#6E5DC6; --purple-bg:#DFD8FD;
+    --warn:#946F00; --warn-bg:#F8E6A0;
+    --danger:#C9372C; --danger-bg:#FFD5D2;
+    --success:#1F845A; --success-bg:#BAF3DB;
+    --sky:#227D9B; --sky-bg:#C6EDFB;
+    --lime:#5B7F24; --lime-bg:#D3F1A7;
+    --gray-bg:#EBEDF0;
+    --radius:8px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'IBM Plex Sans',-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
+  .wrap{max-width:900px;margin:0 auto;padding:32px 24px}
+  h1{font-family:'Spline Sans Mono',monospace;font-size:20px;font-weight:700;margin:0 0 4px;color:var(--accent)}
+  .sub{font-size:13px;color:var(--text2);margin:0 0 24px}
+  .bar{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:20px;box-shadow:0 2px 10px rgba(9,30,66,.06)}
+  .fields{display:flex;gap:28px;flex-wrap:wrap}
+  .field label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.03em;font-family:'Spline Sans Mono',monospace}
+  select,input[type=date],input[type=number]{font-family:inherit;font-size:14px;padding:7px 10px;border:1px solid var(--line-strong);border-radius:6px;background:#fff;color:var(--text)}
+  button{font-family:inherit;font-size:13px;padding:8px 14px;border-radius:20px;border:1px solid var(--line-strong);background:#fff;color:var(--text);cursor:pointer}
+  button:hover{background:var(--gray-bg)}
+  button.primary{background:var(--button);color:#fff;border-color:var(--button)}
+  button.primary:hover{background:var(--button-hover)}
+  .editFieldsBtn, .genOptionsBtn{font-family:'Spline Sans Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.03em;padding:12px 22px;border-radius:24px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+  .editFieldsBtn{border:2px solid var(--button);background:#fff;color:var(--button)}
+  .editFieldsBtn:hover{background:var(--button);color:#fff}
+  .genOptionsBtn{box-shadow:0 4px 12px rgba(12,102,228,.3)}
+  .genOptionsBtn:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(12,102,228,.38)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:20px;display:none;box-shadow:0 2px 10px rgba(9,30,66,.06)}
+  .panel.open{display:block}
+  .panel h3{font-family:'Spline Sans Mono',monospace;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin:0 0 12px;color:var(--accent)}
+  .row{display:grid;grid-template-columns:1.6fr .8fr .9fr 1fr;gap:10px;align-items:center;padding:8px 0 8px 10px;border-bottom:1px solid var(--line);font-size:13px;border-left:3px solid transparent}
+  .row.src-derived{border-left-color:var(--success)}
+  .row.src-manual{border-left-color:var(--purple)}
+  .row.src-borrowed{border-left-color:var(--warn)}
+  .row.src-na{border-left-color:var(--sky)}
+  .fieldRow{grid-template-columns:1.6fr .8fr .9fr 1fr 40px;min-width:520px}
+  .panelScroll{overflow-x:auto}
+  .row:last-child{border-bottom:none}
+  .row .hd{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-family:'Spline Sans Mono',monospace}
+  .src{font-size:11px;padding:2px 8px;border-radius:20px;white-space:nowrap;width:fit-content}
+  .src.derived{background:var(--success-bg);color:var(--success)}
+  .src.borrowed{background:var(--warn-bg);color:var(--warn)}
+  .src.manual{background:var(--purple-bg);color:var(--purple)}
+  .src.na{color:var(--muted)}
+  .lead{width:60px}
+  h2.section{font-family:'Spline Sans Mono',monospace;font-size:12px;color:var(--text2);margin:24px 0 10px;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+  .options{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+  .opt{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;cursor:pointer;transition:box-shadow .12s;box-shadow:0 2px 10px rgba(9,30,66,.06)}
+  .opt:hover{box-shadow:0 4px 16px rgba(9,30,66,.12)}
+  .opt .actions button{cursor:pointer}
+  .opt.rec{border:2px solid var(--accent-fill)}
+  .badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;background:var(--accent-fill);color:var(--text);margin-bottom:8px;font-weight:600}
+  .opt h4{font-family:'Spline Sans Mono',monospace;font-size:14px;margin:0 0 8px}
+  .opt .steps{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:10px}
+  .flag{font-size:12px;display:flex;gap:5px;align-items:flex-start;margin-bottom:8px}
+  .flag.warn{color:var(--warn)}
+  .flag.real{color:#fff;font-weight:600;background:var(--danger);padding:4px 8px;border-radius:6px}
+  .flag.ok{color:var(--success)}
+  .opt .actions{display:flex;gap:8px;margin-top:10px}
+  .opt .actions button{flex:1}
+  .cal{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:21px 26px;margin-bottom:20px;width:130%;margin-left:-15%;box-sizing:border-box;box-shadow:0 2px 10px rgba(9,30,66,.06)}
+  .cal-head{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:10px;font-family:'Spline Sans Mono',monospace}
+  .grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;font-size:11px}
+  .dow{color:var(--muted);text-align:center;padding-bottom:5px;font-family:'Spline Sans Mono',monospace}
+  .day{position:relative;text-align:center;padding:8px 3px 5px;border-radius:7px;min-height:57px}
+  .day .n{font-size:14px}
+  .day .lbl{font-size:10px;margin-top:2px;line-height:1.2;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;padding:0 2px;word-break:break-word}
+  .day .lbl.existingLbl{background:#44546F;color:#fff;border-radius:3px;margin-top:2px;-webkit-line-clamp:2;padding:1px 3px}
+  .day.new{background:var(--accent-bg);color:var(--accent)}
+  .day.warnday{background:var(--warn-bg);color:var(--warn)}
+  .day.danger{background:var(--danger-bg);color:var(--danger)}
+  .day.existing{background:#44546F;color:#fff}
+  .day.target{border:1px dashed var(--line-strong);color:var(--muted)}
+  .day.draggable{cursor:grab}
+  .day.dragover{outline:2px dashed var(--button);outline-offset:-2px}
+  .tag{position:absolute;top:1px;left:1px;right:1px;font-size:8.5px;line-height:1.15;color:var(--danger);text-align:left;white-space:normal;word-break:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;background:#fff;border-radius:3px;padding:0 2px}
+  .agenda{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+  .arow{display:flex;align-items:center;gap:10px;background:var(--gray-bg);border-radius:8px;padding:7px 10px;font-size:13px}
+  .arow.existing{background:#44546F;color:#fff}
+  .arow.existing .src{background:transparent;color:#fff;border:1px solid #7A88A3}
+  .footer-actions{display:flex;gap:12px}
+  .footer-actions button{flex:1;padding:12px;border-radius:24px}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;font-size:13px;padding:10px 16px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s}
+  .toast.show{opacity:1}
+  .win{font-size:12px;color:var(--text2);margin-bottom:10px}
+  .opt.pinned{border:2px solid var(--success);background:var(--success-bg)}
+  .opt .pinnedTag{display:none;font-size:11px;padding:3px 10px;border-radius:20px;background:var(--success);color:#fff;margin-bottom:8px}
+  .opt.pinned .pinnedTag{display:inline-block}
+  .toggle-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2)}
+  .switch{position:relative;width:34px;height:18px;flex:none}
+  .switch input{opacity:0;width:0;height:0}
+  .slider{position:absolute;inset:0;background:var(--line-strong);border-radius:20px;cursor:pointer;transition:.15s}
+  .slider:before{content:'';position:absolute;width:14px;height:14px;left:2px;top:2px;background:#fff;border-radius:50%;transition:.15s}
+  input:checked + .slider{background:var(--accent-fill)}
+  input:checked + .slider:before{transform:translateX(16px)}
+  .tabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--line)}
+  .tabBtn{font-family:'Spline Sans Mono',monospace;border:none;border-bottom:2px solid transparent;border-radius:0;background:none;padding:10px 4px;margin-right:20px;font-size:13px;color:var(--text2)}
+  .tabBtn.active{color:var(--text);border-bottom-color:var(--accent-fill);font-weight:700}
+  .tabBtn:hover{background:none;color:var(--text)}
+  .refCard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:20px;box-shadow:0 2px 10px rgba(9,30,66,.06)}
+  .refCard h3{font-family:'Spline Sans Mono',monospace;font-size:13px;margin:0 0 4px;color:var(--accent)}
+  .refCard .note{font-size:12px;color:var(--muted);margin:0 0 12px}
+  table.refTable{width:100%;border-collapse:collapse;font-size:13px}
+  table.refTable th{text-align:left;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;padding:6px 8px;border-bottom:1px solid var(--line)}
+  table.refTable td{padding:7px 8px;border-bottom:1px solid var(--line)}
+  table.refTable tr:last-child td{border-bottom:none}
+  .buildRow{display:grid;grid-template-columns:2fr 1fr .8fr 1fr auto;gap:8px;align-items:center;margin-bottom:8px}
+  .buildRow input[type=text]{font-family:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--line-strong);border-radius:6px;width:100%}
+  .buildRow input[type=checkbox]{width:16px;height:16px}
+  .miniLabel{font-size:10px;color:var(--muted);text-transform:uppercase;font-family:'Spline Sans Mono',monospace}
+  .chainList{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  .chainItem{display:flex;justify-content:space-between;align-items:center;background:var(--gray-bg);border-radius:8px;padding:8px 12px;font-size:13px}
+  .topGrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;align-items:stretch}
+  .chainPreviewCard{background:#EDEEF1;border:1px dashed var(--line-strong);border-radius:12px;padding:16px 18px;opacity:.8}
+  .chainPreviewCard h4{font-family:'Spline Sans Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin:0 0 10px;font-weight:700}
+  .chainPreviewCard table{width:100%;border-collapse:collapse;font-size:12px}
+  .chainPreviewCard td{padding:5px 4px;color:var(--text2);border-bottom:1px solid #DCDFE4}
+  .chainPreviewCard tr:last-child td{border-bottom:none}
+  .chainPreviewCard td.lead{text-align:right;color:var(--muted);white-space:nowrap}
+  .project-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+  .projChip{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:20px;border:1.5px solid var(--line-strong);background:#fff;font-size:13px;cursor:pointer;box-shadow:0 1px 4px rgba(9,30,66,.05)}
+  .projChip .dot{width:9px;height:9px;border-radius:50%;flex:none}
+  .projChip.active{border-color:var(--accent-fill);font-weight:700;background:var(--accent-bg)}
+  .projChip .rmProj{border:none;background:none;padding:0 0 0 4px;font-size:13px;color:var(--muted);cursor:pointer}
+  .projChip .rmProj:hover{color:var(--danger)}
+  .addProjBtn{border:1.5px dashed var(--line-strong);background:none;border-radius:20px;padding:7px 14px;font-size:13px;color:var(--text2);cursor:pointer}
+  .addProjBtn:hover{background:var(--gray-bg)}
+  .project-toggles{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 4px;font-size:12px}
+  .day .lbl.projLbl{border-radius:3px;margin-top:1px;padding:1px 3px;font-weight:600}
+@media (max-width: 860px){
+  .wrap{padding:20px 14px}
+  .topGrid{grid-template-columns:1fr;gap:14px}
+  .options{grid-template-columns:1fr}
+  .cal{width:100%;margin-left:0;padding:14px 12px}
+  .day{min-height:46px;padding:6px 2px 4px}
+  .day .n{font-size:12px}
+  .day .lbl{font-size:8.5px}
+  .tag{font-size:7px}
+  .buildRow{grid-template-columns:1fr 70px 70px 70px auto;gap:6px;font-size:12px}
+  .chainPreviewCard{opacity:1;background:var(--gray-bg)}
+  h1{font-size:18px}
+  .editFieldsBtn, .genOptionsBtn{padding:10px 14px;font-size:12px}
+}
+@media (max-width: 520px){
+  .day .lbl{display:none}
+  .day{min-height:32px}
+  .buildRow{grid-template-columns:1fr;gap:4px}
+  .buildRow .rmRow{justify-self:start}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Schedule Desk</h1>
+  <p class="sub">Use this for new project timing proposals, timing any logistics and maintenance related tasks, and even planning your personal leaves.</p>
+
+  <div class="tabs">
+    <button type="button" class="tabBtn active" id="tabScheduler">Scheduler</button>
+    <button type="button" class="tabBtn" id="tabReference">Account Reference Field Chains</button>
+  </div>
+
+  <div id="schedulerView">
+  <div id="projectChips" class="project-chips"></div>
+  <div class="topGrid">
+  <div class="bar" style="flex-direction:column;align-items:stretch;margin-bottom:0">
+    <div class="fields" style="flex-direction:column;gap:14px">
+      <div class="field">
+        <label>Type of Shoot</label>
+        <select id="account">
+          <option value="ctg">CTG (subscription)</option>
+          <option value="tmp">TMP (subscription)</option>
+          <option value="nonsub_photo">Non-sub — photo only</option>
+          <option value="nonsub_video">Non-sub — video only</option>
+          <option value="nonsub_both">Non-sub — photo + video</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Project Name <span style="color:var(--danger)">*</span></label>
+        <input type="text" id="projectName" placeholder="e.g. Polland Hopia Sept" style="width:100%">
+      </div>
+      <div class="field">
+        <label>Target Signed CE Date <span style="text-transform:none;font-weight:400;color:var(--muted)">(skip this if subscription shoot)</span></label>
+        <input type="date" id="anchor" value="2026-09-02" style="width:100%">
+      </div>
+      <div class="field">
+        <label>Target Break Date (optional, if provided by client)</label>
+        <input type="date" id="target" value="" style="width:100%">
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button id="editBtn" class="editFieldsBtn">EDIT FIELDS</button>
+      <button class="primary genOptionsBtn" id="genBtn">GENERATE TIMING OPTIONS</button>
+    </div>
+  </div>
+
+  <div class="chainPreviewCard" id="chainPreviewCard"></div>
+  </div>
+
+  <div id="debug" style="font-size:11px;color:var(--muted);margin-bottom:12px"></div>
+
+  <div class="panel" id="panel"></div>
+
+  <h2 class="section" id="optsLabel" style="display:none"></h2>
+  <div class="options" id="opts"></div>
+
+  <div id="calWrap" style="display:none">
+    <h2 class="section">Calendar preview</h2>
+    <div class="cal">
+      <div class="cal-head">
+        <span id="calMonth"></span>
+        <label class="toggle-row">
+          Town Hall Preview
+          <span class="switch"><input type="checkbox" id="townhallToggle"><span class="slider"></span></span>
+        </label>
+      </div>
+      <div class="grid7" id="calGrid"></div>
+      <div id="projectToggles" class="project-toggles"></div>
+      <div class="agenda" id="agenda"></div>
+    </div>
+    <div class="footer-actions">
+      <button class="primary" id="copyBtn"><i class="ti ti-copy" style="font-size:16px;vertical-align:-3px;margin-right:4px"></i>Copy timings</button>
+    </div>
+  </div>
+  </div>
+
+  <div id="referenceView" style="display:none">
+
+    <div class="refCard">
+      <h3>CTG (subscription)</h3>
+      <p class="note">Median gap between milestones, derived from 2026 Slack timing threads.</p>
+      <table class="refTable">
+        <tr><th>Gap</th><th>Median</th><th>Source</th></tr>
+        <tr><td>Shotlist → Product Request</td><td>2 days</td><td>Derived</td></tr>
+        <tr><td>Product Request → PPM</td><td>5 days</td><td>Derived</td></tr>
+        <tr><td>PPM → Delivery</td><td>3 days</td><td>Derived</td></tr>
+        <tr><td>Delivery → Photoshoot Day 1</td><td>4 days</td><td>Derived</td></tr>
+        <tr><td>Photoshoot → Videoshoot Day 2</td><td>1 day</td><td>Derived</td></tr>
+        <tr><td>Shoot → Submit Photos</td><td>3 days</td><td>Derived</td></tr>
+        <tr><td>Video shoot → Submit Videos</td><td>9 days</td><td>Derived</td></tr>
+      </table>
+    </div>
+
+    <div class="refCard">
+      <h3>TMP (subscription)</h3>
+      <p class="note">Median gap between milestones. Turnover fields have no logged history yet (not tracked on Slack or Trello) — borrowed from CTG until TMP data accumulates.</p>
+      <table class="refTable">
+        <tr><th>Gap</th><th>Median</th><th>Source</th></tr>
+        <tr><td>Shotlist → Product Request</td><td>2 days</td><td>Derived</td></tr>
+        <tr><td>Product Request → PPM</td><td>4 days</td><td>Derived</td></tr>
+        <tr><td>PPM → Delivery</td><td>2 days</td><td>Derived</td></tr>
+        <tr><td>Delivery → Photoshoot Day 1</td><td>4 days</td><td>Derived</td></tr>
+        <tr><td>Photoshoot → Videoshoot Day 2</td><td>1 day</td><td>Derived</td></tr>
+        <tr><td>Shoot → Submit Photos</td><td>3 days</td><td>Borrowed (CTG)</td></tr>
+        <tr><td>Video shoot → Submit Videos</td><td>9 days</td><td>Borrowed (CTG)</td></tr>
+      </table>
+    </div>
+
+    <div class="refCard">
+      <h3>Non-subscription — photo only</h3>
+      <p class="note">Small sample (project threads: Alaska, Funtastyk, Mary Grace, CDO). PPM→Shoot was historically logged as one 2-day gap; Delivery of Products is now split out as its own step (1+1 days) as a manual estimate, not independently derived.</p>
+      <table class="refTable">
+        <tr><th>Gap</th><th>Median</th><th>Source</th></tr>
+        <tr><td>CE Signed → Product Request</td><td>2 days</td><td>Derived</td></tr>
+        <tr><td>Product Request → PPM</td><td>4 days</td><td>Derived</td></tr>
+        <tr><td>PPM → Delivery of Products</td><td>1 day</td><td>Manual split</td></tr>
+        <tr><td>Delivery → Shoot</td><td>1 day</td><td>Manual split</td></tr>
+        <tr><td>Shoot → Submit Photos</td><td>2 days</td><td>Derived</td></tr>
+      </table>
+    </div>
+
+    <div class="refCard">
+      <h3>Non-subscription — video only / video leg of "both"</h3>
+      <p class="note">Small sample (Poll & Hopia video cycle and similar). Video turnover runs far longer than photo — consistent with CTG's video pattern too. PPM→Shoot split the same way as the photo table above.</p>
+      <table class="refTable">
+        <tr><th>Gap</th><th>Median</th><th>Source</th></tr>
+        <tr><td>CE Signed → Product Request</td><td>2 days</td><td>Derived</td></tr>
+        <tr><td>Product Request → PPM</td><td>6 days</td><td>Derived</td></tr>
+        <tr><td>PPM → Delivery of Products</td><td>1 day</td><td>Manual split</td></tr>
+        <tr><td>Delivery → Shoot</td><td>1 day</td><td>Manual split</td></tr>
+        <tr><td>Shoot → Submit Videos</td><td>9 days</td><td>Derived</td></tr>
+      </table>
+      <p class="note" style="margin-top:10px">"Both" projects (e.g. Poll & Hopia) aren't a separate pattern — they run the photo cycle, then chain the video cycle after, using both tables above back to back.</p>
+    </div>
+
+    <div class="refCard">
+      <h3>Add a field chain for a non-subscription regular</h3>
+      <p class="note">For a client that isn't on subscription but comes back often enough to deserve its own saved timing pattern instead of the generic non-sub defaults.</p>
+      <div class="field" style="margin-bottom:14px;max-width:320px">
+        <label>Client / project name</label>
+        <input type="text" id="newChainName" placeholder="e.g. Mary Grace">
+      </div>
+      <div class="buildRow">
+        <div class="miniLabel">Field label</div>
+        <div class="miniLabel">Lead (days)</div>
+        <div class="miniLabel">Time?</div>
+        <div class="miniLabel">Is a shoot day?</div>
+        <div></div>
+      </div>
+      <div id="newChainRows"></div>
+      <div style="display:flex;gap:8px;margin-top:6px">
+        <button type="button" id="addChainRow">+ Add field</button>
+        <button type="button" class="primary" id="saveChain">Save as new chain</button>
+      </div>
+    </div>
+
+    <div class="refCard">
+      <h3>Custom chains added</h3>
+      <div class="chainList" id="customChainList"><p class="note" style="margin:0">None yet.</p></div>
+    </div>
+
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+let MOCK = { cards: [], leaves: [] };
+
+async function loadTownHallData(){
+  try{
+    const res = await fetch('data/townhall.json', {cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const data = await res.json();
+    MOCK = { cards: data.cards || [], leaves: data.leaves || [] };
+  }catch(err){
+    console.warn('Could not load live Town Hall data, calendar will show proposed dates only:', err);
+    showToast('Could not load Town Hall data — showing proposed dates only');
+  }
+}
+
+const CHAINS = {
+  ctg: [
+    {key:'shotlist', label:'Shotlist c/o Client', lead:0, src:'na'},
+    {key:'product_request', label:'Product Req. c/o PK', lead:2, src:'derived'},
+    {key:'ppm', label:'PPM', lead:5, src:'derived', hasTime:'15:00', isPPM:true},
+    {key:'delivery', label:'Delivery of Products', lead:3, src:'derived'},
+    {key:'shoot1', label:'Photoshoot Day', lead:4, src:'derived', isShoot:true, shootType:'photo'},
+    {key:'shoot2', label:'Videoshoot Day', lead:1, src:'derived', isShoot:true, shootType:'video'},
+    {key:'turnover_photos', label:'Submit Photos', lead:3, src:'derived'},
+    {key:'turnover_videos', label:'Submit Videos', lead:9, src:'derived'}
+  ],
+  tmp: [
+    {key:'shotlist', label:'Shotlist c/o Client', lead:0, src:'na'},
+    {key:'product_request', label:'Product Req. c/o PK', lead:2, src:'derived'},
+    {key:'ppm', label:'PPM', lead:4, src:'derived', hasTime:'15:00', isPPM:true},
+    {key:'delivery', label:'Delivery of Products', lead:2, src:'derived'},
+    {key:'shoot1', label:'Photoshoot Day', lead:4, src:'derived', isShoot:true, shootType:'photo'},
+    {key:'shoot2', label:'Videoshoot Day', lead:1, src:'derived', isShoot:true, shootType:'video'},
+    {key:'turnover_photos', label:'Submit Photos', lead:3, src:'borrowed'},
+    {key:'turnover_videos', label:'Submit Videos', lead:9, src:'borrowed'}
+  ],
+  nonsub_photo: [
+    {key:'ce', label:'CE Signed', lead:0, src:'na'},
+    {key:'product_request', label:'Product Req. c/o PK', lead:2, src:'derived'},
+    {key:'ppm', label:'PPM', lead:4, src:'derived', hasTime:'14:00', isPPM:true},
+    {key:'delivery', label:'Delivery of Products', lead:1, src:'manual'},
+    {key:'shoot1', label:'Photoshoot Day', lead:1, src:'manual', isShoot:true, shootType:'photo'},
+    {key:'turnover_photos', label:'Submit Photos', lead:2, src:'derived'}
+  ],
+  nonsub_video: [
+    {key:'ce', label:'CE Signed', lead:0, src:'na'},
+    {key:'product_request', label:'Product Req. c/o PK', lead:2, src:'derived'},
+    {key:'ppm', label:'PPM', lead:6, src:'derived', hasTime:'14:00', isPPM:true},
+    {key:'delivery', label:'Delivery of Products', lead:1, src:'manual'},
+    {key:'shoot1', label:'Videoshoot Day', lead:1, src:'manual', isShoot:true, shootType:'video'},
+    {key:'turnover_videos', label:'Submit Videos', lead:9, src:'derived'}
+  ],
+  nonsub_both: [
+    {key:'ce', label:'CE Signed', lead:0, src:'na'},
+    {key:'product_request', label:'Product Req. c/o PK', lead:2, src:'derived'},
+    {key:'ppm', label:'PPM (Photo)', lead:4, src:'derived', hasTime:'14:00', isPPM:true},
+    {key:'delivery', label:'Delivery of Products', lead:1, src:'manual'},
+    {key:'shoot1', label:'Photoshoot Day', lead:1, src:'manual', isShoot:true, shootType:'photo'},
+    {key:'turnover_photos', label:'Submit Photos', lead:2, src:'derived'},
+    {key:'ppm_video', label:'PPM (Video)', lead:6, src:'borrowed', hasTime:'14:00', isPPM:true},
+    {key:'delivery_video', label:'Delivery of Products', lead:1, src:'manual'},
+    {key:'shoot2', label:'Videoshoot Day', lead:1, src:'borrowed', isShoot:true, shootType:'video'},
+    {key:'turnover_videos', label:'Submit Videos', lead:9, src:'borrowed'}
+  ]
+};
+
+const PROJECT_COLORS = [
+  {accent:'#227D9B', bg:'#C6EDFB'},
+  {accent:'#5B7F24', bg:'#D3F1A7'},
+  {accent:'#626F86', bg:'#DCDFE4'}
+];
+const MAX_PROJECTS = 3;
+let projects = [];
+let activeProjectId = null;
+let currentChain, state = null;
+
+function newProject(){
+  const idx = projects.length;
+  const color = PROJECT_COLORS[idx % PROJECT_COLORS.length];
+  return {
+    id: 'proj_'+Date.now()+'_'+idx,
+    name: '',
+    color,
+    account: 'ctg',
+    chainAccount: 'ctg',
+    anchor: todayStr(),
+    target: '',
+    chain: JSON.parse(JSON.stringify(CHAINS.ctg)),
+    options: [],
+    pinned: null,
+    pinnedLetter: 'A',
+    visible: true
+  };
+}
+
+function addProject(){
+  if(projects.length >= MAX_PROJECTS){ showToast('Up to '+MAX_PROJECTS+' projects at a time'); return; }
+  const p = newProject();
+  projects.push(p);
+  setActiveProject(p.id);
+}
+
+function setActiveProject(id){
+  activeProjectId = id;
+  state = projects.find(p=>p.id===id);
+  if(!state) return;
+  currentChain = state.chain;
+  document.getElementById('projectName').value = state.name;
+  document.getElementById('account').value = state.account;
+  document.getElementById('anchor').value = state.anchor;
+  document.getElementById('target').value = state.target;
+  document.getElementById('panel').classList.remove('open');
+  renderProjectChips();
+  renderChainPreview();
+  if(state.options.length){ renderOptions(); }
+  else {
+    document.getElementById('opts').innerHTML = '';
+    document.getElementById('optsLabel').style.display = 'none';
+  }
+  renderCalendar();
+}
+
+function removeProject(id, e){
+  if(e) e.stopPropagation();
+  projects = projects.filter(p=>p.id!==id);
+  if(activeProjectId===id){
+    if(projects.length){ setActiveProject(projects[0].id); }
+    else { addProject(); }
+  } else {
+    renderProjectChips();
+    renderCalendar();
+  }
+}
+
+function renderProjectChips(){
+  const wrap = document.getElementById('projectChips');
+  wrap.innerHTML = '';
+  projects.forEach(p=>{
+    const chip = document.createElement('div');
+    chip.className = 'projChip' + (p.id===activeProjectId ? ' active' : '');
+    chip.innerHTML = '<span class="dot" style="background:'+p.color.accent+'"></span><span>'+(p.name||'Untitled project')+'</span>' + (projects.length>1 ? '<button type="button" class="rmProj" title="Remove project">×</button>' : '');
+    chip.addEventListener('click', ()=> setActiveProject(p.id));
+    const rm = chip.querySelector('.rmProj');
+    if(rm) rm.addEventListener('click', e=> removeProject(p.id, e));
+    wrap.appendChild(chip);
+  });
+  if(projects.length < MAX_PROJECTS){
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'addProjBtn';
+    addBtn.textContent = '+ New project';
+    addBtn.addEventListener('click', addProject);
+    wrap.appendChild(addBtn);
+  }
+}
+
+function recomputeAllProjectFlags(){
+  projects.forEach(p=>{ if(p.pinned){ p.pinned.flags = computeAllFlags(p.pinned.steps, p.id); } });
+}
+
+function fmt(d){ const y=d.getFullYear(); const m=String(d.getMonth()+1).padStart(2,'0'); const day=String(d.getDate()).padStart(2,'0'); return y+'-'+m+'-'+day; }
+function addDays(dateStr, n){ const d = new Date(dateStr+'T00:00:00'); d.setDate(d.getDate()+n); return fmt(d); }
+function monthLabel(dateStr){ const d = new Date(dateStr+'T00:00:00'); return d.toLocaleString('en-US',{month:'long',year:'numeric'}); }
+function prettyDate(dateStr){ const d = new Date(dateStr+'T00:00:00'); return d.toLocaleString('en-US',{month:'short',day:'numeric'}); }
+function prettyDateFull(dateStr){ const d = new Date(dateStr+'T00:00:00'); const md = d.toLocaleString('en-US',{month:'short',day:'numeric'}); const wd = d.toLocaleString('en-US',{weekday:'short'}); return md+', '+wd; }
+function formatTime(t){
+  const [h,m] = t.split(':').map(Number);
+  const period = h>=12 ? 'PM' : 'AM';
+  const h12 = h%12===0 ? 12 : h%12;
+  return m===0 ? h12+period : h12+':'+String(m).padStart(2,'0')+period;
+}
+function timingsHeader(letter){
+  const name = document.getElementById('projectName').value.trim();
+  return name ? name+' — TIMINGS: OPTION '+letter : 'TIMINGS: OPTION '+letter;
+}
+function timingsText(opt, letter){
+  const lines = [timingsHeader(letter), ''];
+  const sorted = [...opt.steps].sort((a,b)=> a.date.localeCompare(b.date));
+  sorted.forEach((s,i)=>{
+    lines.push((i+1)+'. *'+prettyDateFull(s.date)+'* - '+s.label+(s.hasTime?' @ '+formatTime(s.hasTime):''));
+  });
+  if(opt.flags && opt.flags.length){
+    lines.push('');
+    const sortedFlags = [...opt.flags].sort((a,b)=> (a.type==='real'?0:1) - (b.type==='real'?0:1));
+    sortedFlags.forEach(f=>{
+      const prefix = f.type==='real' ? '⚠️ REAL CONFLICT: ' : '⚠️ ';
+      lines.push(prefix+f.text+' ('+prettyDate(f.date)+')');
+    });
+  }
+  return lines.join('\n');
+}
+
+function shiftWeekend(dateStr, prevDate, lead){
+  const dow = new Date(dateStr+'T00:00:00').getDay();
+  if(dow===6){
+    const fri = addDays(dateStr, -1);
+    if(prevDate!=null && lead!=null && daysBetween(prevDate, fri) < lead){
+      return addDays(dateStr, 2);
+    }
+    return fri;
+  }
+  if(dow===0) return addDays(dateStr, 1);
+  return dateStr;
+}
+
+function nextWeekday(dateStr){
+  const dow = new Date(dateStr+'T00:00:00').getDay();
+  if(dow===6) return addDays(dateStr, 2);
+  if(dow===0) return addDays(dateStr, 1);
+  return dateStr;
+}
+
+function leaveFlags(dateStr){
+  const flags = [];
+  const leavesToday = MOCK.leaves.filter(l=>l.date===dateStr);
+  if(leavesToday.length && leavesToday.length<=2){
+    leavesToday.forEach(l=> flags.push({type:'soft', text:l.person+' on leave this day, consider moving if crucial for this shoot'}));
+  } else if(leavesToday.length>2){
+    flags.push({type:'soft', text:leavesToday.length+' people on leave same day — thin crew, review before confirming'});
+  }
+  return flags;
+}
+
+function meetingTimeFlags(dateStr, hasTime){
+  const flags = [];
+  if(hasTime){
+    MOCK.cards.filter(c=>c.kind==='meeting' && c.date===dateStr && c.time).forEach(m=>{
+      flags.push({type:'soft', text:m.title+' already booked — nudge PPM time'});
+    });
+  }
+  return flags;
+}
+
+// Real conflict: this step's shoot day (photo or video) lands on an EXISTING Town Hall
+// shoot card, tentative or confirmed, photo or video — always real, never soft.
+function existingShootFlags(step, dateStr){
+  const flags = [];
+  if(!step.isShoot) return flags;
+  MOCK.cards.filter(c=>c.kind==='shoot' && c.date===dateStr).forEach(s=>{
+    const tag = (s.tentative && !/tentative/i.test(s.title)) ? ' [tentative]' : '';
+    flags.push({type:'real', text:s.title+tag+' — clashes with your '+(step.shootType==='video'?'videoshoot':'photoshoot')});
+  });
+  return flags;
+}
+
+// Real conflict: a photoshoot or videoshoot lands on a company holiday (only reachable
+// via a manual move, since generation itself never lands a step on a holiday).
+function holidayShootFlags(step, dateStr){
+  const flags = [];
+  if(!step.isShoot) return flags;
+  MOCK.cards.filter(c=>c.kind==='holiday' && c.date===dateStr).forEach(h=>{
+    flags.push({type:'real', text:h.title+' — shoot day falls on a company holiday'});
+  });
+  return flags;
+}
+
+// Soft conflicts internal to this timeline: PPM landing on a shoot day, or a sourcing
+// day landing on a shoot day. Checked pairwise across the whole steps array.
+function internalFlags(steps){
+  const flags = [];
+  for(let i=0;i<steps.length;i++){
+    for(let j=0;j<steps.length;j++){
+      if(i===j) continue;
+      const a = steps[i], b = steps[j];
+      if(a.date!==b.date) continue;
+      if(a.isSourcing && b.isShoot){
+        flags.push({type:'soft', text:'Sourcing day falls on the same day as '+b.label, date:a.date, label:a.label});
+      }
+    }
+  }
+  return flags;
+}
+
+function isHolidayAt(dateStr){ return MOCK.cards.some(c=>c.kind==='holiday' && c.date===dateStr); }
+function isConfirmedShootAt(dateStr){ return MOCK.cards.some(c=>c.kind==='shoot' && c.date===dateStr && !c.tentative); }
+
+function resolveStepDate(rawDate, step){
+  let d = rawDate;
+  let guard = 0;
+  if(step.isShoot){
+    while((isHolidayAt(d) || isConfirmedShootAt(d)) && guard<60){ d = nextWeekday(addDays(d,1)); guard++; }
+  } else {
+    while(isHolidayAt(d) && guard<10){ d = nextWeekday(addDays(d,1)); guard++; }
+  }
+  return d;
+}
+
+function buildTimeline(anchorDate, chain, shootBuffer, ownProjectId){
+  let cursor = anchorDate;
+  let prevDate = null;
+  const steps = [];
+  let firstShootUsed = false;
+  chain.forEach((step,i)=>{
+    if(i===0){
+      cursor = anchorDate;
+    } else {
+      let lead = step.lead;
+      if(step.isShoot && !firstShootUsed){ lead += (shootBuffer||0); firstShootUsed = true; }
+      let raw = shiftWeekend(addDays(cursor, lead), cursor, lead);
+      if(lead>0){
+        let guard=0;
+        while(raw===prevDate && guard<5){ raw = nextWeekday(addDays(raw, 2)); guard++; }
+      }
+      cursor = resolveStepDate(raw, step);
+    }
+    steps.push({...step, date:cursor});
+    prevDate = cursor;
+  });
+  const allFlags = computeAllFlags(steps, ownProjectId);
+  return {steps, flags: allFlags};
+}
+
+// Real conflict: this project's shoot day collides with another ACTIVE project's
+// already-pinned shoot day (photo or video, regardless of tentative status — projects
+// aren't tentative, they're both genuinely being scheduled).
+function crossProjectShootFlags(step, dateStr, ownProjectId){
+  const flags = [];
+  if(!step.isShoot) return flags;
+  projects.forEach(p=>{
+    if(p.id===ownProjectId || !p.pinned) return;
+    p.pinned.steps.filter(s=>s.isShoot && s.date===dateStr).forEach(s=>{
+      flags.push({type:'real', text:(p.name||'Untitled project').toUpperCase()+' TIMINGS — '+s.label+' clashes with your '+(step.shootType==='video'?'videoshoot':'photoshoot')});
+    });
+  });
+  return flags;
+}
+
+function computeAllFlags(steps, ownProjectId){
+  let allFlags = [];
+  steps.forEach(step=>{
+    allFlags = allFlags.concat(
+      leaveFlags(step.date).map(f=>({...f, date:step.date, label:step.label})),
+      existingShootFlags(step, step.date).map(f=>({...f, date:step.date, label:step.label})),
+      holidayShootFlags(step, step.date).map(f=>({...f, date:step.date, label:step.label})),
+      crossProjectShootFlags(step, step.date, ownProjectId).map(f=>({...f, date:step.date, label:step.label}))
+    );
+  });
+  allFlags = allFlags.concat(internalFlags(steps));
+  return allFlags;
+}
+
+function daysBetween(a,b){
+  return Math.round((new Date(b+'T00:00:00') - new Date(a+'T00:00:00'))/86400000);
+}
+
+function renderChainPreview(){
+  const acct = document.getElementById('account').value;
+  const chain = state ? state.chain : CHAINS[acct];
+  const card = document.getElementById('chainPreviewCard');
+  if(!chain){ card.innerHTML = ''; return; }
+  const label = acct==='ctg' ? 'CTG' : acct==='tmp' ? 'TMP' : (CHAINS[acct] && CHAINS[acct].displayName) || (document.querySelector('#account option:checked') ? document.querySelector('#account option:checked').textContent : acct);
+  let rows = chain.map((s,i)=> '<tr><td>'+s.label+'</td><td class="lead">'+(i===0?'anchor':s.lead+'d lead')+'</td></tr>').join('');
+  card.innerHTML = '<h4>Lead times — '+label+(state && state.name ? ' · '+state.name : '')+'</h4><table>'+rows+'</table>';
+}
+
+function generateOptions(){
+  if(!state){ showToast('Add a project first'); return; }
+  const nameField = document.getElementById('projectName');
+  if(!nameField.value.trim()){
+    showToast('Enter a project name first');
+    nameField.focus();
+    return;
+  }
+  state.name = nameField.value.trim();
+  state.account = document.getElementById('account').value;
+  if(state.chainAccount !== state.account){
+    state.chain = JSON.parse(JSON.stringify(CHAINS[state.account]));
+    state.chainAccount = state.account;
+    renumberShootDays(state.chain);
+  }
+  currentChain = state.chain;
+  state.anchor = document.getElementById('anchor').value || todayStr();
+  let target = document.getElementById('target').value;
+  if(target && target <= state.anchor){ target = ''; document.getElementById('target').value = ''; }
+  state.target = target;
+  currentChain = state.chain;
+  const tlA = buildTimeline(state.anchor, currentChain, 0, state.id);
+  tlA.bufferUsed = 0;
+  const tlB = buildTimeline(state.anchor, currentChain, 5, state.id);
+  tlB.bufferUsed = 5;
+  [tlA, tlB].forEach(tl=>{ tl.projectId = state.id; tl.projectName = state.name; tl.projectColor = state.color; });
+  const found = [tlA, tlB];
+  state.options = found;
+  state.windowStart = state.anchor;
+  state.windowEnd = target || addDays(state.anchor, 90);
+  document.getElementById('debug').textContent = 'debug — today: '+todayStr()+' · CE anchor (fixed): '+state.anchor+' · target field: '+(target||'(blank)')+' · project: '+state.name+' · found: '+found.length;
+  renderProjectChips();
+  renderOptions();
+  renderFieldPanel(currentChain, state.anchor, found[0] ? found[0].bufferUsed : 0);
+  renderChainPreview();
+  recomputeAllProjectFlags();
+  refreshPinnedCard();
+  renderCalendar();
+}
+
+function renumberShootDays(chain){
+  ['photo','video'].forEach(type=>{
+    const group = chain.filter(s=>s.isShoot && s.shootType===type);
+    const base = type==='photo' ? 'Photoshoot Day' : 'Videoshoot Day';
+    if(group.length===1){ group[0].label = base; }
+    else { group.forEach((s,i)=> s.label = base+' '+(i+1)+'/'+group.length); }
+  });
+}
+
+function renderFieldPanel(chain, anchorDate, buffer){
+  buffer = buffer || 0;
+  const panel = document.getElementById('panel');
+  let html = '<h3>Edit fields</h3>';
+  if(buffer>0){
+    html += '<p style="font-size:12px;color:var(--warn);background:var(--warn-bg);border-radius:6px;padding:8px 10px;margin:0 0 12px">Dates below include a +'+buffer+' day buffer on the first shoot day (to match Option A), plus automatic day-by-day pushes past any holiday or confirmed shoot.</p>';
+  }
+  html += '<div class="panelScroll">';
+  html += '<div class="row fieldRow"><div class="hd">Field</div><div class="hd">Lead time</div><div class="hd">Resulting date</div><div class="hd">Source</div><div></div></div>';
+  let cursor = anchorDate;
+  let prevDate = null;
+  let firstShootUsed = false;
+  chain.forEach((s,i)=>{
+    if(i===0){ cursor = anchorDate; }
+    else {
+      let lead = s.lead;
+      if(s.isShoot && !firstShootUsed){ lead += buffer; firstShootUsed = true; }
+      let raw = shiftWeekend(addDays(cursor, lead), cursor, lead);
+      if(lead>0){ let guard=0; while(raw===prevDate && guard<5){ raw = nextWeekday(addDays(raw, 2)); guard++; } }
+      cursor = resolveStepDate(raw, s);
+    }
+    prevDate = cursor;
+    const srcLabel = s.src==='na' ? '' : (s.src==='derived' ? 'Derived, 2026 history' : s.src==='manual' ? 'Manual entry' : 'Borrowed, related type');
+    html += '<div class="row fieldRow src-'+s.src+'"><div>'+s.label+'</div><div>'+(i===0?'<input type="date" class="anchorEdit" value="'+cursor+'">':'<input type="number" class="lead" value="'+s.lead+'" data-key="'+s.key+'">') +'</div><div>'+prettyDate(cursor)+(s.hasTime?', '+s.hasTime:'')+'</div><div><span class="src '+s.src+'">'+srcLabel+'</span></div><div>'+(i===0?'':'<button type="button" class="rmField" data-key="'+s.key+'" title="Remove field" style="padding:4px 8px;font-size:12px">×</button>')+'</div></div>';
+  });
+  html += '</div>';
+  html += '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">' +
+    '<button type="button" id="addPhotoDay">+ Add photoshoot day</button>' +
+    '<button type="button" id="addVideoDay">+ Add videoshoot day</button>' +
+    '<button type="button" id="addSubmitVideos">+ Add submit videos</button>' +
+    '<button type="button" id="addSourcingDay">+ Add sourcing day</button>' +
+    '</div>';
+  panel.innerHTML = html;
+  panel.querySelectorAll('.anchorEdit').forEach(inp=>{
+    inp.addEventListener('change', ()=>{
+      if(!inp.value) return;
+      document.getElementById('anchor').value = inp.value;
+      generateOptions();
+    });
+  });
+  panel.querySelectorAll('input.lead').forEach(inp=>{
+    inp.addEventListener('change', ()=>{
+      const key = inp.dataset.key;
+      const step = currentChain.find(s=>s.key===key);
+      step.lead = parseInt(inp.value,10) || 0;
+      generateOptions();
+    });
+  });
+  panel.querySelectorAll('.rmField').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const key = btn.dataset.key;
+      const idx = currentChain.findIndex(s=>s.key===key);
+      if(idx>0){ currentChain.splice(idx,1); renumberShootDays(currentChain); generateOptions(); }
+    });
+  });
+  function addShootDay(kind){
+    const label = kind==='photo' ? 'Photoshoot Day' : 'Videoshoot Day';
+    let insertAt = currentChain.length;
+    for(let i=currentChain.length-1;i>=0;i--){
+      if(currentChain[i].isShoot){ insertAt = i+1; break; }
+      if(currentChain[i].key.includes('turnover') || currentChain[i].key.includes('ppm')){ insertAt = i; }
+    }
+    const newKey = kind+'_day_'+Date.now();
+    currentChain.splice(insertAt, 0, {key:newKey, label:label, lead:1, src:'manual', isShoot:true, shootType:kind});
+    renumberShootDays(currentChain);
+    generateOptions();
+  }
+  document.getElementById('addPhotoDay').addEventListener('click', ()=> addShootDay('photo'));
+  document.getElementById('addVideoDay').addEventListener('click', ()=> addShootDay('video'));
+  document.getElementById('addSubmitVideos').addEventListener('click', ()=>{
+    if(currentChain.some(s=>s.key.includes('turnover_videos'))){ showToast('Submit Videos already in this chain'); return; }
+    currentChain.push({key:'turnover_videos_'+Date.now(), label:'Submit Videos', lead:9, src:'manual'});
+    generateOptions();
+  });
+  document.getElementById('addSourcingDay').addEventListener('click', ()=>{
+    let insertAt = currentChain.findIndex(s=>s.isShoot);
+    if(insertAt===-1) insertAt = currentChain.length;
+    currentChain.splice(insertAt, 0, {key:'sourcing_'+Date.now(), label:'Sourcing Day (Plate This)', lead:1, src:'manual', isSourcing:true});
+    generateOptions();
+  });
+}
+
+function buildStepsBlock(opt, letter){
+  const wrap = document.createElement('div');
+  const title = document.createElement('div');
+  title.style.cssText = 'font-weight:500;margin-bottom:4px';
+  title.className = 'timingsTitle';
+  title.dataset.letter = letter;
+  title.textContent = timingsHeader(letter);
+  wrap.appendChild(title);
+  const sorted = [...opt.steps].sort((a,b)=> a.date.localeCompare(b.date));
+  sorted.forEach((s,i)=>{
+    const line = document.createElement('div');
+    line.appendChild(document.createTextNode((i+1)+'. '));
+    const dateB = document.createElement('b');
+    dateB.textContent = prettyDateFull(s.date);
+    line.appendChild(dateB);
+    line.appendChild(document.createTextNode(' - '));
+    const lab = document.createElement('span');
+    lab.contentEditable = 'true';
+    lab.spellcheck = false;
+    lab.style.cssText = 'border-bottom:1px dashed var(--line-strong);outline:none;cursor:text';
+    lab.textContent = s.label + (s.hasTime ? ' @ '+formatTime(s.hasTime) : '');
+    lab.title = 'Click to edit';
+    lab.addEventListener('blur', ()=>{
+      const newText = lab.textContent.trim() || s.label;
+      s.label = newText;
+      s.hasTime = null;
+      if(state.pinned===opt) renderCalendar();
+    });
+    lab.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); lab.blur(); } });
+    line.appendChild(lab);
+    wrap.appendChild(line);
+  });
+  return wrap;
+}
+
+function flagsHtmlFor(opt){
+  if(!opt.flags.length) return '<div class="flag ok">No conflicts</div>';
+  const sorted = [...opt.flags].sort((a,b)=> (a.type==='real'?0:1) - (b.type==='real'?0:1));
+  return sorted.map(f=>{
+    const cls = f.type==='real' ? 'flag real' : 'flag warn';
+    const prefix = f.type==='real' ? 'REAL CONFLICT: ' : '';
+    return '<div class="'+cls+'"><i>!</i>'+prefix+f.text+' ('+prettyDate(f.date)+')</div>';
+  }).join('');
+}
+
+function renderOptions(){
+  const wrap = document.getElementById('opts');
+  const label = document.getElementById('optsLabel');
+  label.style.display = 'block';
+  label.textContent = (state.options.length) + ' suggested timeline' + (state.options.length===1?'':'s') + ' — within ' + prettyDate(state.windowStart) + ' to ' + prettyDate(state.windowEnd);
+  wrap.innerHTML = '';
+  if(state.options.length===0){
+    wrap.innerHTML = '<p style="font-size:13px;color:var(--text2)">No clean options found in this window. Try widening the target break date or reducing lead times.</p>';
+    return;
+  }
+function pinOption(opt, letter){
+  state.pinned = opt;
+  state.pinnedLetter = letter;
+  document.querySelectorAll('.opt').forEach(el=> el.classList.toggle('pinned', el.dataset.letter===letter));
+  recomputeAllProjectFlags();
+  refreshPinnedCard();
+  renderCalendar();
+  showToast('Option '+letter+' pinned');
+}
+
+  state.options.forEach((opt, idx)=>{
+    const letter = String.fromCharCode(65+idx);
+    const div = document.createElement('div');
+    div.className = 'opt';
+    div.dataset.letter = letter;
+    div.innerHTML = '<span class="badge" style="'+(idx===0?'':'display:none')+'">Recommended</span>' +
+      '<span class="pinnedTag">Pinned — showing on calendar</span>' +
+      '<h4>Option '+letter+'</h4>' +
+      '<div class="steps"></div><div class="flagsBlock">'+flagsHtmlFor(opt)+'</div>' +
+      '<div class="actions"><button type="button" class="pinBtn">Pin</button></div>';
+    div.querySelector('.steps').appendChild(buildStepsBlock(opt, letter));
+    div.addEventListener('click', function(e){
+      if(e.target.closest('.pinBtn') || e.target.hasAttribute('contenteditable')) return;
+      pinOption(opt, letter);
+    });
+    div.querySelector('.pinBtn').addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      pinOption(opt, letter);
+    });
+    wrap.appendChild(div);
+  });
+  if(!state.pinned || !state.options.includes(state.pinned)){
+    state.pinned = state.options[0];
+    state.pinnedLetter = 'A';
+  }
+  const activeCard = wrap.querySelector('.opt[data-letter="'+state.pinnedLetter+'"]');
+  if(activeCard) activeCard.classList.add('pinned');
+}
+
+function todayStr(){ return fmt(new Date()); }
+
+function refreshPinnedCard(){
+  if(!state || !state.pinned) return;
+  const card = document.querySelector('.opt[data-letter="'+state.pinnedLetter+'"]');
+  if(!card) return;
+  const stepsDiv = card.querySelector('.steps');
+  stepsDiv.innerHTML = '';
+  stepsDiv.appendChild(buildStepsBlock(state.pinned, state.pinnedLetter));
+  const flagsDiv = card.querySelector('.flagsBlock');
+  if(flagsDiv) flagsDiv.innerHTML = flagsHtmlFor(state.pinned);
+}
+
+function moveStep(projectId, stepKey, newDate){
+  const proj = projects.find(p=>p.id===projectId);
+  if(!proj || !proj.pinned) return;
+  const step = proj.pinned.steps.find(s=>s.key===stepKey);
+  if(!step) return;
+  step.date = newDate;
+  recomputeAllProjectFlags();
+  if(proj.id===activeProjectId) refreshPinnedCard();
+  renderCalendar();
+  const realHit = proj.pinned.flags.find(f=>f.type==='real' && f.date===newDate);
+  const who = proj.id===activeProjectId ? '' : proj.name+' — ';
+  showToast(realHit ? who+'Moved to '+prettyDateFull(newDate)+' — real conflict flagged' : who+'Moved to '+prettyDateFull(newDate));
+}
+
+function renderProjectToggles(){
+  const wrap = document.getElementById('projectToggles');
+  const pinnedProjects = projects.filter(p=>p.pinned);
+  if(pinnedProjects.length < 2){ wrap.innerHTML = ''; return; }
+  wrap.innerHTML = pinnedProjects.map(p=>
+    '<label class="toggle-row"><span style="width:8px;height:8px;border-radius:50%;background:'+p.color.accent+';display:inline-block"></span>'+(p.name||'Untitled project')+' Timing Preview'+
+    '<span class="switch"><input type="checkbox" class="projToggle" data-pid="'+p.id+'" '+(p.visible!==false?'checked':'')+'><span class="slider"></span></span></label>'
+  ).join('');
+  wrap.querySelectorAll('.projToggle').forEach(cb=>{
+    cb.addEventListener('change', ()=>{
+      const p = projects.find(pr=>pr.id===cb.dataset.pid);
+      if(p) p.visible = cb.checked;
+      renderCalendar();
+    });
+  });
+}
+
+function renderCalendar(){
+  document.getElementById('calWrap').style.display = 'block';
+  renderProjectToggles();
+  const target = state ? state.target : '';
+  const showTownHall = document.getElementById('townhallToggle').checked;
+
+  const winStart = new Date(todayStr()+'T00:00:00');
+  const winStartStr = fmt(winStart);
+  const winEndStr = addDays(winStartStr, 41);
+  document.getElementById('calMonth').textContent = '6 weeks — ' + prettyDate(winStartStr) + ' to ' + prettyDate(winEndStr);
+
+  const byDate = {};
+  function addEntry(dateStr, entry){
+    if(!byDate[dateStr]) byDate[dateStr] = [];
+    byDate[dateStr].push(entry);
+  }
+  const visibleProjects = projects.filter(p=> p.pinned && p.visible!==false);
+  const multi = visibleProjects.length > 1;
+  visibleProjects.forEach(p=>{
+    p.pinned.steps.forEach(s=> addEntry(s.date, {
+      label: (multi ? p.name+' — ' : '')+s.label,
+      isNew:true, isShootStep: !!s.isShoot,
+      stepKey:s.key, projectId:p.id, color:p.color
+    }));
+  });
+  if(showTownHall){
+    MOCK.cards.forEach(c=> addEntry(c.date, {label: c.title, type:'existing'}));
+  }
+  if(target) addEntry(target, {label:'Target', type: byDate[target] ? null : 'target'});
+
+  const leaveByDate = {};
+  MOCK.leaves.forEach(l=>{ leaveByDate[l.date] = leaveByDate[l.date] || []; leaveByDate[l.date].push(l.person); });
+
+  const startDow = winStart.getDay();
+  let grid = '<div class="dow">S</div><div class="dow">M</div><div class="dow">T</div><div class="dow">W</div><div class="dow">T</div><div class="dow">F</div><div class="dow">S</div>';
+  for(let i=0;i<startDow;i++) grid += '<div></div>';
+  const MAX_STACK = 5;
+  for(let d=0; d<42; d++){
+    const dateStr = addDays(winStartStr, d);
+    const dayNum = new Date(dateStr+'T00:00:00').getDate();
+    const allEntries = (byDate[dateStr] || []).filter(e=>e.label);
+    const entries = allEntries.slice(0, MAX_STACK);
+    const overflow = allEntries.length - entries.length;
+    const newEntries = entries.filter(e=>e.isNew);
+    const primaryEntry = newEntries[0];
+    const existingOnly = !primaryEntry && entries[0] && entries[0].type==='existing';
+    const cellStyle = newEntries.length===1 ? ('background:'+primaryEntry.color.bg+';color:'+primaryEntry.color.accent+';'+(primaryEntry.isShootStep?'border:2px solid '+primaryEntry.color.accent+';':'')) : '';
+    const cls = 'day' + (existingOnly?' existing':'') + (!primaryEntry && dateStr===target?' target':'') + (newEntries.length?' draggable':'');
+    let lblHtml = entries.map(e=>{
+      if(e.type==='existing') return '<div class="lbl existingLbl">'+e.label+'</div>';
+      if(e.isNew) return '<div class="lbl projLbl" draggable="true" data-step-key="'+e.stepKey+'" data-project-id="'+e.projectId+'" style="background:'+e.color.accent+';color:#fff">'+e.label+'</div>';
+      return '<div class="lbl">'+e.label+'</div>';
+    }).join('');
+    if(overflow>0) lblHtml += '<div class="lbl existingLbl">+'+overflow+' more</div>';
+    const leaveTag = leaveByDate[dateStr] ? '<span class="tag">-'+leaveByDate[dateStr].map(p=>p.toLowerCase()).join(' -')+'</span>' : '';
+    grid += '<div class="'+cls+'" data-date="'+dateStr+'" style="'+cellStyle+'">'+leaveTag+'<div class="n">'+dayNum+'</div>'+lblHtml+'</div>';
+  }
+  document.getElementById('calGrid').innerHTML = grid;
+
+  document.querySelectorAll('#calGrid .projLbl[draggable="true"]').forEach(el=>{
+    el.addEventListener('dragstart', e=>{
+      e.stopPropagation();
+      e.dataTransfer.setData('text/plain', JSON.stringify({stepKey:el.dataset.stepKey, projectId:el.dataset.projectId}));
+    });
+  });
+  document.querySelectorAll('#calGrid .day').forEach(el=>{
+    el.addEventListener('dragover', e=>{ e.preventDefault(); el.classList.add('dragover'); });
+    el.addEventListener('dragleave', ()=> el.classList.remove('dragover'));
+    el.addEventListener('drop', e=>{
+      e.preventDefault();
+      el.classList.remove('dragover');
+      let data = {};
+      try{ data = JSON.parse(e.dataTransfer.getData('text/plain')||'{}'); }catch(err){}
+      if(data.stepKey && data.projectId && el.dataset.date) moveStep(data.projectId, data.stepKey, el.dataset.date);
+    });
+  });
+
+  let agenda = '';
+  visibleProjects.forEach(p=>{
+    p.pinned.steps.forEach(s=>{
+      const outside = s.date<winStartStr || s.date>winEndStr;
+      agenda += '<div class="arow"><span class="badge" style="margin:0;background:'+p.color.bg+';color:'+p.color.accent+'">'+(multi?p.name:'New')+'</span>'+prettyDate(s.date)+' — '+s.label+(s.hasTime?', '+s.hasTime:'')+(outside?' <span style="color:var(--muted)">(outside 6-week view)</span>':'')+'</div>';
+    });
+  });
+  if(showTownHall){
+    MOCK.cards
+      .filter(c=> c.date>=winStartStr && c.date<=winEndStr)
+      .sort((a,b)=> a.date.localeCompare(b.date))
+      .forEach(c=>{
+        agenda += '<div class="arow existing"><span class="src">Existing</span>'+c.title+'</div>';
+      });
+  }
+  if(target){
+    agenda += '<div class="arow"><span class="src na" style="border:1px dashed var(--line-strong)">Target</span>'+prettyDate(target)+' — client break date</div>';
+  }
+  document.getElementById('agenda').innerHTML = agenda;
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=> t.classList.remove('show'), 2200);
+}
+
+document.getElementById('genBtn').addEventListener('click', generateOptions);
+document.getElementById('account').addEventListener('change', ()=>{
+  if(!state) return;
+  state.account = document.getElementById('account').value;
+  state.chain = JSON.parse(JSON.stringify(CHAINS[state.account]));
+  state.chainAccount = state.account;
+  renumberShootDays(state.chain);
+  currentChain = state.chain;
+  renderChainPreview();
+  if(document.getElementById('projectName').value.trim()){ generateOptions(); }
+});
+document.getElementById('editBtn').addEventListener('click', ()=>{
+  if(!state) return;
+  const anchorInput = document.getElementById('anchor').value || todayStr();
+  currentChain = state.chain;
+  renderFieldPanel(currentChain, anchorInput, state.options[0] ? state.options[0].bufferUsed : 0);
+  document.getElementById('panel').classList.toggle('open');
+});
+document.getElementById('copyBtn').addEventListener('click', ()=>{
+  if(!state || !state.pinned){ showToast('Pin an option first'); return; }
+  const text = timingsText(state.pinned, state.pinnedLetter || 'A');
+  function legacyCopy(){
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    let ok = false;
+    try{ ok = document.execCommand('copy'); }catch(e){ ok = false; }
+    document.body.removeChild(ta);
+    showToast(ok ? 'Timings copied — paste into Weekly View' : 'Could not copy — select and copy manually');
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(()=> showToast('Timings copied — paste into Weekly View')).catch(legacyCopy);
+  } else {
+    legacyCopy();
+  }
+});
+document.getElementById('townhallToggle').addEventListener('change', renderCalendar);
+document.getElementById('projectName').addEventListener('input', ()=>{
+  document.querySelectorAll('.timingsTitle').forEach(el=>{
+    el.textContent = timingsHeader(el.dataset.letter);
+  });
+});
+
+document.getElementById('tabScheduler').addEventListener('click', ()=>{
+  document.getElementById('tabScheduler').classList.add('active');
+  document.getElementById('tabReference').classList.remove('active');
+  document.getElementById('schedulerView').style.display = 'block';
+  document.getElementById('referenceView').style.display = 'none';
+});
+document.getElementById('tabReference').addEventListener('click', ()=>{
+  document.getElementById('tabReference').classList.add('active');
+  document.getElementById('tabScheduler').classList.remove('active');
+  document.getElementById('schedulerView').style.display = 'none';
+  document.getElementById('referenceView').style.display = 'block';
+});
+
+function newChainRow(vals){
+  vals = vals || {};
+  const row = document.createElement('div');
+  row.className = 'buildRow';
+  row.innerHTML =
+    '<input type="text" class="rowLabel" placeholder="e.g. Delivery of Products" value="'+(vals.label||'')+'">' +
+    '<input type="number" class="rowLead" value="'+(vals.lead!=null?vals.lead:2)+'" min="0">' +
+    '<input type="time" class="rowTime" value="'+(vals.hasTime||'')+'">' +
+    '<input type="checkbox" class="rowShoot" '+(vals.isShoot?'checked':'')+'>' +
+    '<button type="button" class="rmRow">Remove</button>';
+  row.querySelector('.rmRow').addEventListener('click', ()=> row.remove());
+  return row;
+}
+
+document.getElementById('addChainRow').addEventListener('click', ()=>{
+  document.getElementById('newChainRows').appendChild(newChainRow());
+});
+// seed with a sensible starting set matching the standard non-sub shape
+['CE Signed', 'Product Req. c/o PK', 'PPM', 'Shoot', 'Submit Photos'].forEach((lbl,i)=>{
+  document.getElementById('newChainRows').appendChild(newChainRow({label:lbl, lead:i===0?0:undefined, isShoot: lbl==='Shoot'}));
+});
+
+function renderCustomChainList(){
+  const list = document.getElementById('customChainList');
+  const custom = Object.keys(CHAINS).filter(k=>CHAINS[k].custom);
+  if(!custom.length){ list.innerHTML = '<p class="note" style="margin:0">None yet.</p>'; return; }
+  list.innerHTML = custom.map(k=>'<div class="chainItem"><span>'+CHAINS[k].displayName+' — '+CHAINS[k].length+' fields</span></div>').join('');
+}
+
+document.getElementById('saveChain').addEventListener('click', ()=>{
+  const name = document.getElementById('newChainName').value.trim();
+  if(!name){ showToast('Give the chain a client name first'); return; }
+  const rows = [...document.querySelectorAll('#newChainRows .buildRow')];
+  if(!rows.length){ showToast('Add at least one field'); return; }
+  const steps = rows.map((row,i)=>{
+    const label = row.querySelector('.rowLabel').value.trim() || 'Field '+(i+1);
+    const lead = i===0 ? 0 : (parseInt(row.querySelector('.rowLead').value,10) || 0);
+    const time = row.querySelector('.rowTime').value;
+    const isShoot = row.querySelector('.rowShoot').checked;
+    return {key:'f'+i+'_'+label.toLowerCase().replace(/[^a-z0-9]+/g,'_'), label, lead, src: i===0?'na':'manual', hasTime: time||undefined, isShoot: isShoot||undefined};
+  });
+  const slug = 'custom_'+name.toLowerCase().replace(/[^a-z0-9]+/g,'_');
+  CHAINS[slug] = steps;
+  CHAINS[slug].custom = true;
+  CHAINS[slug].displayName = name;
+  const opt = document.createElement('option');
+  opt.value = slug;
+  opt.textContent = name+' (custom)';
+  document.getElementById('account').appendChild(opt);
+  renderCustomChainList();
+  showToast('Saved "'+name+'" — now available in the Account dropdown');
+});
+renderCustomChainList();
+
+(async function bootstrap(){
+  await loadTownHallData();
+  addProject();
+})();
+</script>
+</body>
+</html>
