@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-13T09:25:39.522Z",
+  "generatedAt": "2026-08-13T10:33:43.306Z",
   "cards": [
     {
       "date": "2027-08-10",
@@ -136,18 +136,6 @@
     {
       "date": "2026-09-17",
       "title": "Sep 15-18: KLS Photo/Video Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-09-10",
-      "title": "Sep 11: 8CUTS Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-09-13",
-      "title": "Sep 14: 8CUTS Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
