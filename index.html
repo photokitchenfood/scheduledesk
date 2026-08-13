@@ -168,7 +168,9 @@
   <p class="sub">Use this for new project timing proposals, timing any logistics and maintenance related tasks, and even planning your personal leaves.</p>
 
   <div class="tabs">
-    <button type="button" class="tabBtn active" id="tabScheduler">Scheduler</button>
+    <button type="button" class="tabBtn active" id="tabScheduler">Production Scheduler</button>
+    <button type="button" class="tabBtn" id="tabLogistics">Logistics Scheduler</button>
+    <button type="button" class="tabBtn" id="tabMaintenance">Maintenance Scheduler</button>
     <button type="button" class="tabBtn" id="tabReference">Account Reference Field Chains</button>
   </div>
 
@@ -215,6 +217,65 @@
 
   <h2 class="section" id="optsLabel" style="display:none"></h2>
   <div class="options" id="opts"></div>
+  </div>
+
+  <div id="logisticsView" style="display:none">
+    <div class="bar" style="flex-direction:column;align-items:stretch;margin-bottom:20px">
+      <div class="fields" style="flex-direction:column;gap:14px">
+        <div class="field">
+          <label>Task Name <span style="color:var(--danger)">*</span></label>
+          <input type="text" id="logTaskName" placeholder="e.g. Backdrop rolls pick-up" style="width:100%">
+        </div>
+        <div class="field">
+          <label>Assigned To</label>
+          <select id="logPerson">
+            <option value="Regie">Regie</option>
+            <option value="Lins">Lins</option>
+            <option value="Gilbert">Gilbert</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Search From</label>
+          <input type="date" id="logStart" style="width:100%">
+        </div>
+        <div class="field">
+          <label>Search Until (optional)</label>
+          <input type="date" id="logEnd" style="width:100%">
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:16px">
+        <button class="primary genOptionsBtn" id="logGenBtn">FIND FREE DAYS</button>
+      </div>
+    </div>
+    <div id="logDebug" style="font-size:11px;color:var(--muted);margin-bottom:12px"></div>
+    <h2 class="section" id="logOptsLabel" style="display:none"></h2>
+    <div class="options" id="logOpts"></div>
+  </div>
+
+  <div id="maintenanceView" style="display:none">
+    <div class="bar" style="flex-direction:column;align-items:stretch;margin-bottom:20px">
+      <div class="fields" style="flex-direction:column;gap:14px">
+        <div class="field">
+          <label>Task Name <span style="color:var(--danger)">*</span></label>
+          <input type="text" id="maintTaskName" placeholder="e.g. Studio deep clean" style="width:100%">
+        </div>
+        <div class="field">
+          <label>Search From</label>
+          <input type="date" id="maintStart" style="width:100%">
+        </div>
+        <div class="field">
+          <label>Search Until (optional)</label>
+          <input type="date" id="maintEnd" style="width:100%">
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:16px">
+        <button class="primary genOptionsBtn" id="maintGenBtn">FIND FREE DAYS</button>
+      </div>
+    </div>
+    <div id="maintDebug" style="font-size:11px;color:var(--muted);margin-bottom:12px"></div>
+    <h2 class="section" id="maintOptsLabel" style="display:none"></h2>
+    <div class="options" id="maintOpts"></div>
+  </div>
 
   <div id="calWrap" style="display:none">
     <h2 class="section">Calendar preview</h2>
@@ -233,7 +294,6 @@
     <div class="footer-actions">
       <button class="primary" id="copyBtn"><i class="ti ti-copy" style="font-size:16px;vertical-align:-3px;margin-right:4px"></i>Copy timings</button>
     </div>
-  </div>
   </div>
 
   <div id="referenceView" style="display:none">
@@ -396,6 +456,8 @@ const PROJECT_COLORS = [
   {accent:'#5B7F24', bg:'#D3F1A7'},
   {accent:'#626F86', bg:'#DCDFE4'}
 ];
+const LOGISTICS_COLOR = {accent:'#6E5DC6', bg:'#DFD8FD'};
+const MAINTENANCE_COLOR = {accent:'#B65C02', bg:'#FFE2BD'};
 const MAX_PROJECTS = 3;
 let projects = [];
 let activeProjectId = null;
@@ -600,6 +662,154 @@ function internalFlags(steps){
 
 function isHolidayAt(dateStr){ return MOCK.cards.some(c=>c.kind==='holiday' && c.date===dateStr); }
 function isConfirmedShootAt(dateStr){ return MOCK.cards.some(c=>c.kind==='shoot' && c.date===dateStr && !c.tentative); }
+function isTentativeShootAt(dateStr){ return MOCK.cards.some(c=>c.kind==='shoot' && c.date===dateStr && c.tentative); }
+function isAnyPinnedProductionShootAt(dateStr){
+  return projects.some(p => p.pinned && p.pinned.steps.some(s => s.isShoot && s.date===dateStr));
+}
+function isStudioBookedAt(dateStr){
+  return isConfirmedShootAt(dateStr) || isAnyPinnedProductionShootAt(dateStr);
+}
+function leaveNamesAt(dateStr){ return MOCK.leaves.filter(l=>l.date===dateStr).map(l=>l.person); }
+function personHasLogisticsCardAt(person, dateStr){
+  return MOCK.cards.some(c=>c.kind==='logistics' && c.person===person && c.date===dateStr);
+}
+function isMaintPinnedAt(dateStr){ return !!(maintenanceTask.pinned && maintenanceTask.pinned.date===dateStr); }
+function isLogPinnedAt(dateStr){ return !!(logisticsTask.pinned && logisticsTask.pinned.date===dateStr); }
+
+// Generic forward scanner: walks day by day from start, skipping weekends,
+// returns up to `count` dates that pass isHardExcluded, each paired with
+// whatever soft flags getFlags produces for that date.
+function findFreeDays(startDate, endDate, count, isHardExcluded, getFlags){
+  const found = [];
+  let d = startDate;
+  let guard = 0;
+  while(found.length<count && d<=endDate && guard<400){
+    const dow = new Date(d+'T00:00:00').getDay();
+    if(dow!==0 && dow!==6 && !isHolidayAt(d) && !isHardExcluded(d)){
+      found.push({date:d, flags:getFlags(d)});
+    }
+    d = addDays(d,1);
+    guard++;
+  }
+  return found;
+}
+
+let logisticsTask = {name:'', person:'Regie', pinned:null, options:[]};
+let maintenanceTask = {name:'', pinned:null, options:[]};
+
+function generateLogisticsOptions(){
+  const nameField = document.getElementById('logTaskName');
+  if(!nameField.value.trim()){ showToast('Enter a task name first'); nameField.focus(); return; }
+  logisticsTask.name = nameField.value.trim();
+  logisticsTask.person = document.getElementById('logPerson').value;
+  const start = document.getElementById('logStart').value || todayStr();
+  const end = document.getElementById('logEnd').value || addDays(start, 90);
+  const person = logisticsTask.person;
+
+  const hardExcluded = d => leaveNamesAt(d).includes(person) || personHasLogisticsCardAt(person, d);
+  const getFlags = d => {
+    const flags = [];
+    if(isConfirmedShootAt(d) || isAnyPinnedProductionShootAt(d)) flags.push({type:'soft', text:'Studio has a shoot this day — coordinate access', date:d});
+    else if(isTentativeShootAt(d)) flags.push({type:'soft', text:'Tentative shoot this day — may shift', date:d});
+    return flags;
+  };
+  const found = findFreeDays(start, end, 2, hardExcluded, getFlags);
+  logisticsTask.options = found;
+  document.getElementById('logDebug').textContent = 'debug — searching '+start+' to '+end+' for '+person+' · found: '+found.length;
+  renderLogisticsOptions();
+}
+
+function generateMaintenanceOptions(){
+  const nameField = document.getElementById('maintTaskName');
+  if(!nameField.value.trim()){ showToast('Enter a task name first'); nameField.focus(); return; }
+  maintenanceTask.name = nameField.value.trim();
+  const start = document.getElementById('maintStart').value || todayStr();
+  const end = document.getElementById('maintEnd').value || addDays(start, 90);
+
+  const hardExcluded = d => {
+    if(isStudioBookedAt(d)) return true;
+    const onLeave = leaveNamesAt(d).filter(p=>['Regie','Lins','Gilbert'].includes(p));
+    if(['Regie','Lins','Gilbert'].every(p=>onLeave.includes(p))) return true; // need at least one present
+    return false;
+  };
+  const getFlags = d => {
+    const flags = [];
+    if(isTentativeShootAt(d)) flags.push({type:'soft', text:'Tentative shoot this day — may shift', date:d});
+    ['Regie','Lins','Gilbert'].forEach(p=>{
+      if(leaveNamesAt(d).includes(p)) flags.push({type:'soft', text:p+' on leave this day', date:d});
+    });
+    return flags;
+  };
+  const found = findFreeDays(start, end, 2, hardExcluded, getFlags);
+  maintenanceTask.options = found;
+  document.getElementById('maintDebug').textContent = 'debug — searching '+start+' to '+end+' · found: '+found.length;
+  renderMaintenanceOptions();
+}
+
+function simpleFlagsHtml(flags){
+  if(!flags.length) return '<div class="flag ok">No conflicts</div>';
+  return flags.map(f=>'<div class="flag warn"><i>!</i>'+f.text+'</div>').join('');
+}
+
+function renderLogisticsOptions(){
+  const wrap = document.getElementById('logOpts');
+  const label = document.getElementById('logOptsLabel');
+  label.style.display = 'block';
+  label.textContent = logisticsTask.options.length+' suggested day'+(logisticsTask.options.length===1?'':'s')+' for '+logisticsTask.person;
+  wrap.innerHTML = '';
+  if(!logisticsTask.options.length){
+    wrap.innerHTML = '<p style="font-size:13px;color:var(--text2)">No free days found in this window.</p>';
+    return;
+  }
+  logisticsTask.options.forEach((opt, idx)=>{
+    const letter = String.fromCharCode(65+idx);
+    const div = document.createElement('div');
+    div.className = 'opt';
+    div.innerHTML = '<span class="badge" style="'+(idx===0?'':'display:none')+'">Recommended</span>'+
+      '<h4>Option '+letter+'</h4>'+
+      '<div class="steps"><b>'+prettyDateFull(opt.date)+'</b> — '+logisticsTask.name+' ('+logisticsTask.person+')</div>'+
+      '<div class="flagsBlock">'+simpleFlagsHtml(opt.flags)+'</div>'+
+      '<div class="actions"><button type="button" class="pinBtn">Pin</button></div>';
+    div.querySelector('.pinBtn').addEventListener('click', e=>{
+      e.stopPropagation();
+      logisticsTask.pinned = {date:opt.date, name:logisticsTask.name, person:logisticsTask.person, flags:opt.flags};
+      showToast('Pinned: '+logisticsTask.name+' — '+prettyDateFull(opt.date));
+      renderCalendar();
+    });
+    div.addEventListener('click', ()=> div.querySelector('.pinBtn').click());
+    wrap.appendChild(div);
+  });
+}
+
+function renderMaintenanceOptions(){
+  const wrap = document.getElementById('maintOpts');
+  const label = document.getElementById('maintOptsLabel');
+  label.style.display = 'block';
+  label.textContent = maintenanceTask.options.length+' suggested day'+(maintenanceTask.options.length===1?'':'s');
+  wrap.innerHTML = '';
+  if(!maintenanceTask.options.length){
+    wrap.innerHTML = '<p style="font-size:13px;color:var(--text2)">No free days found in this window.</p>';
+    return;
+  }
+  maintenanceTask.options.forEach((opt, idx)=>{
+    const letter = String.fromCharCode(65+idx);
+    const div = document.createElement('div');
+    div.className = 'opt';
+    div.innerHTML = '<span class="badge" style="'+(idx===0?'':'display:none')+'">Recommended</span>'+
+      '<h4>Option '+letter+'</h4>'+
+      '<div class="steps"><b>'+prettyDateFull(opt.date)+'</b> — '+maintenanceTask.name+'</div>'+
+      '<div class="flagsBlock">'+simpleFlagsHtml(opt.flags)+'</div>'+
+      '<div class="actions"><button type="button" class="pinBtn">Pin</button></div>';
+    div.querySelector('.pinBtn').addEventListener('click', e=>{
+      e.stopPropagation();
+      maintenanceTask.pinned = {date:opt.date, name:maintenanceTask.name, flags:opt.flags};
+      showToast('Pinned: '+maintenanceTask.name+' — '+prettyDateFull(opt.date));
+      renderCalendar();
+    });
+    div.addEventListener('click', ()=> div.querySelector('.pinBtn').click());
+    wrap.appendChild(div);
+  });
+}
 
 function resolveStepDate(rawDate, step){
   let d = rawDate;
@@ -652,6 +862,15 @@ function crossProjectShootFlags(step, dateStr, ownProjectId){
   return flags;
 }
 
+function maintenanceShootFlags(step, dateStr){
+  const flags = [];
+  if(!step.isShoot) return flags;
+  if(maintenanceTask.pinned && maintenanceTask.pinned.date===dateStr){
+    flags.push({type:'soft', text:'Maintenance — '+maintenanceTask.pinned.name+' is pinned this day'});
+  }
+  return flags;
+}
+
 function computeAllFlags(steps, ownProjectId){
   let allFlags = [];
   steps.forEach(step=>{
@@ -659,7 +878,8 @@ function computeAllFlags(steps, ownProjectId){
       leaveFlags(step.date).map(f=>({...f, date:step.date, label:step.label})),
       existingShootFlags(step, step.date).map(f=>({...f, date:step.date, label:step.label})),
       holidayShootFlags(step, step.date).map(f=>({...f, date:step.date, label:step.label})),
-      crossProjectShootFlags(step, step.date, ownProjectId).map(f=>({...f, date:step.date, label:step.label}))
+      crossProjectShootFlags(step, step.date, ownProjectId).map(f=>({...f, date:step.date, label:step.label})),
+      maintenanceShootFlags(step, step.date).map(f=>({...f, date:step.date, label:step.label}))
     );
   });
   allFlags = allFlags.concat(internalFlags(steps));
@@ -951,7 +1171,8 @@ function renderProjectToggles(){
 }
 
 function renderCalendar(){
-  document.getElementById('calWrap').style.display = 'block';
+  document.getElementById('calWrap').style.display = (activeTabKind==='reference') ? 'none' : 'block';
+  if(activeTabKind==='reference') return;
   renderProjectToggles();
   const target = state ? state.target : '';
   const showTownHall = document.getElementById('townhallToggle').checked;
@@ -975,6 +1196,18 @@ function renderCalendar(){
       stepKey:s.key, projectId:p.id, color:p.color
     }));
   });
+  if(logisticsTask.pinned){
+    addEntry(logisticsTask.pinned.date, {
+      label: 'Logistics — '+logisticsTask.pinned.name+' ('+logisticsTask.pinned.person+')',
+      isNew:true, isShootStep:false, fixed:true, color:LOGISTICS_COLOR
+    });
+  }
+  if(maintenanceTask.pinned){
+    addEntry(maintenanceTask.pinned.date, {
+      label: 'Maintenance — '+maintenanceTask.pinned.name,
+      isNew:true, isShootStep:false, fixed:true, color:MAINTENANCE_COLOR
+    });
+  }
   if(showTownHall){
     MOCK.cards.forEach(c=> addEntry(c.date, {label: c.title, type:'existing'}));
   }
@@ -997,9 +1230,11 @@ function renderCalendar(){
     const primaryEntry = newEntries[0];
     const existingOnly = !primaryEntry && entries[0] && entries[0].type==='existing';
     const cellStyle = newEntries.length===1 ? ('background:'+primaryEntry.color.bg+';color:'+primaryEntry.color.accent+';'+(primaryEntry.isShootStep?'border:2px solid '+primaryEntry.color.accent+';':'')) : '';
-    const cls = 'day' + (existingOnly?' existing':'') + (!primaryEntry && dateStr===target?' target':'') + (newEntries.length?' draggable':'');
+    const anyDraggable = newEntries.some(e=>!e.fixed);
+    const cls = 'day' + (existingOnly?' existing':'') + (!primaryEntry && dateStr===target?' target':'') + (anyDraggable?' draggable':'');
     let lblHtml = entries.map(e=>{
       if(e.type==='existing') return '<div class="lbl existingLbl">'+e.label+'</div>';
+      if(e.isNew && e.fixed) return '<div class="lbl projLbl" style="background:'+e.color.accent+';color:#fff">'+e.label+'</div>';
       if(e.isNew) return '<div class="lbl projLbl" draggable="true" data-step-key="'+e.stepKey+'" data-project-id="'+e.projectId+'" style="background:'+e.color.accent+';color:#fff">'+e.label+'</div>';
       return '<div class="lbl">'+e.label+'</div>';
     }).join('');
@@ -1056,6 +1291,8 @@ function showToast(msg){
 }
 
 document.getElementById('genBtn').addEventListener('click', generateOptions);
+document.getElementById('logGenBtn').addEventListener('click', generateLogisticsOptions);
+document.getElementById('maintGenBtn').addEventListener('click', generateMaintenanceOptions);
 document.getElementById('account').addEventListener('change', ()=>{
   if(!state) return;
   state.account = document.getElementById('account').value;
@@ -1074,8 +1311,19 @@ document.getElementById('editBtn').addEventListener('click', ()=>{
   document.getElementById('panel').classList.toggle('open');
 });
 document.getElementById('copyBtn').addEventListener('click', ()=>{
-  if(!state || !state.pinned){ showToast('Pin an option first'); return; }
-  const text = timingsText(state.pinned, state.pinnedLetter || 'A');
+  let text;
+  if(activeTabKind==='logistics'){
+    if(!logisticsTask.pinned){ showToast('Pin a logistics day first'); return; }
+    text = 'LOGISTICS TASK\n\n'+logisticsTask.pinned.name+' — '+logisticsTask.pinned.person+'\n*'+prettyDateFull(logisticsTask.pinned.date)+'*'+
+      (logisticsTask.pinned.flags.length ? '\n\n'+logisticsTask.pinned.flags.map(f=>'⚠️ '+f.text).join('\n') : '');
+  } else if(activeTabKind==='maintenance'){
+    if(!maintenanceTask.pinned){ showToast('Pin a maintenance day first'); return; }
+    text = 'MAINTENANCE TASK\n\n'+maintenanceTask.pinned.name+'\n*'+prettyDateFull(maintenanceTask.pinned.date)+'*'+
+      (maintenanceTask.pinned.flags.length ? '\n\n'+maintenanceTask.pinned.flags.map(f=>'⚠️ '+f.text).join('\n') : '');
+  } else {
+    if(!state || !state.pinned){ showToast('Pin an option first'); return; }
+    text = timingsText(state.pinned, state.pinnedLetter || 'A');
+  }
   function legacyCopy(){
     const ta = document.createElement('textarea');
     ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
@@ -1098,18 +1346,23 @@ document.getElementById('projectName').addEventListener('input', ()=>{
   });
 });
 
-document.getElementById('tabScheduler').addEventListener('click', ()=>{
-  document.getElementById('tabScheduler').classList.add('active');
-  document.getElementById('tabReference').classList.remove('active');
-  document.getElementById('schedulerView').style.display = 'block';
-  document.getElementById('referenceView').style.display = 'none';
-});
-document.getElementById('tabReference').addEventListener('click', ()=>{
-  document.getElementById('tabReference').classList.add('active');
-  document.getElementById('tabScheduler').classList.remove('active');
-  document.getElementById('schedulerView').style.display = 'none';
-  document.getElementById('referenceView').style.display = 'block';
-});
+let activeTabKind = 'production';
+function showTab(kind){
+  activeTabKind = kind;
+  const tabs = {production:'tabScheduler', logistics:'tabLogistics', maintenance:'tabMaintenance', reference:'tabReference'};
+  const views = {production:'schedulerView', logistics:'logisticsView', maintenance:'maintenanceView', reference:'referenceView'};
+  Object.keys(tabs).forEach(k=>{
+    document.getElementById(tabs[k]).classList.toggle('active', k===kind);
+    document.getElementById(views[k]).style.display = (k===kind) ? 'block' : 'none';
+  });
+  document.getElementById('calWrap').style.display = (kind==='reference') ? 'none' : (document.getElementById('calWrap').dataset.hasContent==='1' ? 'block' : 'none');
+  renderCalendar();
+}
+document.getElementById('tabScheduler').addEventListener('click', ()=> showTab('production'));
+document.getElementById('tabLogistics').addEventListener('click', ()=> showTab('logistics'));
+document.getElementById('tabMaintenance').addEventListener('click', ()=> showTab('maintenance'));
+document.getElementById('tabReference').addEventListener('click', ()=> showTab('reference'));
+
 
 function newChainRow(vals){
   vals = vals || {};
@@ -1167,6 +1420,8 @@ renderCustomChainList();
 
 (async function bootstrap(){
   await loadTownHallData();
+  document.getElementById('logStart').value = todayStr();
+  document.getElementById('maintStart').value = todayStr();
   addProject();
 })();
 </script>
