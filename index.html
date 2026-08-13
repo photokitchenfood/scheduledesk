@@ -100,6 +100,12 @@
   .opt .pinnedTag{display:none;font-size:11px;padding:3px 10px;border-radius:20px;background:var(--success);color:#fff;margin-bottom:8px}
   .opt.pinned .pinnedTag{display:inline-block}
   .toggle-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2)}
+  .windowBtns{display:flex;gap:4px}
+  .winBtn{font-family:'Spline Sans Mono',monospace;font-size:10px;padding:5px 9px;border-radius:14px;border:1px solid var(--line-strong);background:#fff;color:var(--text2);cursor:pointer}
+  .winBtn:hover{background:var(--gray-bg)}
+  .winBtn.active{background:var(--accent-fill);color:var(--text);border-color:var(--accent-fill);font-weight:700}
+  .agendaToggleBtn{width:100%;font-family:'Spline Sans Mono',monospace;font-size:11px;font-weight:600;padding:8px;border-radius:8px;border:1px dashed var(--line-strong);background:none;color:var(--text2);margin-top:4px}
+  .agendaToggleBtn:hover{background:var(--gray-bg)}
   .switch{position:relative;width:34px;height:18px;flex:none}
   .switch input{opacity:0;width:0;height:0}
   .slider{position:absolute;inset:0;background:var(--line-strong);border-radius:20px;cursor:pointer;transition:.15s}
@@ -172,6 +178,7 @@
     <button type="button" class="tabBtn" id="tabLogistics">Logistics Scheduler</button>
     <button type="button" class="tabBtn" id="tabMaintenance">Maintenance Scheduler</button>
     <button type="button" class="tabBtn" id="tabReference">Account Reference Field Chains</button>
+    <button type="button" class="tabBtn" id="tabLearn">Learn My Logic</button>
   </div>
 
   <div id="schedulerView">
@@ -284,9 +291,17 @@
   <div id="calWrap" style="display:none">
     <h2 class="section">Calendar preview</h2>
     <div class="cal">
-      <div class="cal-head">
-        <span id="calMonth"></span>
-        <div style="display:flex;gap:16px">
+      <div class="cal-head" style="flex-direction:column;align-items:stretch;gap:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span id="calMonth"></span>
+          <div class="windowBtns" id="windowBtns">
+            <button type="button" class="winBtn active" data-extra="0">6 WEEKS</button>
+            <button type="button" class="winBtn" data-extra="30">+30 DAYS</button>
+            <button type="button" class="winBtn" data-extra="90">+90 DAYS</button>
+            <button type="button" class="winBtn" data-extra="120">+120 DAYS</button>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:16px">
           <label class="toggle-row">
             Production Timings
             <span class="switch"><input type="checkbox" id="productionToggle" checked><span class="slider"></span></span>
@@ -389,6 +404,44 @@
     <div class="refCard">
       <h3>Custom chains added</h3>
       <div class="chainList" id="customChainList"><p class="note" style="margin:0">None yet.</p></div>
+    </div>
+
+  </div>
+
+  <div id="learnView" style="display:none">
+
+    <div class="refCard">
+      <div style="font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Photokitchen Schedule Desk</div>
+      <h3 style="font-size:20px;margin:0 0 18px">Methodology — how it thinks, and why it's worth using</h3>
+
+      <h4 style="font-family:'Spline Sans Mono',monospace;font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;margin:0 0 8px">The problem this replaces</h4>
+      <p class="note" style="font-size:13px;color:var(--text);margin:0 0 20px;line-height:1.7">Every new project means opening Town Hall, scanning for existing shoots, meetings, and leaves, then counting lead days by memory or an old Slack thread to land on a timeline. Add a second or third project running at the same time, and that whole check has to be repeated for every combination, by hand, every time something shifts.</p>
+
+      <h4 style="font-family:'Spline Sans Mono',monospace;font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;margin:0 0 8px">What it actually does</h4>
+      <p class="note" style="font-size:13px;color:var(--text);margin:0 0 20px;line-height:1.7">The scheduler reads the real timing patterns from 2026 Photokitchen history — the lead times PK, accounts, and Plate This have actually used — and generates two ready-to-review timelines from a project's Signed CE (or Shotlist) date. It checks each one live against the current Town Hall board and against any other project you're scheduling at the same time. It never books anything on its own — it proposes, flags, and waits for you.</p>
+
+      <h4 style="font-family:'Spline Sans Mono',monospace;font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;margin:0 0 10px">The core logic, in five rules</h4>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+        <div style="display:flex;gap:10px;padding:10px 12px;background:var(--gray-bg);border-radius:8px;border-left:3px solid var(--sky)"><b style="font-size:13px;white-space:nowrap">1.</b><span style="font-size:13px;line-height:1.6"><b>The Signed CE / Shotlist date never moves on its own.</b> Everything else in the chain is calculated from it, using either that account's historical lead times or your own edited ones.</span></div>
+        <div style="display:flex;gap:10px;padding:10px 12px;background:var(--gray-bg);border-radius:8px;border-left:3px solid var(--sky)"><b style="font-size:13px;white-space:nowrap">2.</b><span style="font-size:13px;line-height:1.6"><b>Weekends are never proposed.</b> A date landing on Saturday or Sunday is nudged to the nearest weekday automatically — never shown as a suggestion.</span></div>
+        <div style="display:flex;gap:10px;padding:10px 12px;background:var(--danger-bg);border-radius:8px;border-left:3px solid var(--danger)"><b style="font-size:13px;white-space:nowrap">3.</b><span style="font-size:13px;line-height:1.6"><b>Holidays and confirmed shoots are hard blocks.</b> The generator will not suggest a date that lands on a holiday or an already-confirmed shoot — those are skipped before you ever see them.</span></div>
+        <div style="display:flex;gap:10px;padding:10px 12px;background:var(--warn-bg);border-radius:8px;border-left:3px solid var(--warn)"><b style="font-size:13px;white-space:nowrap">4.</b><span style="font-size:13px;line-height:1.6"><b>Everything else is a flag, not a block.</b> A tentative Town Hall shoot, a teammate's leave day, or two projects landing on the same shoot day still get proposed — but clearly labelled Soft Conflict (worth a second look) or Real Conflict (needs a decision) so you decide, not the tool.</span></div>
+        <div style="display:flex;gap:10px;padding:10px 12px;background:var(--gray-bg);border-radius:8px;border-left:3px solid var(--purple)"><b style="font-size:13px;white-space:nowrap">5.</b><span style="font-size:13px;line-height:1.6"><b>Multiple projects watch each other.</b> Add a second or third project and the scheduler checks their pinned timelines against each other the same way it checks Town Hall — no manual cross-referencing.</span></div>
+      </div>
+
+      <h4 style="font-family:'Spline Sans Mono',monospace;font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;margin:0 0 10px">What it saves you</h4>
+      <table class="refTable" style="margin-bottom:20px">
+        <tr><th>Without the scheduler</th><th>With the scheduler</th></tr>
+        <tr><td>Manually count lead days from memory or an old thread</td><td>Lead times pulled from real 2026 shoot history, editable per field</td></tr>
+        <tr><td>Open Town Hall separately, scroll to check for clashes</td><td>Town Hall checked automatically, live, while you type</td></tr>
+        <tr><td>Re-check by hand every time a 2nd or 3rd project is added</td><td>Every active project checked against every other, automatically</td></tr>
+        <tr><td>Retype the whole proposal for Slack</td><td>One click copies it, already Slack-formatted</td></tr>
+      </table>
+
+      <h4 style="font-family:'Spline Sans Mono',monospace;font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;margin:0 0 8px">What stays entirely yours</h4>
+      <p class="note" style="font-size:13px;color:var(--text);margin:0 0 20px;line-height:1.7">Every date can be dragged, typed over, or edited by hand. Every field's lead time is yours to change. Nothing is ever sent to Slack or written to Town Hall without you choosing to copy it and paste it yourself. The scheduler's job is to do the counting and the cross-checking — the judgment calls are still entirely KC and Chin's.</p>
+
+      <div style="border-top:1px solid var(--line);padding-top:14px;font-size:12px;color:var(--muted);font-style:italic">Built directly from Photokitchen's own 2026 Slack and Trello history — not generic scheduling assumptions.</div>
     </div>
 
   </div>
@@ -1187,17 +1240,22 @@ function renderProjectToggles(){
   });
 }
 
+let calendarExtraDays = 0;
+let agendaCollapsed = true;
+
 function renderCalendar(){
-  document.getElementById('calWrap').style.display = (activeTabKind==='reference') ? 'none' : 'block';
-  if(activeTabKind==='reference') return;
+  document.getElementById('calWrap').style.display = (activeTabKind==='reference' || activeTabKind==='learn') ? 'none' : 'block';
+  if(activeTabKind==='reference' || activeTabKind==='learn') return;
   renderProjectToggles();
   const target = state ? state.target : '';
   const showTownHall = document.getElementById('townhallToggle').checked;
 
+  const totalDays = 42 + calendarExtraDays;
   const winStart = new Date(todayStr()+'T00:00:00');
   const winStartStr = fmt(winStart);
-  const winEndStr = addDays(winStartStr, 41);
-  document.getElementById('calMonth').textContent = '6 weeks — ' + prettyDate(winStartStr) + ' to ' + prettyDate(winEndStr);
+  const winEndStr = addDays(winStartStr, totalDays-1);
+  const weekCount = Math.ceil(totalDays/7);
+  document.getElementById('calMonth').textContent = weekCount+' weeks — ' + prettyDate(winStartStr) + ' to ' + prettyDate(winEndStr);
 
   const byDate = {};
   function addEntry(dateStr, entry){
@@ -1251,7 +1309,7 @@ function renderCalendar(){
   let grid = '<div class="dow">S</div><div class="dow">M</div><div class="dow">T</div><div class="dow">W</div><div class="dow">T</div><div class="dow">F</div><div class="dow">S</div>';
   for(let i=0;i<startDow;i++) grid += '<div></div>';
   const MAX_STACK = 5;
-  for(let d=0; d<42; d++){
+  for(let d=0; d<totalDays; d++){
     const dateStr = addDays(winStartStr, d);
     const dayNum = new Date(dateStr+'T00:00:00').getDate();
     const allEntries = (byDate[dateStr] || []).filter(e=>e.label);
@@ -1309,11 +1367,11 @@ function renderCalendar(){
     });
   });
 
-  let agenda = '';
+  let agendaRows = [];
   visibleProjects.forEach(p=>{
     p.pinned.steps.forEach(s=>{
       const outside = s.date<winStartStr || s.date>winEndStr;
-      agenda += '<div class="arow"><span class="badge" style="margin:0;background:'+p.color.bg+';color:'+p.color.accent+'">'+(multi?p.name:'New')+'</span>'+prettyDate(s.date)+' — '+s.label+(s.hasTime?', '+s.hasTime:'')+(outside?' <span style="color:var(--muted)">(outside 6-week view)</span>':'')+'</div>';
+      agendaRows.push('<div class="arow"><span class="badge" style="margin:0;background:'+p.color.bg+';color:'+p.color.accent+'">'+(multi?p.name:'New')+'</span>'+prettyDate(s.date)+' — '+s.label+(s.hasTime?', '+s.hasTime:'')+(outside?' <span style="color:var(--muted)">(outside calendar view)</span>':'')+'</div>');
     });
   });
   if(showTownHall){
@@ -1321,13 +1379,22 @@ function renderCalendar(){
       .filter(c=> c.date>=winStartStr && c.date<=winEndStr)
       .sort((a,b)=> a.date.localeCompare(b.date))
       .forEach(c=>{
-        agenda += '<div class="arow existing"><span class="src">Existing</span>'+c.title+'</div>';
+        agendaRows.push('<div class="arow existing"><span class="src">Existing</span>'+c.title+'</div>');
       });
   }
   if(target){
-    agenda += '<div class="arow"><span class="src na" style="border:1px dashed var(--line-strong)">Target</span>'+prettyDate(target)+' — client break date</div>';
+    agendaRows.push('<div class="arow"><span class="src na" style="border:1px dashed var(--line-strong)">Target</span>'+prettyDate(target)+' — client break date</div>');
   }
-  document.getElementById('agenda').innerHTML = agenda;
+  const AGENDA_VISIBLE = 8;
+  let agendaHtml;
+  if(agendaRows.length<=AGENDA_VISIBLE || !agendaCollapsed){
+    agendaHtml = agendaRows.join('') + (agendaRows.length>AGENDA_VISIBLE ? '<button type="button" id="agendaToggleBtn" class="agendaToggleBtn">Show less</button>' : '');
+  } else {
+    agendaHtml = agendaRows.slice(0,AGENDA_VISIBLE).join('') + '<button type="button" id="agendaToggleBtn" class="agendaToggleBtn">Show all ('+agendaRows.length+')</button>';
+  }
+  document.getElementById('agenda').innerHTML = agendaHtml;
+  const agendaToggleBtn = document.getElementById('agendaToggleBtn');
+  if(agendaToggleBtn){ agendaToggleBtn.addEventListener('click', ()=>{ agendaCollapsed = !agendaCollapsed; renderCalendar(); }); }
 }
 
 function showToast(msg){
@@ -1407,6 +1474,13 @@ document.getElementById('copyBtn').addEventListener('click', ()=>{
 });
 document.getElementById('townhallToggle').addEventListener('change', renderCalendar);
 document.getElementById('productionToggle').addEventListener('change', renderCalendar);
+document.querySelectorAll('.winBtn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    calendarExtraDays = parseInt(btn.dataset.extra, 10) || 0;
+    document.querySelectorAll('.winBtn').forEach(b=> b.classList.toggle('active', b===btn));
+    renderCalendar();
+  });
+});
 document.getElementById('projectName').addEventListener('input', ()=>{
   document.querySelectorAll('.timingsTitle').forEach(el=>{
     el.textContent = timingsHeader(el.dataset.letter);
@@ -1416,8 +1490,8 @@ document.getElementById('projectName').addEventListener('input', ()=>{
 let activeTabKind = 'production';
 function showTab(kind){
   activeTabKind = kind;
-  const tabs = {production:'tabScheduler', logistics:'tabLogistics', maintenance:'tabMaintenance', reference:'tabReference'};
-  const views = {production:'schedulerView', logistics:'logisticsView', maintenance:'maintenanceView', reference:'referenceView'};
+  const tabs = {production:'tabScheduler', logistics:'tabLogistics', maintenance:'tabMaintenance', reference:'tabReference', learn:'tabLearn'};
+  const views = {production:'schedulerView', logistics:'logisticsView', maintenance:'maintenanceView', reference:'referenceView', learn:'learnView'};
   Object.keys(tabs).forEach(k=>{
     document.getElementById(tabs[k]).classList.toggle('active', k===kind);
     document.getElementById(views[k]).style.display = (k===kind) ? 'block' : 'none';
@@ -1429,6 +1503,7 @@ document.getElementById('tabScheduler').addEventListener('click', ()=> showTab('
 document.getElementById('tabLogistics').addEventListener('click', ()=> showTab('logistics'));
 document.getElementById('tabMaintenance').addEventListener('click', ()=> showTab('maintenance'));
 document.getElementById('tabReference').addEventListener('click', ()=> showTab('reference'));
+document.getElementById('tabLearn').addEventListener('click', ()=> showTab('learn'));
 
 
 function newChainRow(vals){
