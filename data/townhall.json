@@ -1,0 +1,40 @@
+{
+  "generatedAt": "2026-08-13T00:00:00.000Z",
+  "note": "Seed file — replaced automatically by the first scheduled sync-trello.js run.",
+  "cards": [
+    {"date":"2026-08-12", "title":"Aug 12: Knorr Packaging Briefing", "kind":"meeting"},
+    {"date":"2026-08-13", "title":"Aug 13: LC Anya PPM @ 1PM", "kind":"meeting", "time":"13:00"},
+    {"date":"2026-08-14", "title":"Aug 14: SM Nuvali Food Hall Proposal Alignment Call w/ Go Motion @ 1PM", "kind":"meeting", "time":"13:00"},
+    {"date":"2026-08-17", "title":"Aug 17: Polland Hopia Photoshoot PPM @ 3PM", "kind":"meeting", "time":"15:00"},
+    {"date":"2026-08-28", "title":"Aug 28: Polland Hopia Videoshoot PPM @ 4PM", "kind":"meeting", "time":"16:00"},
+
+    {"date":"2026-08-18", "title":"Aug 18-19: LC Anya Shoot", "kind":"shoot"},
+    {"date":"2026-08-19", "title":"Aug 18-19: LC Anya Shoot", "kind":"shoot"},
+    {"date":"2026-08-20", "title":"Aug 20: Polland Hopia Photo Shoot", "kind":"shoot"},
+    {"date":"2026-08-25", "title":"Aug 25: TMP Aug Subscription Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
+    {"date":"2026-08-26", "title":"Aug 26: LC Anya Shoot", "kind":"shoot"},
+    {"date":"2026-08-27", "title":"Aug 27-28: CTG Aug Subscription Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
+    {"date":"2026-08-28", "title":"Aug 27-28: CTG Aug Subscription Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
+    {"date":"2026-09-03", "title":"Sep 3: Polland Hopia Video Shoot", "kind":"shoot"},
+    {"date":"2026-09-08", "title":"Sep 8-9: SM Nuvali Photo Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
+    {"date":"2026-09-09", "title":"Sep 8-9: SM Nuvali Photo Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
+    {"date":"2026-09-10", "title":"Sep 10: KLS Photo/Video Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
+    {"date":"2026-09-11", "title":"Sep 11: Manam Recommends Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
+    {"date":"2026-09-14", "title":"Sep 14: Manam Recommends Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
+    {"date":"2026-09-15", "title":"Sep 15-16: KLS Photo/Video Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
+    {"date":"2026-09-16", "title":"Sep 15-16: KLS Photo/Video Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
+    {"date":"2026-09-17", "title":"Sep 17-18: TMP Sep Subscription Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
+    {"date":"2026-09-18", "title":"Sep 17-18: TMP Sep Subscription Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
+
+    {"date":"2026-08-21", "title":"Aug 21: Ninoy Aquino Day", "kind":"holiday"},
+    {"date":"2026-08-31", "title":"Aug 31: National Heroes Day", "kind":"holiday"}
+  ],
+  "leaves": [
+    {"date":"2026-08-14", "person":"Chin"},
+    {"date":"2026-08-14", "person":"Mye"},
+    {"date":"2026-08-14", "person":"Ikay"},
+    {"date":"2026-08-14", "person":"KC"},
+    {"date":"2026-08-17", "person":"KC"},
+    {"date":"2026-09-01", "person":"Shen"}
+  ]
+}
