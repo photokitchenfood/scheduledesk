@@ -1,40 +1,513 @@
 {
-  "generatedAt": "2026-08-13T00:00:00.000Z",
-  "note": "Seed file — replaced automatically by the first scheduled sync-trello.js run.",
+  "generatedAt": "2026-08-13T09:25:39.522Z",
   "cards": [
-    {"date":"2026-08-12", "title":"Aug 12: Knorr Packaging Briefing", "kind":"meeting"},
-    {"date":"2026-08-13", "title":"Aug 13: LC Anya PPM @ 1PM", "kind":"meeting", "time":"13:00"},
-    {"date":"2026-08-14", "title":"Aug 14: SM Nuvali Food Hall Proposal Alignment Call w/ Go Motion @ 1PM", "kind":"meeting", "time":"13:00"},
-    {"date":"2026-08-17", "title":"Aug 17: Polland Hopia Photoshoot PPM @ 3PM", "kind":"meeting", "time":"15:00"},
-    {"date":"2026-08-28", "title":"Aug 28: Polland Hopia Videoshoot PPM @ 4PM", "kind":"meeting", "time":"16:00"},
-
-    {"date":"2026-08-18", "title":"Aug 18-19: LC Anya Shoot", "kind":"shoot"},
-    {"date":"2026-08-19", "title":"Aug 18-19: LC Anya Shoot", "kind":"shoot"},
-    {"date":"2026-08-20", "title":"Aug 20: Polland Hopia Photo Shoot", "kind":"shoot"},
-    {"date":"2026-08-25", "title":"Aug 25: TMP Aug Subscription Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
-    {"date":"2026-08-26", "title":"Aug 26: LC Anya Shoot", "kind":"shoot"},
-    {"date":"2026-08-27", "title":"Aug 27-28: CTG Aug Subscription Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
-    {"date":"2026-08-28", "title":"Aug 27-28: CTG Aug Subscription Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
-    {"date":"2026-09-03", "title":"Sep 3: Polland Hopia Video Shoot", "kind":"shoot"},
-    {"date":"2026-09-08", "title":"Sep 8-9: SM Nuvali Photo Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
-    {"date":"2026-09-09", "title":"Sep 8-9: SM Nuvali Photo Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
-    {"date":"2026-09-10", "title":"Sep 10: KLS Photo/Video Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
-    {"date":"2026-09-11", "title":"Sep 11: Manam Recommends Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
-    {"date":"2026-09-14", "title":"Sep 14: Manam Recommends Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
-    {"date":"2026-09-15", "title":"Sep 15-16: KLS Photo/Video Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
-    {"date":"2026-09-16", "title":"Sep 15-16: KLS Photo/Video Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
-    {"date":"2026-09-17", "title":"Sep 17-18: TMP Sep Subscription Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
-    {"date":"2026-09-18", "title":"Sep 17-18: TMP Sep Subscription Shoot [TENTATIVE]", "kind":"shoot", "tentative":true},
-
-    {"date":"2026-08-21", "title":"Aug 21: Ninoy Aquino Day", "kind":"holiday"},
-    {"date":"2026-08-31", "title":"Aug 31: National Heroes Day", "kind":"holiday"}
+    {
+      "date": "2027-08-10",
+      "title": "Aug 11: SM Nuvali Food Hall Proposal Huddle @ 4:30PM",
+      "kind": "meeting",
+      "time": "16:30"
+    },
+    {
+      "date": "2026-08-12",
+      "title": "Aug 12: Knorr Packaging Briefing",
+      "kind": "meeting"
+    },
+    {
+      "date": "2026-08-13",
+      "title": "Aug 13: LC Anya PPM @ 1PM",
+      "kind": "meeting",
+      "time": "13:00"
+    },
+    {
+      "date": "2026-08-14",
+      "title": "Aug 14: SM Nuvali Food Hall Proposal Alignment Call w/ Go Motion @ 1PM",
+      "kind": "meeting",
+      "time": "13:00"
+    },
+    {
+      "date": "2026-08-17",
+      "title": "Aug 17: Polland Hopia Photoshoot PPM @ 3PM",
+      "kind": "meeting",
+      "time": "15:00"
+    },
+    {
+      "date": "2026-08-28",
+      "title": "Aug 28: Polland Hopia Videoshoot PPM @ 4PM",
+      "kind": "meeting",
+      "time": "16:00"
+    },
+    {
+      "date": "2026-08-18",
+      "title": "Aug 18-19: LC Anya Shoot",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-08-19",
+      "title": "Aug 18-19: LC Anya Shoot",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-08-20",
+      "title": "Aug 20: Polland Hopia Photo Shoot",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-08-25",
+      "title": "Aug 25: TMP Aug Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-08-26",
+      "title": "Aug 26: LC Anya Shoot",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-08-27",
+      "title": "Aug 27-28: CTG Aug Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-08-28",
+      "title": "Aug 27-28: CTG Aug Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-07",
+      "title": "Sep 7-8: SM Nuvali Photo Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-08",
+      "title": "Sep 7-8: SM Nuvali Photo Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-10",
+      "title": "Sep 10-11: Coco Video Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-11",
+      "title": "Sep 10-11: Coco Video Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-02",
+      "title": "Sep 2-3: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-03",
+      "title": "Sep 2-3: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-04",
+      "title": "Sep 2-3: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-03",
+      "title": "Sep 3: Polland Hopia Video Shoot",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-09-15",
+      "title": "Sep 15-18: KLS Photo/Video Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-16",
+      "title": "Sep 15-18: KLS Photo/Video Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-17",
+      "title": "Sep 15-18: KLS Photo/Video Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-10",
+      "title": "Sep 11: 8CUTS Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-13",
+      "title": "Sep 14: 8CUTS Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-18",
+      "title": "Sep 18: TMP Sep Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-28",
+      "title": "Sep 28-29: CTG Sep Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-22",
+      "title": "Sep 23: Nestle Goodnest Photo Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-29",
+      "title": "Sep 28-29: CTG Sep Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-10-20",
+      "title": "Oct 20-21: TMP Oct Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-10-21",
+      "title": "Oct 20-21: TMP Oct Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-10-27",
+      "title": "Oct 27-28: CTG Oct Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-10-28",
+      "title": "Oct 27-28: CTG Oct Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-12-15",
+      "title": "Dec 15-16: TMP Dec Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-12-17",
+      "title": "Dec 17-18: CTG Dec Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-12-18",
+      "title": "Dec 17-18: CTG Dec Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-12-16",
+      "title": "Dec 15-16: TMP Dec Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Nov 19-20: TMP Nov Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Nov 19-20: TMP Nov Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-11-26",
+      "title": "Nov 26-27: CTG Nov Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-11-27",
+      "title": "Nov 26-27: CTG Nov Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-08-21",
+      "title": "Aug 21: Ninoy Aquino Day",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-08-31",
+      "title": "Aug 31: National Heroes Day",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-11-02",
+      "title": "Nov 2: All Souls’ Day",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-11-30",
+      "title": "Nov 30: Bonifacio Day",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-12-08",
+      "title": "Dec 8: Immaculate Conception",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-12-24",
+      "title": "Dec 23: Christmas Eve",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-12-25",
+      "title": "Dec 25: Christmas",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-12-30",
+      "title": "Dec 30: Rizal Day",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-12-31",
+      "title": "Dec 31: Last day of the year",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-12-21",
+      "title": "Dec 21-Jan 4: Company Break [TENTATIVE]",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-12-22",
+      "title": "Dec 21-Jan 4: Company Break [TENTATIVE]",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-12-23",
+      "title": "Dec 21-Jan 4: Company Break [TENTATIVE]",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-12-24",
+      "title": "Dec 21-Jan 4: Company Break",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-12-25",
+      "title": "Dec 21-Jan 4: Company Break",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-12-28",
+      "title": "Dec 21-Jan 4: Company Break",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-12-29",
+      "title": "Dec 21-Jan 4: Company Break",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-12-30",
+      "title": "Dec 21-Jan 4: Company Break",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-12-31",
+      "title": "Dec 21-Jan 4: Company Break",
+      "kind": "holiday"
+    },
+    {
+      "date": "2027-01-04",
+      "title": "Dec 21-Jan 4: Company Break",
+      "kind": "holiday"
+    },
+    {
+      "date": "2027-01-01",
+      "title": "Dec 21-Jan 4: Company Break",
+      "kind": "holiday"
+    }
   ],
   "leaves": [
-    {"date":"2026-08-14", "person":"Chin"},
-    {"date":"2026-08-14", "person":"Mye"},
-    {"date":"2026-08-14", "person":"Ikay"},
-    {"date":"2026-08-14", "person":"KC"},
-    {"date":"2026-08-17", "person":"KC"},
-    {"date":"2026-09-01", "person":"Shen"}
+    {
+      "date": "2026-08-10",
+      "person": "Ysay"
+    },
+    {
+      "date": "2026-08-12",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-08-12",
+      "person": "Ikay"
+    },
+    {
+      "date": "2026-08-14",
+      "person": "Chin"
+    },
+    {
+      "date": "2026-08-14",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-08-14",
+      "person": "Ikay"
+    },
+    {
+      "date": "2026-09-01",
+      "person": "Shen"
+    },
+    {
+      "date": "2026-10-13",
+      "person": "Shen"
+    },
+    {
+      "date": "2026-10-09",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-10-09",
+      "person": "Ikay"
+    },
+    {
+      "date": "2026-10-10",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-10-10",
+      "person": "Ikay"
+    },
+    {
+      "date": "2026-10-11",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-10-11",
+      "person": "Ikay"
+    },
+    {
+      "date": "2026-10-12",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-10-12",
+      "person": "Ikay"
+    },
+    {
+      "date": "2026-10-13",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-10-13",
+      "person": "Ikay"
+    },
+    {
+      "date": "2026-10-14",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-10-14",
+      "person": "Ikay"
+    },
+    {
+      "date": "2026-10-15",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-10-15",
+      "person": "Ikay"
+    },
+    {
+      "date": "2026-10-16",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-10-16",
+      "person": "Ikay"
+    },
+    {
+      "date": "2026-11-12",
+      "person": "Alex"
+    },
+    {
+      "date": "2026-11-13",
+      "person": "Alex"
+    },
+    {
+      "date": "2026-12-07",
+      "person": "Shen"
+    },
+    {
+      "date": "2026-12-08",
+      "person": "Shen"
+    },
+    {
+      "date": "2026-12-09",
+      "person": "Shen"
+    },
+    {
+      "date": "2026-12-10",
+      "person": "Shen"
+    },
+    {
+      "date": "2026-12-11",
+      "person": "Shen"
+    },
+    {
+      "date": "2026-12-21",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-12-21",
+      "person": "Ikay"
+    },
+    {
+      "date": "2026-12-22",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-12-22",
+      "person": "Ikay"
+    },
+    {
+      "date": "2026-12-23",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-12-23",
+      "person": "Ikay"
+    },
+    {
+      "date": "2026-12-28",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-12-28",
+      "person": "Ikay"
+    },
+    {
+      "date": "2027-03-16",
+      "person": "Andi"
+    }
   ]
 }
