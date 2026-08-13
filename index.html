@@ -248,8 +248,6 @@
       </div>
     </div>
     <div id="logDebug" style="font-size:11px;color:var(--muted);margin-bottom:12px"></div>
-    <h2 class="section" id="logOptsLabel" style="display:none"></h2>
-    <div class="options" id="logOpts"></div>
   </div>
 
   <div id="maintenanceView" style="display:none">
@@ -258,6 +256,10 @@
         <div class="field">
           <label>Task Name <span style="color:var(--danger)">*</span></label>
           <input type="text" id="maintTaskName" placeholder="e.g. Studio deep clean" style="width:100%">
+        </div>
+        <div class="field">
+          <label>Duration (days) <span style="text-transform:none;font-weight:400;color:var(--muted)">(e.g. 2 for cleanup, up to 7 for construction)</span></label>
+          <input type="number" id="maintDuration" value="2" min="1" max="14" style="width:100%">
         </div>
         <div class="field">
           <label>Search From</label>
@@ -282,10 +284,16 @@
     <div class="cal">
       <div class="cal-head">
         <span id="calMonth"></span>
-        <label class="toggle-row">
-          Town Hall Preview
-          <span class="switch"><input type="checkbox" id="townhallToggle"><span class="slider"></span></span>
-        </label>
+        <div style="display:flex;gap:16px">
+          <label class="toggle-row">
+            Production Timings
+            <span class="switch"><input type="checkbox" id="productionToggle" checked><span class="slider"></span></span>
+          </label>
+          <label class="toggle-row">
+            Town Hall Preview
+            <span class="switch"><input type="checkbox" id="townhallToggle"><span class="slider"></span></span>
+          </label>
+        </div>
       </div>
       <div class="grid7" id="calGrid"></div>
       <div id="projectToggles" class="project-toggles"></div>
@@ -673,7 +681,7 @@ function leaveNamesAt(dateStr){ return MOCK.leaves.filter(l=>l.date===dateStr).m
 function personHasLogisticsCardAt(person, dateStr){
   return MOCK.cards.some(c=>c.kind==='logistics' && c.person===person && c.date===dateStr);
 }
-function isMaintPinnedAt(dateStr){ return !!(maintenanceTask.pinned && maintenanceTask.pinned.date===dateStr); }
+function isMaintPinnedAt(dateStr){ return !!(maintenanceTask.pinned && dateStr>=maintenanceTask.pinned.date && dateStr<=(maintenanceTask.pinned.endDate||maintenanceTask.pinned.date)); }
 function isLogPinnedAt(dateStr){ return !!(logisticsTask.pinned && logisticsTask.pinned.date===dateStr); }
 
 // Generic forward scanner: walks day by day from start, skipping weekends,
@@ -694,6 +702,34 @@ function findFreeDays(startDate, endDate, count, isHardExcluded, getFlags){
   return found;
 }
 
+// Scans for `count` blocks of `blockLength` consecutive calendar days where every
+// day in the block passes isHardExcluded==false. Weekends are allowed WITHIN a
+// block (a multi-day closure can reasonably span a weekend) but every day is
+// still individually checked. On success, jumps past the found block; on
+// failure, advances by one day and retries from there.
+function findFreeBlocks(startDate, endDate, blockLength, count, isHardExcluded, getFlagsForDay){
+  const found = [];
+  let d = startDate;
+  let guard = 0;
+  while(found.length<count && d<=endDate && guard<400){
+    let ok = true;
+    let flags = [];
+    for(let i=0;i<blockLength;i++){
+      const day = addDays(d,i);
+      if(isHolidayAt(day) || isHardExcluded(day)){ ok = false; break; }
+      flags = flags.concat(getFlagsForDay(day));
+    }
+    if(ok){
+      found.push({date:d, endDate:addDays(d, blockLength-1), flags});
+      d = addDays(d, blockLength);
+    } else {
+      d = addDays(d,1);
+    }
+    guard++;
+  }
+  return found;
+}
+
 let logisticsTask = {name:'', person:'Regie', pinned:null, options:[]};
 let maintenanceTask = {name:'', pinned:null, options:[]};
 
@@ -702,6 +738,7 @@ function generateLogisticsOptions(){
   if(!nameField.value.trim()){ showToast('Enter a task name first'); nameField.focus(); return; }
   logisticsTask.name = nameField.value.trim();
   logisticsTask.person = document.getElementById('logPerson').value;
+  logisticsTask.pinned = null;
   const start = document.getElementById('logStart').value || todayStr();
   const end = document.getElementById('logEnd').value || addDays(start, 90);
   const person = logisticsTask.person;
@@ -716,13 +753,16 @@ function generateLogisticsOptions(){
   const found = findFreeDays(start, end, 2, hardExcluded, getFlags);
   logisticsTask.options = found;
   document.getElementById('logDebug').textContent = 'debug — searching '+start+' to '+end+' for '+person+' · found: '+found.length;
-  renderLogisticsOptions();
+  if(!found.length){ showToast('No free days found in this window'); }
+  renderCalendar();
 }
 
 function generateMaintenanceOptions(){
   const nameField = document.getElementById('maintTaskName');
   if(!nameField.value.trim()){ showToast('Enter a task name first'); nameField.focus(); return; }
   maintenanceTask.name = nameField.value.trim();
+  const duration = Math.max(1, parseInt(document.getElementById('maintDuration').value, 10) || 1);
+  maintenanceTask.duration = duration;
   const start = document.getElementById('maintStart').value || todayStr();
   const end = document.getElementById('maintEnd').value || addDays(start, 90);
 
@@ -740,9 +780,9 @@ function generateMaintenanceOptions(){
     });
     return flags;
   };
-  const found = findFreeDays(start, end, 2, hardExcluded, getFlags);
+  const found = findFreeBlocks(start, end, duration, 2, hardExcluded, getFlags);
   maintenanceTask.options = found;
-  document.getElementById('maintDebug').textContent = 'debug — searching '+start+' to '+end+' · found: '+found.length;
+  document.getElementById('maintDebug').textContent = 'debug — searching '+start+' to '+end+' · duration: '+duration+'d · found: '+found.length;
   renderMaintenanceOptions();
 }
 
@@ -751,59 +791,31 @@ function simpleFlagsHtml(flags){
   return flags.map(f=>'<div class="flag warn"><i>!</i>'+f.text+'</div>').join('');
 }
 
-function renderLogisticsOptions(){
-  const wrap = document.getElementById('logOpts');
-  const label = document.getElementById('logOptsLabel');
-  label.style.display = 'block';
-  label.textContent = logisticsTask.options.length+' suggested day'+(logisticsTask.options.length===1?'':'s')+' for '+logisticsTask.person;
-  wrap.innerHTML = '';
-  if(!logisticsTask.options.length){
-    wrap.innerHTML = '<p style="font-size:13px;color:var(--text2)">No free days found in this window.</p>';
-    return;
-  }
-  logisticsTask.options.forEach((opt, idx)=>{
-    const letter = String.fromCharCode(65+idx);
-    const div = document.createElement('div');
-    div.className = 'opt';
-    div.innerHTML = '<span class="badge" style="'+(idx===0?'':'display:none')+'">Recommended</span>'+
-      '<h4>Option '+letter+'</h4>'+
-      '<div class="steps"><b>'+prettyDateFull(opt.date)+'</b> — '+logisticsTask.name+' ('+logisticsTask.person+')</div>'+
-      '<div class="flagsBlock">'+simpleFlagsHtml(opt.flags)+'</div>'+
-      '<div class="actions"><button type="button" class="pinBtn">Pin</button></div>';
-    div.querySelector('.pinBtn').addEventListener('click', e=>{
-      e.stopPropagation();
-      logisticsTask.pinned = {date:opt.date, name:logisticsTask.name, person:logisticsTask.person, flags:opt.flags};
-      showToast('Pinned: '+logisticsTask.name+' — '+prettyDateFull(opt.date));
-      renderCalendar();
-    });
-    div.addEventListener('click', ()=> div.querySelector('.pinBtn').click());
-    wrap.appendChild(div);
-  });
-}
-
 function renderMaintenanceOptions(){
   const wrap = document.getElementById('maintOpts');
   const label = document.getElementById('maintOptsLabel');
   label.style.display = 'block';
-  label.textContent = maintenanceTask.options.length+' suggested day'+(maintenanceTask.options.length===1?'':'s');
+  const dur = maintenanceTask.duration || 1;
+  label.textContent = maintenanceTask.options.length+' suggested '+dur+'-day block'+(maintenanceTask.options.length===1?'':'s');
   wrap.innerHTML = '';
   if(!maintenanceTask.options.length){
-    wrap.innerHTML = '<p style="font-size:13px;color:var(--text2)">No free days found in this window.</p>';
+    wrap.innerHTML = '<p style="font-size:13px;color:var(--text2)">No free '+dur+'-day block found in this window.</p>';
     return;
   }
   maintenanceTask.options.forEach((opt, idx)=>{
     const letter = String.fromCharCode(65+idx);
+    const rangeText = opt.endDate && opt.endDate!==opt.date ? prettyDateFull(opt.date)+' – '+prettyDateFull(opt.endDate) : prettyDateFull(opt.date);
     const div = document.createElement('div');
     div.className = 'opt';
     div.innerHTML = '<span class="badge" style="'+(idx===0?'':'display:none')+'">Recommended</span>'+
       '<h4>Option '+letter+'</h4>'+
-      '<div class="steps"><b>'+prettyDateFull(opt.date)+'</b> — '+maintenanceTask.name+'</div>'+
+      '<div class="steps"><b>'+rangeText+'</b> — '+maintenanceTask.name+'</div>'+
       '<div class="flagsBlock">'+simpleFlagsHtml(opt.flags)+'</div>'+
       '<div class="actions"><button type="button" class="pinBtn">Pin</button></div>';
     div.querySelector('.pinBtn').addEventListener('click', e=>{
       e.stopPropagation();
-      maintenanceTask.pinned = {date:opt.date, name:maintenanceTask.name, flags:opt.flags};
-      showToast('Pinned: '+maintenanceTask.name+' — '+prettyDateFull(opt.date));
+      maintenanceTask.pinned = {date:opt.date, endDate:opt.endDate||opt.date, name:maintenanceTask.name, flags:opt.flags};
+      showToast('Pinned: '+maintenanceTask.name+' — '+rangeText);
       renderCalendar();
     });
     div.addEventListener('click', ()=> div.querySelector('.pinBtn').click());
@@ -865,8 +877,11 @@ function crossProjectShootFlags(step, dateStr, ownProjectId){
 function maintenanceShootFlags(step, dateStr){
   const flags = [];
   if(!step.isShoot) return flags;
-  if(maintenanceTask.pinned && maintenanceTask.pinned.date===dateStr){
-    flags.push({type:'soft', text:'Maintenance — '+maintenanceTask.pinned.name+' is pinned this day'});
+  if(maintenanceTask.pinned){
+    const mEnd = maintenanceTask.pinned.endDate || maintenanceTask.pinned.date;
+    if(dateStr>=maintenanceTask.pinned.date && dateStr<=mEnd){
+      flags.push({type:'soft', text:'Maintenance — '+maintenanceTask.pinned.name+' is pinned this day'});
+    }
   }
   return flags;
 }
@@ -1187,7 +1202,8 @@ function renderCalendar(){
     if(!byDate[dateStr]) byDate[dateStr] = [];
     byDate[dateStr].push(entry);
   }
-  const visibleProjects = projects.filter(p=> p.pinned && p.visible!==false);
+  const showProduction = document.getElementById('productionToggle').checked;
+  const visibleProjects = showProduction ? projects.filter(p=> p.pinned && p.visible!==false) : [];
   const multi = visibleProjects.length > 1;
   visibleProjects.forEach(p=>{
     p.pinned.steps.forEach(s=> addEntry(s.date, {
@@ -1201,12 +1217,25 @@ function renderCalendar(){
       label: 'Logistics — '+logisticsTask.pinned.name+' ('+logisticsTask.pinned.person+')',
       isNew:true, isShootStep:false, fixed:true, color:LOGISTICS_COLOR
     });
+  } else if(logisticsTask.options && logisticsTask.options.length){
+    logisticsTask.options.forEach((opt, idx)=>{
+      const letter = String.fromCharCode(65+idx);
+      addEntry(opt.date, {
+        label: 'Suggested '+letter+' — '+logisticsTask.name+' ('+logisticsTask.person+')',
+        isNew:true, isShootStep:false, fixed:true, suggested:true, logOptionIndex:idx, color:LOGISTICS_COLOR
+      });
+    });
   }
   if(maintenanceTask.pinned){
-    addEntry(maintenanceTask.pinned.date, {
-      label: 'Maintenance — '+maintenanceTask.pinned.name,
-      isNew:true, isShootStep:false, fixed:true, color:MAINTENANCE_COLOR
-    });
+    const mEnd = maintenanceTask.pinned.endDate || maintenanceTask.pinned.date;
+    let md = maintenanceTask.pinned.date;
+    while(md<=mEnd){
+      addEntry(md, {
+        label: 'Maintenance — '+maintenanceTask.pinned.name,
+        isNew:true, isShootStep:false, fixed:true, color:MAINTENANCE_COLOR
+      });
+      md = addDays(md, 1);
+    }
   }
   if(showTownHall){
     MOCK.cards.forEach(c=> addEntry(c.date, {label: c.title, type:'existing'}));
@@ -1229,12 +1258,17 @@ function renderCalendar(){
     const newEntries = entries.filter(e=>e.isNew);
     const primaryEntry = newEntries[0];
     const existingOnly = !primaryEntry && entries[0] && entries[0].type==='existing';
-    const cellStyle = newEntries.length===1 ? ('background:'+primaryEntry.color.bg+';color:'+primaryEntry.color.accent+';'+(primaryEntry.isShootStep?'border:2px solid '+primaryEntry.color.accent+';':'')) : '';
+    const cellStyle = newEntries.length===1
+      ? (primaryEntry.fixed
+          ? ('background:#fff;color:'+primaryEntry.color.accent+';border:2px dashed '+primaryEntry.color.accent+';')
+          : ('background:'+primaryEntry.color.bg+';color:'+primaryEntry.color.accent+';'+(primaryEntry.isShootStep?'border:2px solid '+primaryEntry.color.accent+';':'')))
+      : '';
     const anyDraggable = newEntries.some(e=>!e.fixed);
     const cls = 'day' + (existingOnly?' existing':'') + (!primaryEntry && dateStr===target?' target':'') + (anyDraggable?' draggable':'');
     let lblHtml = entries.map(e=>{
       if(e.type==='existing') return '<div class="lbl existingLbl">'+e.label+'</div>';
-      if(e.isNew && e.fixed) return '<div class="lbl projLbl" style="background:'+e.color.accent+';color:#fff">'+e.label+'</div>';
+      if(e.isNew && e.suggested) return '<div class="lbl projLbl logSuggested" data-log-idx="'+e.logOptionIndex+'" style="background:#fff;color:'+e.color.accent+';border:1.5px dotted '+e.color.accent+';cursor:pointer">'+e.label+'</div>';
+      if(e.isNew && e.fixed) return '<div class="lbl projLbl" style="background:#fff;color:'+e.color.accent+';border:1.5px solid '+e.color.accent+'">'+e.label+'</div>';
       if(e.isNew) return '<div class="lbl projLbl" draggable="true" data-step-key="'+e.stepKey+'" data-project-id="'+e.projectId+'" style="background:'+e.color.accent+';color:#fff">'+e.label+'</div>';
       return '<div class="lbl">'+e.label+'</div>';
     }).join('');
@@ -1244,6 +1278,17 @@ function renderCalendar(){
   }
   document.getElementById('calGrid').innerHTML = grid;
 
+  document.querySelectorAll('#calGrid .logSuggested').forEach(el=>{
+    el.addEventListener('click', e=>{
+      e.stopPropagation();
+      const idx = parseInt(el.dataset.logIdx, 10);
+      const opt = logisticsTask.options[idx];
+      if(!opt) return;
+      logisticsTask.pinned = {date:opt.date, name:logisticsTask.name, person:logisticsTask.person, flags:opt.flags};
+      showToast('Pinned: '+logisticsTask.name+' — '+prettyDateFull(opt.date));
+      renderCalendar();
+    });
+  });
   document.querySelectorAll('#calGrid .projLbl[draggable="true"]').forEach(el=>{
     el.addEventListener('dragstart', e=>{
       e.stopPropagation();
@@ -1318,7 +1363,9 @@ document.getElementById('copyBtn').addEventListener('click', ()=>{
       (logisticsTask.pinned.flags.length ? '\n\n'+logisticsTask.pinned.flags.map(f=>'⚠️ '+f.text).join('\n') : '');
   } else if(activeTabKind==='maintenance'){
     if(!maintenanceTask.pinned){ showToast('Pin a maintenance day first'); return; }
-    text = 'MAINTENANCE TASK\n\n'+maintenanceTask.pinned.name+'\n*'+prettyDateFull(maintenanceTask.pinned.date)+'*'+
+    const mEnd = maintenanceTask.pinned.endDate || maintenanceTask.pinned.date;
+    const mRange = mEnd!==maintenanceTask.pinned.date ? prettyDateFull(maintenanceTask.pinned.date)+' – '+prettyDateFull(mEnd) : prettyDateFull(maintenanceTask.pinned.date);
+    text = 'MAINTENANCE TASK\n\n'+maintenanceTask.pinned.name+'\n*'+mRange+'*'+
       (maintenanceTask.pinned.flags.length ? '\n\n'+maintenanceTask.pinned.flags.map(f=>'⚠️ '+f.text).join('\n') : '');
   } else {
     if(!state || !state.pinned){ showToast('Pin an option first'); return; }
@@ -1340,6 +1387,7 @@ document.getElementById('copyBtn').addEventListener('click', ()=>{
   }
 });
 document.getElementById('townhallToggle').addEventListener('change', renderCalendar);
+document.getElementById('productionToggle').addEventListener('change', renderCalendar);
 document.getElementById('projectName').addEventListener('input', ()=>{
   document.querySelectorAll('.timingsTitle').forEach(el=>{
     el.textContent = timingsHeader(el.dataset.letter);
