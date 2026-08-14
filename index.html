@@ -1108,7 +1108,7 @@ function renderFieldPanel(chain, anchorDate, buffer){
     inp.addEventListener('change', ()=>{
       if(!inp.value) return;
       document.getElementById('anchor').value = inp.value;
-      generateOptions();
+      setTimeout(()=> generateOptions(), 0);
     });
   });
   panel.querySelectorAll('input.lead').forEach(inp=>{
@@ -1116,7 +1116,7 @@ function renderFieldPanel(chain, anchorDate, buffer){
       const key = inp.dataset.key;
       const step = currentChain.find(s=>s.key===key);
       step.lead = parseInt(inp.value,10) || 0;
-      generateOptions();
+      setTimeout(()=> generateOptions(), 0);
     });
   });
   panel.querySelectorAll('.rmField').forEach(btn=>{
