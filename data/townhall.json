@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-14T01:03:07.248Z",
+  "generatedAt": "2026-08-14T03:33:15.177Z",
   "cards": [
     {
       "date": "2027-08-10",
@@ -31,10 +31,10 @@
       "time": "15:00"
     },
     {
-      "date": "2026-08-28",
-      "title": "Aug 28: Polland Hopia Videoshoot PPM @ 4PM",
+      "date": "2026-08-24",
+      "title": "Aug 24: Polland Hopia Videoshoot PPM @ 3PM",
       "kind": "meeting",
-      "time": "16:00"
+      "time": "15:00"
     },
     {
       "date": "2026-08-18",
@@ -117,8 +117,8 @@
       "tentative": true
     },
     {
-      "date": "2026-09-03",
-      "title": "Sep 3: Polland Hopia Video Shoot",
+      "date": "2026-08-31",
+      "title": "Aug 31: Polland Hopia Video Shoot",
       "kind": "shoot"
     },
     {
