@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-14T08:06:54.244Z",
+  "generatedAt": "2026-08-14T09:32:47.074Z",
   "cards": [
     {
       "date": "2027-08-10",
@@ -21,6 +21,12 @@
     {
       "date": "2026-08-14",
       "title": "Aug 14: SM Nuvali Food Hall Proposal Alignment Call w/ Go Motion @ 1PM",
+      "kind": "meeting",
+      "time": "13:00"
+    },
+    {
+      "date": "2026-08-17",
+      "title": "Aug 17: CTG Video Campaign Briefing @ 1PM",
       "kind": "meeting",
       "time": "13:00"
     },
@@ -77,6 +83,18 @@
     {
       "date": "2026-09-07",
       "title": "Sep 7-8: SM Nuvali Photo Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-09",
+      "title": "Sep 8-9: 8CUTS Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-08",
+      "title": "Sep 8-9: 8CUTS Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -146,20 +164,20 @@
       "tentative": true
     },
     {
-      "date": "2026-09-28",
-      "title": "Sep 28-29: CTG Sep Subscription Shoot [TENTATIVE]",
+      "date": "2026-09-24",
+      "title": "Sep 24-25: CTG Sep Subscription Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-22",
-      "title": "Sep 23: Nestle Goodnest Photo Shoot [TENTATIVE]",
+      "date": "2026-09-21",
+      "title": "Sep 22: Nestle Goodnest Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-29",
-      "title": "Sep 28-29: CTG Sep Subscription Shoot [TENTATIVE]",
+      "date": "2026-09-25",
+      "title": "Sep 24-25: CTG Sep Subscription Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -383,22 +401,6 @@
     },
     {
       "date": "2026-10-09",
-      "person": "Ikay"
-    },
-    {
-      "date": "2026-10-10",
-      "person": "Mye"
-    },
-    {
-      "date": "2026-10-10",
-      "person": "Ikay"
-    },
-    {
-      "date": "2026-10-11",
-      "person": "Mye"
-    },
-    {
-      "date": "2026-10-11",
       "person": "Ikay"
     },
     {
