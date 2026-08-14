@@ -1,29 +1,6 @@
 {
-  "generatedAt": "2026-08-14T18:12:37.666Z",
+  "generatedAt": "2026-08-14T19:25:46.731Z",
   "cards": [
-    {
-      "date": "2027-08-10",
-      "title": "Aug 11: SM Nuvali Food Hall Proposal Huddle @ 4:30PM",
-      "kind": "meeting",
-      "time": "16:30"
-    },
-    {
-      "date": "2026-08-12",
-      "title": "Aug 12: Knorr Packaging Briefing",
-      "kind": "meeting"
-    },
-    {
-      "date": "2026-08-13",
-      "title": "Aug 13: LC Anya PPM @ 1PM",
-      "kind": "meeting",
-      "time": "13:00"
-    },
-    {
-      "date": "2026-08-14",
-      "title": "Aug 14: SM Nuvali Food Hall Proposal Alignment Call w/ Go Motion @ 1PM",
-      "kind": "meeting",
-      "time": "13:00"
-    },
     {
       "date": "2026-08-17",
       "title": "Aug 17: CTG Video Campaign Briefing @ 1PM",
@@ -355,30 +332,6 @@
     }
   ],
   "leaves": [
-    {
-      "date": "2026-08-10",
-      "person": "Ysay"
-    },
-    {
-      "date": "2026-08-12",
-      "person": "Mye"
-    },
-    {
-      "date": "2026-08-12",
-      "person": "Ikay"
-    },
-    {
-      "date": "2026-08-14",
-      "person": "Chin"
-    },
-    {
-      "date": "2026-08-14",
-      "person": "Mye"
-    },
-    {
-      "date": "2026-08-14",
-      "person": "Ikay"
-    },
     {
       "date": "2026-09-01",
       "person": "Shen"
