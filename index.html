@@ -75,7 +75,11 @@
   .opt .actions button{flex:1}
   .cal{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:21px 26px;margin-bottom:20px;width:130%;margin-left:-15%;box-sizing:border-box;box-shadow:0 2px 10px rgba(9,30,66,.06)}
   .cal-head{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:10px;font-family:'Spline Sans Mono',monospace}
-  .grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;font-size:11px}
+  .grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;font-size:11px;flex:1;min-width:0}
+  .calGridWrap{display:flex;gap:7px;align-items:flex-start}
+  .rail{width:20px;position:relative;flex:none}
+  .railLabel{position:absolute;left:0;width:100%;writing-mode:vertical-rl;transform:rotate(180deg);font-family:'Spline Sans Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--accent);text-align:center;display:flex;align-items:center;justify-content:center;border-radius:5px;background:var(--gray-bg);overflow:hidden}
+  .railLabel.alt{background:var(--accent-bg)}
   .dow{color:var(--muted);text-align:center;padding-bottom:5px;font-family:'Spline Sans Mono',monospace}
   .day{position:relative;text-align:center;padding:8px 3px 5px;border-radius:7px;min-height:57px}
   .day .n{font-size:14px}
@@ -314,7 +318,10 @@
           </label>
         </div>
       </div>
-      <div class="grid7" id="calGrid"></div>
+      <div class="calGridWrap">
+        <div class="rail" id="monthRail"></div>
+        <div class="grid7" id="calGrid"></div>
+      </div>
       <div id="projectToggles" class="project-toggles"></div>
       <div class="agenda" id="agenda"></div>
     </div>
@@ -1125,6 +1132,11 @@ function renderFieldPanel(chain, anchorDate, buffer){
   });
   html += '</div>';
   html += '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">' +
+    '<button type="button" id="addProductRequest">+ Add product request</button>' +
+    '<button type="button" id="addPPMPhoto">+ Add PPM (Photo)</button>' +
+    '<button type="button" id="addPPMVideo">+ Add PPM (Video)</button>' +
+    '<button type="button" id="addPPMBoth">+ Add PPM (Photo + Video)</button>' +
+    '<button type="button" id="addDelivery">+ Add delivery of products</button>' +
     '<button type="button" id="addPhotoDay">+ Add photoshoot day</button>' +
     '<button type="button" id="addVideoDay">+ Add videoshoot day</button>' +
     '<button type="button" id="addSubmitVideos">+ Add submit videos</button>' +
@@ -1188,6 +1200,47 @@ function renderFieldPanel(chain, anchorDate, buffer){
     if(insertAt===-1) insertAt = currentChain.length;
     currentChain.splice(insertAt, 0, {key:'sourcing_'+Date.now(), label:'Sourcing Day (Plate This)', lead:1, src:'manual', isSourcing:true});
     generateOptions();
+  });
+
+  function insertBeforeFirstMatch(newStep, matchFn){
+    const idx = currentChain.findIndex(matchFn);
+    const insertAt = idx===-1 ? currentChain.length : idx;
+    currentChain.splice(insertAt, 0, newStep);
+    generateOptions();
+  }
+  document.getElementById('addProductRequest').addEventListener('click', ()=>{
+    insertBeforeFirstMatch(
+      {key:'product_request_'+Date.now(), label:'Product Request c/o PK', lead:2, src:'manual'},
+      s=> s.isPPM || s.key.includes('delivery') || s.isShoot
+    );
+  });
+  function insertAtIndex(newStep, idx){
+    currentChain.splice(idx, 0, newStep);
+    generateOptions();
+  }
+  function ppmInsertIndex(shootType){
+    const shootIdx = currentChain.findIndex(s=>s.isShoot && s.shootType===shootType);
+    if(shootIdx===-1) return currentChain.length;
+    if(shootIdx>0 && currentChain[shootIdx-1].key.includes('delivery')) return shootIdx-1;
+    return shootIdx;
+  }
+  document.getElementById('addPPMPhoto').addEventListener('click', ()=>{
+    insertAtIndex({key:'ppm_photo_'+Date.now(), label:'PPM (Photo)', lead:4, src:'manual', hasTime:'14:00', isPPM:true}, ppmInsertIndex('photo'));
+  });
+  document.getElementById('addPPMVideo').addEventListener('click', ()=>{
+    insertAtIndex({key:'ppm_video_'+Date.now(), label:'PPM (Video)', lead:6, src:'manual', hasTime:'14:00', isPPM:true}, ppmInsertIndex('video'));
+  });
+  document.getElementById('addPPMBoth').addEventListener('click', ()=>{
+    insertBeforeFirstMatch(
+      {key:'ppm_both_'+Date.now(), label:'PPM (Photo + Video)', lead:5, src:'manual', hasTime:'14:00', isPPM:true},
+      s=> s.key.includes('delivery') || s.isShoot
+    );
+  });
+  document.getElementById('addDelivery').addEventListener('click', ()=>{
+    insertBeforeFirstMatch(
+      {key:'delivery_'+Date.now(), label:'Delivery of Products to PK Studio', lead:1, src:'manual'},
+      s=> s.isShoot
+    );
   });
 }
 
@@ -1345,6 +1398,43 @@ function renderProjectToggles(){
 let calendarExtraDays = 0;
 let agendaCollapsed = true;
 
+function renderMonthRail(){
+  const railEl = document.getElementById('monthRail');
+  const gridEl = document.getElementById('calGrid');
+  const dayEls = [...gridEl.querySelectorAll('.day[data-date]')];
+  if(!dayEls.length){ railEl.innerHTML = ''; railEl.style.height = ''; return; }
+
+  const blocks = [];
+  let currentMonthKey = null;
+  let blockStartEl = null;
+  let blockLabel = '';
+  let prevEl = null;
+  dayEls.forEach(el=>{
+    const d = new Date(el.dataset.date+'T00:00:00');
+    const monthKey = d.getFullYear()+'-'+d.getMonth();
+    if(monthKey!==currentMonthKey){
+      if(blockStartEl){ blocks.push({label:blockLabel, startEl:blockStartEl, endEl:prevEl}); }
+      currentMonthKey = monthKey;
+      blockLabel = d.toLocaleString('en-US',{month:'short'}).toUpperCase();
+      blockStartEl = el;
+    }
+    prevEl = el;
+  });
+  if(blockStartEl){ blocks.push({label:blockLabel, startEl:blockStartEl, endEl:prevEl}); }
+
+  const railRect = railEl.getBoundingClientRect();
+  let html = '';
+  blocks.forEach((b,i)=>{
+    const startRect = b.startEl.getBoundingClientRect();
+    const endRect = b.endEl.getBoundingClientRect();
+    const top = startRect.top - railRect.top;
+    const height = endRect.bottom - startRect.top;
+    html += '<div class="railLabel'+(i%2?' alt':'')+'" style="top:'+top+'px;height:'+height+'px">'+b.label+'</div>';
+  });
+  railEl.innerHTML = html;
+  railEl.style.height = gridEl.getBoundingClientRect().height+'px';
+}
+
 function renderCalendar(){
   document.getElementById('calWrap').style.display = (activeTabKind==='reference' || activeTabKind==='learn') ? 'none' : 'block';
   if(activeTabKind==='reference' || activeTabKind==='learn') return;
@@ -1436,6 +1526,7 @@ function renderCalendar(){
     grid += '<div class="'+cls+'" data-date="'+dateStr+'" style="'+cellStyle+'">'+leaveTag+'<div class="n">'+dayNum+'</div>'+lblHtml+'</div>';
   }
   document.getElementById('calGrid').innerHTML = grid;
+  renderMonthRail();
 
   document.querySelectorAll('#calGrid .logSuggested').forEach(el=>{
     el.addEventListener('click', e=>{
@@ -1501,6 +1592,11 @@ function showToast(msg){
 }
 
 document.getElementById('genBtn').addEventListener('click', generateOptions);
+let railResizeTimer;
+window.addEventListener('resize', ()=>{
+  clearTimeout(railResizeTimer);
+  railResizeTimer = setTimeout(renderMonthRail, 120);
+});
 document.getElementById('logGenBtn').addEventListener('click', generateLogisticsOptions);
 document.getElementById('maintGenBtn').addEventListener('click', generateMaintenanceOptions);
 document.getElementById('logClearBtn').addEventListener('click', ()=>{
