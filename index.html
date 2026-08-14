@@ -200,6 +200,7 @@
           <option value="nonsub_photo">Non-sub — photo only</option>
           <option value="nonsub_video">Non-sub — video only</option>
           <option value="nonsub_both">Non-sub — photo + video</option>
+          <option value="nonsub_combined">Non-sub — combined (no photo/video distinction)</option>
         </select>
       </div>
       <div class="field">
@@ -213,6 +214,12 @@
       <div class="field" id="numShootDaysField">
         <label>Number of Shooting Days <span style="text-transform:none;font-weight:400;color:var(--muted)" id="numShootDaysHint">(fixed for subscription accounts)</span></label>
         <input type="number" id="numShootDays" value="1" min="1" max="14" style="width:100%">
+      </div>
+      <div class="field" id="numPhotoVideoDaysField" style="display:none">
+        <label>Number of Photoshoot Days</label>
+        <input type="number" id="numPhotoDays" value="1" min="1" max="14" style="width:100%;margin-bottom:10px">
+        <label>Number of Videoshoot Days</label>
+        <input type="number" id="numVideoDays" value="1" min="1" max="14" style="width:100%">
       </div>
     </div>
     <div style="display:flex;gap:8px;margin-top:16px">
@@ -520,6 +527,15 @@ const CHAINS = {
     {key:'delivery_video', label:'Delivery of Products to PK Studio', lead:1, src:'manual'},
     {key:'shoot2', label:'Videoshoot Day', lead:1, src:'borrowed', isShoot:true, shootType:'video'},
     {key:'turnover_videos', label:'Initial Draft of Videos', lead:9, src:'borrowed'}
+  ],
+  nonsub_combined: [
+    {key:'ce', label:'Signed CE/ Awarding', lead:0, src:'na'},
+    {key:'product_request', label:'Product Request c/o PK', lead:2, src:'derived'},
+    {key:'ppm', label:'PPM', lead:5, src:'manual', hasTime:'14:00', isPPM:true},
+    {key:'delivery', label:'Delivery of Products to PK Studio', lead:1, src:'manual'},
+    {key:'shoot1', label:'Shoot Day', lead:1, src:'manual', isShoot:true, shootType:'combined'},
+    {key:'turnover_photos', label:'Submit Photos', lead:2, src:'derived'},
+    {key:'turnover_videos', label:'Initial Draft of Videos', lead:9, src:'derived'}
   ]
 };
 
@@ -1028,11 +1044,16 @@ function generateOptions(){
     renumberShootDays(state.chain);
   }
   currentChain = state.chain;
-  const singleType = state.account==='nonsub_photo' || state.account==='nonsub_video';
+  const singleType = state.account==='nonsub_photo' || state.account==='nonsub_video' || state.account==='nonsub_combined';
   if(singleType){
     const wanted = Math.max(1, parseInt(document.getElementById('numShootDays').value,10) || 1);
-    const shootType = state.account==='nonsub_photo' ? 'photo' : 'video';
+    const shootType = state.account==='nonsub_photo' ? 'photo' : state.account==='nonsub_video' ? 'video' : 'combined';
     syncShootDayCount(currentChain, shootType, wanted);
+  } else if(state.account==='nonsub_both'){
+    const wantedPhoto = Math.max(1, parseInt(document.getElementById('numPhotoDays').value,10) || 1);
+    const wantedVideo = Math.max(1, parseInt(document.getElementById('numVideoDays').value,10) || 1);
+    syncShootDayCount(currentChain, 'photo', wantedPhoto);
+    syncShootDayCount(currentChain, 'video', wantedVideo);
   }
   state.anchor = document.getElementById('anchor').value || todayStr();
   const tlA = buildTimeline(state.anchor, currentChain, 0, state.id);
@@ -1074,12 +1095,15 @@ function generateOptions(){
 
 function syncShootDayCount(chain, shootType, wanted){
   const group = chain.filter(s=>s.isShoot && s.shootType===shootType);
-  const base = shootType==='photo' ? 'Photoshoot Day' : 'Videoshoot Day';
+  const base = shootType==='photo' ? 'Photoshoot Day' : shootType==='video' ? 'Videoshoot Day' : 'Shoot Day';
   if(group.length<wanted){
-    let insertAt = chain.length;
+    let insertAt = -1;
     for(let i=chain.length-1;i>=0;i--){
-      if(chain[i].isShoot){ insertAt = i+1; break; }
-      if(chain[i].key.includes('turnover') || chain[i].key.includes('ppm')){ insertAt = i; }
+      if(chain[i].isShoot && chain[i].shootType===shootType){ insertAt = i+1; break; }
+    }
+    if(insertAt===-1){
+      insertAt = chain.findIndex(s=>s.isShoot);
+      if(insertAt===-1) insertAt = chain.length;
     }
     while(group.length<wanted){
       const newStep = {key:shootType+'_day_'+Date.now()+'_'+group.length, label:base, lead:1, src:'manual', isShoot:true, shootType};
@@ -1098,11 +1122,11 @@ function syncShootDayCount(chain, shootType, wanted){
 }
 
 function renumberShootDays(chain){
-  ['photo','video'].forEach(type=>{
+  ['photo','video','combined'].forEach(type=>{
     const group = chain.filter(s=>s.isShoot && s.shootType===type);
-    const base = type==='photo' ? 'Photoshoot Day' : 'Videoshoot Day';
+    const base = type==='photo' ? 'Photoshoot Day' : type==='video' ? 'Videoshoot Day' : 'Shoot Day';
     if(group.length===1){ group[0].label = base; }
-    else { group.forEach((s,i)=> s.label = base+' '+(i+1)+'/'+group.length); }
+    else if(group.length>1){ group.forEach((s,i)=> s.label = base+' '+(i+1)+'/'+group.length); }
   });
 }
 
@@ -1176,11 +1200,14 @@ function renderFieldPanel(chain, anchorDate, buffer){
     });
   });
   function addShootDay(kind){
-    const label = kind==='photo' ? 'Photoshoot Day' : 'Videoshoot Day';
-    let insertAt = currentChain.length;
+    const label = kind==='photo' ? 'Photoshoot Day' : kind==='video' ? 'Videoshoot Day' : 'Shoot Day';
+    let insertAt = -1;
     for(let i=currentChain.length-1;i>=0;i--){
-      if(currentChain[i].isShoot){ insertAt = i+1; break; }
-      if(currentChain[i].key.includes('turnover') || currentChain[i].key.includes('ppm')){ insertAt = i; }
+      if(currentChain[i].isShoot && currentChain[i].shootType===kind){ insertAt = i+1; break; }
+    }
+    if(insertAt===-1){
+      insertAt = currentChain.findIndex(s=>s.isShoot);
+      if(insertAt===-1) insertAt = currentChain.length;
     }
     const newKey = kind+'_day_'+Date.now();
     currentChain.splice(insertAt, 0, {key:newKey, label:label, lead:1, src:'manual', isShoot:true, shootType:kind});
@@ -1618,19 +1645,40 @@ document.getElementById('maintClearBtn').addEventListener('click', ()=>{
 });
 function syncNumShootDaysFieldToChain(shootType){
   if(!state) return;
-  const singleType = (state.account==='nonsub_photo' && shootType==='photo') || (state.account==='nonsub_video' && shootType==='video');
-  if(!singleType) return;
   const count = currentChain.filter(s=>s.isShoot && s.shootType===shootType).length;
+  if(state.account==='nonsub_both' && (shootType==='photo' || shootType==='video')){
+    document.getElementById(shootType==='photo' ? 'numPhotoDays' : 'numVideoDays').value = count || 1;
+    return;
+  }
+  const singleType = (state.account==='nonsub_photo' && shootType==='photo') ||
+    (state.account==='nonsub_video' && shootType==='video') ||
+    (state.account==='nonsub_combined' && shootType==='combined');
+  if(!singleType) return;
   document.getElementById('numShootDays').value = count || 1;
 }
 
 function updateNumShootDaysField(){
   if(!state) return;
   const acct = state.account;
+  const singleField = document.getElementById('numShootDaysField');
+  const splitField = document.getElementById('numPhotoVideoDaysField');
   const field = document.getElementById('numShootDays');
   const hint = document.getElementById('numShootDaysHint');
-  const singleType = acct==='nonsub_photo' || acct==='nonsub_video';
-  const shootType = acct==='nonsub_photo' ? 'photo' : acct==='nonsub_video' ? 'video' : null;
+  const photoField = document.getElementById('numPhotoDays');
+  const videoField = document.getElementById('numVideoDays');
+
+  if(acct==='nonsub_both'){
+    singleField.style.display = 'none';
+    splitField.style.display = '';
+    photoField.value = state.chain.filter(s=>s.isShoot && s.shootType==='photo').length || 1;
+    videoField.value = state.chain.filter(s=>s.isShoot && s.shootType==='video').length || 1;
+    return;
+  }
+  singleField.style.display = '';
+  splitField.style.display = 'none';
+
+  const singleType = acct==='nonsub_photo' || acct==='nonsub_video' || acct==='nonsub_combined';
+  const shootType = acct==='nonsub_photo' ? 'photo' : acct==='nonsub_video' ? 'video' : acct==='nonsub_combined' ? 'combined' : null;
   const currentCount = shootType ? state.chain.filter(s=>s.isShoot && s.shootType===shootType).length : state.chain.filter(s=>s.isShoot).length;
   field.value = currentCount || 1;
   if(singleType){
@@ -1638,7 +1686,7 @@ function updateNumShootDaysField(){
     hint.textContent = '(consecutive days starting from the Target Shoot Date)';
   } else {
     field.disabled = true;
-    hint.textContent = acct==='nonsub_both' ? '(use Edit Fields — Add photo/video day — for this type)' : '(fixed for subscription accounts)';
+    hint.textContent = '(fixed for subscription accounts)';
   }
 }
 
