@@ -68,6 +68,8 @@
   .flag{font-size:12px;display:flex;gap:5px;align-items:flex-start;margin-bottom:8px}
   .flag.warn{color:var(--warn)}
   .flag.real{color:#fff;font-weight:600;background:var(--danger);padding:4px 8px;border-radius:6px}
+  .targetWarnBanner{background:var(--danger);color:#fff;font-weight:700;font-size:13px;padding:10px 12px;border-radius:8px;margin-bottom:12px}
+  .altDateNote{background:var(--success-bg);color:var(--success);font-weight:600;font-size:12px;padding:8px 12px;border-radius:8px;margin-bottom:12px}
   .flag.ok{color:var(--success)}
   .opt .actions{display:flex;gap:8px;margin-top:10px}
   .opt .actions button{flex:1}
@@ -998,6 +1000,11 @@ function renderChainPreview(){
   card.innerHTML = '<h4>Lead times — '+label+(state && state.name ? ' · '+state.name : '')+'</h4><table>'+rows+'</table>';
 }
 
+function hasRealShootConflict(tl){
+  const shootDates = tl.steps.filter(s=>s.isShoot).map(s=>s.date);
+  return tl.flags.some(f=> f.type==='real' && shootDates.includes(f.date));
+}
+
 function generateOptions(){
   if(!state){ showToast('Add a project first'); return; }
   const nameField = document.getElementById('projectName');
@@ -1023,8 +1030,28 @@ function generateOptions(){
   state.anchor = document.getElementById('anchor').value || todayStr();
   const tlA = buildTimeline(state.anchor, currentChain, 0, state.id);
   tlA.bufferUsed = 0;
-  const tlB = buildTimeline(state.anchor, currentChain, 5, state.id);
-  tlB.bufferUsed = 5;
+  tlA.targetDateRequested = state.anchor;
+
+  let tlB;
+  if(hasRealShootConflict(tlA)){
+    let altDate = addDays(state.anchor, 1);
+    let cleanFound = null;
+    let guard = 0;
+    while(!cleanFound && guard<60){
+      const candidate = buildTimeline(altDate, currentChain, 0, state.id);
+      if(!hasRealShootConflict(candidate)){ cleanFound = candidate; break; }
+      altDate = addDays(altDate, 1);
+      guard++;
+    }
+    tlB = cleanFound || buildTimeline(state.anchor, currentChain, 5, state.id);
+    tlB.bufferUsed = cleanFound ? 0 : 5;
+    tlB.isAlternateDate = !!cleanFound;
+  } else {
+    tlB = buildTimeline(state.anchor, currentChain, 5, state.id);
+    tlB.bufferUsed = 5;
+  }
+  tlB.targetDateRequested = state.anchor;
+
   [tlA, tlB].forEach(tl=>{ tl.projectId = state.id; tl.projectName = state.name; tl.projectColor = state.color; });
   const found = [tlA, tlB];
   state.options = found;
@@ -1229,6 +1256,17 @@ function pinOption(opt, letter){
   showToast('Option '+letter+' pinned');
 }
 
+function targetDateBannerHtml(opt){
+  if(!hasRealShootConflict(opt)) return '';
+  const reqDate = opt.targetDateRequested ? prettyDate(opt.targetDateRequested) : '';
+  return '<div class="targetWarnBanner">⚠ Target Shoot Date'+(reqDate?' ('+reqDate+')':'')+' is not feasible for current production schedule</div>';
+}
+
+function altDateNoteHtml(opt){
+  if(!opt.isAlternateDate) return '';
+  return '<div class="altDateNote">✓ Alternate shoot date suggested to avoid the conflict on your requested date</div>';
+}
+
   state.options.forEach((opt, idx)=>{
     const letter = String.fromCharCode(65+idx);
     const div = document.createElement('div');
@@ -1237,6 +1275,7 @@ function pinOption(opt, letter){
     div.innerHTML = '<span class="badge" style="'+(idx===0?'':'display:none')+'">Recommended</span>' +
       '<span class="pinnedTag">Pinned — showing on calendar</span>' +
       '<h4>Option '+letter+'</h4>' +
+      targetDateBannerHtml(opt) + altDateNoteHtml(opt) +
       '<div class="steps"></div><div class="flagsBlock">'+flagsHtmlFor(opt)+'</div>' +
       '<div class="actions"><button type="button" class="pinBtn">Pin</button></div>';
     div.querySelector('.steps').appendChild(buildStepsBlock(opt, letter));
