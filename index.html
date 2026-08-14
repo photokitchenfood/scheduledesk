@@ -201,12 +201,12 @@
         <input type="text" id="projectName" placeholder="e.g. Polland Hopia Sept" style="width:100%">
       </div>
       <div class="field">
-        <label>Target Signed CE Date <span style="text-transform:none;font-weight:400;color:var(--muted)">(skip this if subscription shoot)</span></label>
+        <label>Target Shoot Date <span style="text-transform:none;font-weight:400;color:var(--muted)">(the actual production day given by the client)</span></label>
         <input type="date" id="anchor" value="2026-09-02" style="width:100%">
       </div>
-      <div class="field">
-        <label>Target Break Date (optional, if provided by client)</label>
-        <input type="date" id="target" value="" style="width:100%">
+      <div class="field" id="numShootDaysField">
+        <label>Number of Shooting Days <span style="text-transform:none;font-weight:400;color:var(--muted)" id="numShootDaysHint">(fixed for subscription accounts)</span></label>
+        <input type="number" id="numShootDays" value="1" min="1" max="14" style="width:100%">
       </div>
     </div>
     <div style="display:flex;gap:8px;margin-top:16px">
@@ -466,51 +466,51 @@ async function loadTownHallData(){
 const CHAINS = {
   ctg: [
     {key:'shotlist', label:'Shotlist c/o Client', lead:0, src:'na'},
-    {key:'product_request', label:'Product Req. c/o PK', lead:2, src:'derived'},
+    {key:'product_request', label:'Product Request c/o PK', lead:2, src:'derived'},
     {key:'ppm', label:'PPM', lead:5, src:'derived', hasTime:'15:00', isPPM:true},
-    {key:'delivery', label:'Delivery of Products', lead:3, src:'derived'},
+    {key:'delivery', label:'Delivery of Products to PK Studio', lead:3, src:'derived'},
     {key:'shoot1', label:'Photoshoot Day', lead:4, src:'derived', isShoot:true, shootType:'photo'},
     {key:'shoot2', label:'Videoshoot Day', lead:1, src:'derived', isShoot:true, shootType:'video'},
     {key:'turnover_photos', label:'Submit Photos', lead:3, src:'derived'},
-    {key:'turnover_videos', label:'Submit Videos', lead:9, src:'derived'}
+    {key:'turnover_videos', label:'Initial Draft of Videos', lead:9, src:'derived'}
   ],
   tmp: [
     {key:'shotlist', label:'Shotlist c/o Client', lead:0, src:'na'},
-    {key:'product_request', label:'Product Req. c/o PK', lead:2, src:'derived'},
+    {key:'product_request', label:'Product Request c/o PK', lead:2, src:'derived'},
     {key:'ppm', label:'PPM', lead:4, src:'derived', hasTime:'15:00', isPPM:true},
-    {key:'delivery', label:'Delivery of Products', lead:2, src:'derived'},
+    {key:'delivery', label:'Delivery of Products to PK Studio', lead:2, src:'derived'},
     {key:'shoot1', label:'Photoshoot Day', lead:4, src:'derived', isShoot:true, shootType:'photo'},
     {key:'shoot2', label:'Videoshoot Day', lead:1, src:'derived', isShoot:true, shootType:'video'},
     {key:'turnover_photos', label:'Submit Photos', lead:3, src:'borrowed'},
-    {key:'turnover_videos', label:'Submit Videos', lead:9, src:'borrowed'}
+    {key:'turnover_videos', label:'Initial Draft of Videos', lead:9, src:'borrowed'}
   ],
   nonsub_photo: [
-    {key:'ce', label:'CE Signed', lead:0, src:'na'},
-    {key:'product_request', label:'Product Req. c/o PK', lead:2, src:'derived'},
+    {key:'ce', label:'Signed CE/ Awarding', lead:0, src:'na'},
+    {key:'product_request', label:'Product Request c/o PK', lead:2, src:'derived'},
     {key:'ppm', label:'PPM', lead:4, src:'derived', hasTime:'14:00', isPPM:true},
-    {key:'delivery', label:'Delivery of Products', lead:1, src:'manual'},
+    {key:'delivery', label:'Delivery of Products to PK Studio', lead:1, src:'manual'},
     {key:'shoot1', label:'Photoshoot Day', lead:1, src:'manual', isShoot:true, shootType:'photo'},
     {key:'turnover_photos', label:'Submit Photos', lead:2, src:'derived'}
   ],
   nonsub_video: [
-    {key:'ce', label:'CE Signed', lead:0, src:'na'},
-    {key:'product_request', label:'Product Req. c/o PK', lead:2, src:'derived'},
+    {key:'ce', label:'Signed CE/ Awarding', lead:0, src:'na'},
+    {key:'product_request', label:'Product Request c/o PK', lead:2, src:'derived'},
     {key:'ppm', label:'PPM', lead:6, src:'derived', hasTime:'14:00', isPPM:true},
-    {key:'delivery', label:'Delivery of Products', lead:1, src:'manual'},
+    {key:'delivery', label:'Delivery of Products to PK Studio', lead:1, src:'manual'},
     {key:'shoot1', label:'Videoshoot Day', lead:1, src:'manual', isShoot:true, shootType:'video'},
-    {key:'turnover_videos', label:'Submit Videos', lead:9, src:'derived'}
+    {key:'turnover_videos', label:'Initial Draft of Videos', lead:9, src:'derived'}
   ],
   nonsub_both: [
-    {key:'ce', label:'CE Signed', lead:0, src:'na'},
-    {key:'product_request', label:'Product Req. c/o PK', lead:2, src:'derived'},
+    {key:'ce', label:'Signed CE/ Awarding', lead:0, src:'na'},
+    {key:'product_request', label:'Product Request c/o PK', lead:2, src:'derived'},
     {key:'ppm', label:'PPM (Photo)', lead:4, src:'derived', hasTime:'14:00', isPPM:true},
-    {key:'delivery', label:'Delivery of Products', lead:1, src:'manual'},
+    {key:'delivery', label:'Delivery of Products to PK Studio', lead:1, src:'manual'},
     {key:'shoot1', label:'Photoshoot Day', lead:1, src:'manual', isShoot:true, shootType:'photo'},
     {key:'turnover_photos', label:'Submit Photos', lead:2, src:'derived'},
     {key:'ppm_video', label:'PPM (Video)', lead:6, src:'borrowed', hasTime:'14:00', isPPM:true},
-    {key:'delivery_video', label:'Delivery of Products', lead:1, src:'manual'},
+    {key:'delivery_video', label:'Delivery of Products to PK Studio', lead:1, src:'manual'},
     {key:'shoot2', label:'Videoshoot Day', lead:1, src:'borrowed', isShoot:true, shootType:'video'},
-    {key:'turnover_videos', label:'Submit Videos', lead:9, src:'borrowed'}
+    {key:'turnover_videos', label:'Initial Draft of Videos', lead:9, src:'borrowed'}
   ]
 };
 
@@ -536,7 +536,6 @@ function newProject(){
     account: 'ctg',
     chainAccount: 'ctg',
     anchor: todayStr(),
-    target: '',
     chain: JSON.parse(JSON.stringify(CHAINS.ctg)),
     options: [],
     pinned: null,
@@ -560,7 +559,7 @@ function setActiveProject(id){
   document.getElementById('projectName').value = state.name;
   document.getElementById('account').value = state.account;
   document.getElementById('anchor').value = state.anchor;
-  document.getElementById('target').value = state.target;
+  updateNumShootDaysField();
   document.getElementById('panel').classList.remove('open');
   renderProjectChips();
   renderChainPreview();
@@ -628,15 +627,15 @@ function timingsHeader(letter){
 function timingsText(opt, letter){
   const lines = [timingsHeader(letter), ''];
   const sorted = [...opt.steps].sort((a,b)=> a.date.localeCompare(b.date));
-  sorted.forEach((s,i)=>{
-    lines.push((i+1)+'. *'+prettyDateFull(s.date)+'* - '+s.label+(s.hasTime?' @ '+formatTime(s.hasTime):''));
+  sorted.forEach((s)=>{
+    lines.push('*'+prettyDateFull(s.date)+'* - '+s.label+(s.hasTime?' @ '+formatTime(s.hasTime):''));
   });
   if(opt.flags && opt.flags.length){
     lines.push('');
     const sortedFlags = [...opt.flags].sort((a,b)=> (a.type==='real'?0:1) - (b.type==='real'?0:1));
     sortedFlags.forEach(f=>{
-      const prefix = f.type==='real' ? '⚠️ REAL CONFLICT: ' : '⚠️ ';
-      lines.push(prefix+f.text+' ('+prettyDate(f.date)+')');
+      const label = f.type==='real' ? 'Real Conflict' : 'Soft Conflict';
+      lines.push('⚠️ '+prettyDate(f.date)+': '+label+', '+f.text);
     });
   }
   return lines.join('\n');
@@ -660,6 +659,20 @@ function nextWeekday(dateStr){
   if(dow===6) return addDays(dateStr, 2);
   if(dow===0) return addDays(dateStr, 1);
   return dateStr;
+}
+
+function shiftWeekendBackward(dateStr){
+  const dow = new Date(dateStr+'T00:00:00').getDay();
+  if(dow===6) return addDays(dateStr, -1);
+  if(dow===0) return addDays(dateStr, -2);
+  return dateStr;
+}
+
+function resolveStepDateBackward(rawDate){
+  let d = rawDate;
+  let guard = 0;
+  while(isHolidayAt(d) && guard<15){ d = shiftWeekendBackward(addDays(d,-1)); guard++; }
+  return d;
 }
 
 function leaveFlags(dateStr){
@@ -843,7 +856,7 @@ function generateMaintenanceOptions(){
 
 function simpleFlagsHtml(flags){
   if(!flags.length) return '<div class="flag ok">No conflicts</div>';
-  return flags.map(f=>'<div class="flag warn"><i>!</i>'+f.text+'</div>').join('');
+  return flags.map(f=>'<div class="flag warn"><i>!</i>'+prettyDate(f.date)+': Soft Conflict, '+f.text+'</div>').join('');
 }
 
 function renderMaintenanceOptions(){
@@ -889,27 +902,42 @@ function resolveStepDate(rawDate, step){
   return d;
 }
 
-function buildTimeline(anchorDate, chain, shootBuffer, ownProjectId){
-  let cursor = anchorDate;
+function buildTimeline(targetShootDate, chain, prepBuffer, ownProjectId){
+  const shootIdx = chain.findIndex(s=>s.isShoot);
+  const steps = new Array(chain.length);
+
+  // Forward: from the fixed shoot date through subsequent shoot legs and turnovers.
+  // Same cascade logic as before — just now starting FROM the shoot day instead of CE.
+  let cursor = targetShootDate;
   let prevDate = null;
-  const steps = [];
-  let firstShootUsed = false;
-  chain.forEach((step,i)=>{
-    if(i===0){
-      cursor = anchorDate;
+  for(let i=shootIdx; i<chain.length; i++){
+    const step = chain[i];
+    if(i===shootIdx){
+      cursor = resolveStepDate(shiftWeekend(targetShootDate), step);
     } else {
-      let lead = step.lead;
-      if(step.isShoot && !firstShootUsed){ lead += (shootBuffer||0); firstShootUsed = true; }
-      let raw = shiftWeekend(addDays(cursor, lead), cursor, lead);
-      if(lead>0){
+      let raw = shiftWeekend(addDays(cursor, step.lead), cursor, step.lead);
+      if(step.lead>0){
         let guard=0;
         while(raw===prevDate && guard<5){ raw = nextWeekday(addDays(raw, 2)); guard++; }
       }
       cursor = resolveStepDate(raw, step);
     }
-    steps.push({...step, date:cursor});
+    steps[i] = {...step, date:cursor};
     prevDate = cursor;
-  });
+  }
+
+  // Backward: from the fixed shoot date back through Delivery, PPM, Product Request, CE.
+  // prepBuffer adds extra breathing room right before the shoot (Option B — safer variant).
+  let backCursor = steps[shootIdx].date;
+  for(let i=shootIdx-1; i>=0; i--){
+    const nextStep = chain[i+1];
+    let lead = nextStep.lead + (i===shootIdx-1 ? (prepBuffer||0) : 0);
+    let raw = shiftWeekendBackward(addDays(backCursor, -lead));
+    raw = resolveStepDateBackward(raw);
+    steps[i] = {...chain[i], date: raw};
+    backCursor = raw;
+  }
+
   const allFlags = computeAllFlags(steps, ownProjectId);
   return {steps, flags: allFlags};
 }
@@ -986,11 +1014,13 @@ function generateOptions(){
     renumberShootDays(state.chain);
   }
   currentChain = state.chain;
+  const singleType = state.account==='nonsub_photo' || state.account==='nonsub_video';
+  if(singleType){
+    const wanted = Math.max(1, parseInt(document.getElementById('numShootDays').value,10) || 1);
+    const shootType = state.account==='nonsub_photo' ? 'photo' : 'video';
+    syncShootDayCount(currentChain, shootType, wanted);
+  }
   state.anchor = document.getElementById('anchor').value || todayStr();
-  let target = document.getElementById('target').value;
-  if(target && target <= state.anchor){ target = ''; document.getElementById('target').value = ''; }
-  state.target = target;
-  currentChain = state.chain;
   const tlA = buildTimeline(state.anchor, currentChain, 0, state.id);
   tlA.bufferUsed = 0;
   const tlB = buildTimeline(state.anchor, currentChain, 5, state.id);
@@ -998,9 +1028,7 @@ function generateOptions(){
   [tlA, tlB].forEach(tl=>{ tl.projectId = state.id; tl.projectName = state.name; tl.projectColor = state.color; });
   const found = [tlA, tlB];
   state.options = found;
-  state.windowStart = state.anchor;
-  state.windowEnd = target || addDays(state.anchor, 90);
-  document.getElementById('debug').textContent = 'debug — today: '+todayStr()+' · CE anchor (fixed): '+state.anchor+' · target field: '+(target||'(blank)')+' · project: '+state.name+' · found: '+found.length;
+  document.getElementById('debug').textContent = 'debug — today: '+todayStr()+' · target shoot date (fixed): '+state.anchor+' · project: '+state.name+' · found: '+found.length;
   renderProjectChips();
   renderOptions();
   renderFieldPanel(currentChain, state.anchor, found[0] ? found[0].bufferUsed : 0);
@@ -1008,6 +1036,31 @@ function generateOptions(){
   recomputeAllProjectFlags();
   refreshPinnedCard();
   renderCalendar();
+}
+
+function syncShootDayCount(chain, shootType, wanted){
+  const group = chain.filter(s=>s.isShoot && s.shootType===shootType);
+  const base = shootType==='photo' ? 'Photoshoot Day' : 'Videoshoot Day';
+  if(group.length<wanted){
+    let insertAt = chain.length;
+    for(let i=chain.length-1;i>=0;i--){
+      if(chain[i].isShoot){ insertAt = i+1; break; }
+      if(chain[i].key.includes('turnover') || chain[i].key.includes('ppm')){ insertAt = i; }
+    }
+    while(group.length<wanted){
+      const newStep = {key:shootType+'_day_'+Date.now()+'_'+group.length, label:base, lead:1, src:'manual', isShoot:true, shootType};
+      chain.splice(insertAt, 0, newStep);
+      group.push(newStep);
+      insertAt++;
+    }
+  } else if(group.length>wanted){
+    while(group.length>wanted){
+      const removeStep = group.pop();
+      const idx = chain.indexOf(removeStep);
+      if(idx>-1) chain.splice(idx,1);
+    }
+  }
+  renumberShootDays(chain);
 }
 
 function renumberShootDays(chain){
@@ -1019,30 +1072,29 @@ function renumberShootDays(chain){
   });
 }
 
+function renumberSubmitVideos(chain){
+  const group = chain.filter(s=>s.key.includes('turnover_videos'));
+  const base = 'Initial Draft of Videos';
+  if(group.length===1){ group[0].label = base; }
+  else { group.forEach((s,i)=> s.label = base+' '+(i+1)+'/'+group.length); }
+}
+
 function renderFieldPanel(chain, anchorDate, buffer){
   buffer = buffer || 0;
   const panel = document.getElementById('panel');
   let html = '<h3>Edit fields</h3>';
   if(buffer>0){
-    html += '<p style="font-size:12px;color:var(--warn);background:var(--warn-bg);border-radius:6px;padding:8px 10px;margin:0 0 12px">Dates below include a +'+buffer+' day buffer on the first shoot day (to match Option A), plus automatic day-by-day pushes past any holiday or confirmed shoot.</p>';
+    html += '<p style="font-size:12px;color:var(--warn);background:var(--warn-bg);border-radius:6px;padding:8px 10px;margin:0 0 12px">Dates below include a +'+buffer+' day buffer before the shoot (to match Option A), plus automatic pushes past any holiday or confirmed shoot.</p>';
   }
   html += '<div class="panelScroll">';
   html += '<div class="row fieldRow"><div class="hd">Field</div><div class="hd">Lead time</div><div class="hd">Resulting date</div><div class="hd">Source</div><div></div></div>';
-  let cursor = anchorDate;
-  let prevDate = null;
-  let firstShootUsed = false;
+  const shootIdx = chain.findIndex(s=>s.isShoot);
+  const previewTl = buildTimeline(anchorDate, chain, buffer, null);
   chain.forEach((s,i)=>{
-    if(i===0){ cursor = anchorDate; }
-    else {
-      let lead = s.lead;
-      if(s.isShoot && !firstShootUsed){ lead += buffer; firstShootUsed = true; }
-      let raw = shiftWeekend(addDays(cursor, lead), cursor, lead);
-      if(lead>0){ let guard=0; while(raw===prevDate && guard<5){ raw = nextWeekday(addDays(raw, 2)); guard++; } }
-      cursor = resolveStepDate(raw, s);
-    }
-    prevDate = cursor;
+    const cursor = previewTl.steps[i].date;
+    const isAnchorRow = i===shootIdx;
     const srcLabel = s.src==='na' ? '' : (s.src==='derived' ? 'Derived, 2026 history' : s.src==='manual' ? 'Manual entry' : 'Borrowed, related type');
-    html += '<div class="row fieldRow src-'+s.src+'"><div>'+s.label+'</div><div>'+(i===0?'<input type="date" class="anchorEdit" value="'+cursor+'">':'<input type="number" class="lead" value="'+s.lead+'" data-key="'+s.key+'">') +'</div><div>'+prettyDate(cursor)+(s.hasTime?', '+s.hasTime:'')+'</div><div><span class="src '+s.src+'">'+srcLabel+'</span></div><div>'+(i===0?'':'<button type="button" class="rmField" data-key="'+s.key+'" title="Remove field" style="padding:4px 8px;font-size:12px">×</button>')+'</div></div>';
+    html += '<div class="row fieldRow src-'+s.src+'"><div>'+s.label+'</div><div>'+(isAnchorRow?'<input type="date" class="anchorEdit" value="'+cursor+'">':'<input type="number" class="lead" value="'+s.lead+'" data-key="'+s.key+'">') +'</div><div>'+prettyDate(cursor)+(s.hasTime?', '+s.hasTime:'')+'</div><div><span class="src '+s.src+'">'+srcLabel+'</span></div><div>'+(isAnchorRow?'':'<button type="button" class="rmField" data-key="'+s.key+'" title="Remove field" style="padding:4px 8px;font-size:12px">×</button>')+'</div></div>';
   });
   html += '</div>';
   html += '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">' +
@@ -1071,7 +1123,17 @@ function renderFieldPanel(chain, anchorDate, buffer){
     btn.addEventListener('click', ()=>{
       const key = btn.dataset.key;
       const idx = currentChain.findIndex(s=>s.key===key);
-      if(idx>0){ currentChain.splice(idx,1); renumberShootDays(currentChain); generateOptions(); }
+      if(idx<0) return;
+      const removedStep = currentChain[idx];
+      if(removedStep.isShoot && currentChain.filter(s=>s.isShoot).length<=1){
+        showToast('Need at least one shoot day');
+        return;
+      }
+      currentChain.splice(idx,1);
+      renumberShootDays(currentChain);
+      renumberSubmitVideos(currentChain);
+      if(removedStep.isShoot) syncNumShootDaysFieldToChain(removedStep.shootType);
+      generateOptions();
     });
   });
   function addShootDay(kind){
@@ -1084,13 +1146,14 @@ function renderFieldPanel(chain, anchorDate, buffer){
     const newKey = kind+'_day_'+Date.now();
     currentChain.splice(insertAt, 0, {key:newKey, label:label, lead:1, src:'manual', isShoot:true, shootType:kind});
     renumberShootDays(currentChain);
+    syncNumShootDaysFieldToChain(kind);
     generateOptions();
   }
   document.getElementById('addPhotoDay').addEventListener('click', ()=> addShootDay('photo'));
   document.getElementById('addVideoDay').addEventListener('click', ()=> addShootDay('video'));
   document.getElementById('addSubmitVideos').addEventListener('click', ()=>{
-    if(currentChain.some(s=>s.key.includes('turnover_videos'))){ showToast('Submit Videos already in this chain'); return; }
-    currentChain.push({key:'turnover_videos_'+Date.now(), label:'Submit Videos', lead:9, src:'manual'});
+    currentChain.push({key:'turnover_videos_'+Date.now(), label:'Initial Draft of Videos', lead:9, src:'manual'});
+    renumberSubmitVideos(currentChain);
     generateOptions();
   });
   document.getElementById('addSourcingDay').addEventListener('click', ()=>{
@@ -1141,8 +1204,8 @@ function flagsHtmlFor(opt){
   const sorted = [...opt.flags].sort((a,b)=> (a.type==='real'?0:1) - (b.type==='real'?0:1));
   return sorted.map(f=>{
     const cls = f.type==='real' ? 'flag real' : 'flag warn';
-    const prefix = f.type==='real' ? 'REAL CONFLICT: ' : '';
-    return '<div class="'+cls+'"><i>!</i>'+prefix+f.text+' ('+prettyDate(f.date)+')</div>';
+    const label = f.type==='real' ? 'Real Conflict' : 'Soft Conflict';
+    return '<div class="'+cls+'"><i>!</i>'+prettyDate(f.date)+': '+label+', '+f.text+'</div>';
   }).join('');
 }
 
@@ -1150,10 +1213,10 @@ function renderOptions(){
   const wrap = document.getElementById('opts');
   const label = document.getElementById('optsLabel');
   label.style.display = 'block';
-  label.textContent = (state.options.length) + ' suggested timeline' + (state.options.length===1?'':'s') + ' — within ' + prettyDate(state.windowStart) + ' to ' + prettyDate(state.windowEnd);
+  label.textContent = (state.options.length) + ' suggested timeline' + (state.options.length===1?'':'s') + ' for shoot date ' + prettyDate(state.anchor);
   wrap.innerHTML = '';
   if(state.options.length===0){
-    wrap.innerHTML = '<p style="font-size:13px;color:var(--text2)">No clean options found in this window. Try widening the target break date or reducing lead times.</p>';
+    wrap.innerHTML = '<p style="font-size:13px;color:var(--text2)">No clean timeline found for this shoot date. Try adjusting the date or lead times in Edit Fields.</p>';
     return;
   }
 function pinOption(opt, letter){
@@ -1247,7 +1310,6 @@ function renderCalendar(){
   document.getElementById('calWrap').style.display = (activeTabKind==='reference' || activeTabKind==='learn') ? 'none' : 'block';
   if(activeTabKind==='reference' || activeTabKind==='learn') return;
   renderProjectToggles();
-  const target = state ? state.target : '';
   const showTownHall = document.getElementById('townhallToggle').checked;
 
   const totalDays = 42 + calendarExtraDays;
@@ -1264,10 +1326,9 @@ function renderCalendar(){
   }
   const showProduction = document.getElementById('productionToggle').checked;
   const visibleProjects = showProduction ? projects.filter(p=> p.pinned && p.visible!==false) : [];
-  const multi = visibleProjects.length > 1;
   visibleProjects.forEach(p=>{
     p.pinned.steps.forEach(s=> addEntry(s.date, {
-      label: (multi ? p.name+' — ' : '')+s.label,
+      label: (p.name||'Untitled project')+' — '+s.label,
       isNew:true, isShootStep: !!s.isShoot,
       stepKey:s.key, projectId:p.id, color:p.color
     }));
@@ -1300,7 +1361,6 @@ function renderCalendar(){
   if(showTownHall){
     MOCK.cards.forEach(c=> addEntry(c.date, {label: c.title, type:'existing'}));
   }
-  if(target) addEntry(target, {label:'Target', type: byDate[target] ? null : 'target'});
 
   const leaveByDate = {};
   MOCK.leaves.forEach(l=>{ leaveByDate[l.date] = leaveByDate[l.date] || []; leaveByDate[l.date].push(l.person); });
@@ -1324,7 +1384,7 @@ function renderCalendar(){
           : ('background:'+primaryEntry.color.bg+';color:'+primaryEntry.color.accent+';'+(primaryEntry.isShootStep?'border:2px solid '+primaryEntry.color.accent+';':'')))
       : '';
     const anyDraggable = newEntries.some(e=>!e.fixed);
-    const cls = 'day' + (existingOnly?' existing':'') + (!primaryEntry && dateStr===target?' target':'') + (anyDraggable?' draggable':'');
+    const cls = 'day' + (existingOnly?' existing':'') + (anyDraggable?' draggable':'');
     let lblHtml = entries.map(e=>{
       if(e.type==='existing') return '<div class="lbl existingLbl">'+e.label+'</div>';
       if(e.isNew && e.suggested) return '<div class="lbl projLbl logSuggested" data-log-idx="'+e.logOptionIndex+'" style="background:#fff;color:'+e.color.accent+';border:1.5px dotted '+e.color.accent+';cursor:pointer">'+e.label+'</div>';
@@ -1371,7 +1431,7 @@ function renderCalendar(){
   visibleProjects.forEach(p=>{
     p.pinned.steps.forEach(s=>{
       const outside = s.date<winStartStr || s.date>winEndStr;
-      agendaRows.push('<div class="arow"><span class="badge" style="margin:0;background:'+p.color.bg+';color:'+p.color.accent+'">'+(multi?p.name:'New')+'</span>'+prettyDate(s.date)+' — '+s.label+(s.hasTime?', '+s.hasTime:'')+(outside?' <span style="color:var(--muted)">(outside calendar view)</span>':'')+'</div>');
+      agendaRows.push('<div class="arow"><span class="badge" style="margin:0;background:'+p.color.bg+';color:'+p.color.accent+'">'+(p.name||'Untitled project')+'</span>'+prettyDate(s.date)+' — '+s.label+(s.hasTime?', '+s.hasTime:'')+(outside?' <span style="color:var(--muted)">(outside calendar view)</span>':'')+'</div>');
     });
   });
   if(showTownHall){
@@ -1381,9 +1441,6 @@ function renderCalendar(){
       .forEach(c=>{
         agendaRows.push('<div class="arow existing"><span class="src">Existing</span>'+c.title+'</div>');
       });
-  }
-  if(target){
-    agendaRows.push('<div class="arow"><span class="src na" style="border:1px dashed var(--line-strong)">Target</span>'+prettyDate(target)+' — client break date</div>');
   }
   const AGENDA_VISIBLE = 8;
   let agendaHtml;
@@ -1424,6 +1481,32 @@ document.getElementById('maintClearBtn').addEventListener('click', ()=>{
   showToast('Maintenance task cleared');
   renderCalendar();
 });
+function syncNumShootDaysFieldToChain(shootType){
+  if(!state) return;
+  const singleType = (state.account==='nonsub_photo' && shootType==='photo') || (state.account==='nonsub_video' && shootType==='video');
+  if(!singleType) return;
+  const count = currentChain.filter(s=>s.isShoot && s.shootType===shootType).length;
+  document.getElementById('numShootDays').value = count || 1;
+}
+
+function updateNumShootDaysField(){
+  if(!state) return;
+  const acct = state.account;
+  const field = document.getElementById('numShootDays');
+  const hint = document.getElementById('numShootDaysHint');
+  const singleType = acct==='nonsub_photo' || acct==='nonsub_video';
+  const shootType = acct==='nonsub_photo' ? 'photo' : acct==='nonsub_video' ? 'video' : null;
+  const currentCount = shootType ? state.chain.filter(s=>s.isShoot && s.shootType===shootType).length : state.chain.filter(s=>s.isShoot).length;
+  field.value = currentCount || 1;
+  if(singleType){
+    field.disabled = false;
+    hint.textContent = '(consecutive days starting from the Target Shoot Date)';
+  } else {
+    field.disabled = true;
+    hint.textContent = acct==='nonsub_both' ? '(use Edit Fields — Add photo/video day — for this type)' : '(fixed for subscription accounts)';
+  }
+}
+
 document.getElementById('account').addEventListener('change', ()=>{
   if(!state) return;
   state.account = document.getElementById('account').value;
@@ -1431,6 +1514,7 @@ document.getElementById('account').addEventListener('change', ()=>{
   state.chainAccount = state.account;
   renumberShootDays(state.chain);
   currentChain = state.chain;
+  updateNumShootDaysField();
   renderChainPreview();
   if(document.getElementById('projectName').value.trim()){ generateOptions(); }
 });
@@ -1446,13 +1530,13 @@ document.getElementById('copyBtn').addEventListener('click', ()=>{
   if(activeTabKind==='logistics'){
     if(!logisticsTask.pinned){ showToast('Pin a logistics day first'); return; }
     text = 'LOGISTICS TASK\n\n'+logisticsTask.pinned.name+' — '+logisticsTask.pinned.person+'\n*'+prettyDateFull(logisticsTask.pinned.date)+'*'+
-      (logisticsTask.pinned.flags.length ? '\n\n'+logisticsTask.pinned.flags.map(f=>'⚠️ '+f.text).join('\n') : '');
+      (logisticsTask.pinned.flags.length ? '\n\n'+logisticsTask.pinned.flags.map(f=>'⚠️ '+prettyDate(f.date)+': Soft Conflict, '+f.text).join('\n') : '');
   } else if(activeTabKind==='maintenance'){
     if(!maintenanceTask.pinned){ showToast('Pin a maintenance day first'); return; }
     const mEnd = maintenanceTask.pinned.endDate || maintenanceTask.pinned.date;
     const mRange = mEnd!==maintenanceTask.pinned.date ? prettyDateFull(maintenanceTask.pinned.date)+' – '+prettyDateFull(mEnd) : prettyDateFull(maintenanceTask.pinned.date);
     text = 'MAINTENANCE TASK\n\n'+maintenanceTask.pinned.name+'\n*'+mRange+'*'+
-      (maintenanceTask.pinned.flags.length ? '\n\n'+maintenanceTask.pinned.flags.map(f=>'⚠️ '+f.text).join('\n') : '');
+      (maintenanceTask.pinned.flags.length ? '\n\n'+maintenanceTask.pinned.flags.map(f=>'⚠️ '+prettyDate(f.date)+': Soft Conflict, '+f.text).join('\n') : '');
   } else {
     if(!state || !state.pinned){ showToast('Pin an option first'); return; }
     text = timingsText(state.pinned, state.pinnedLetter || 'A');
