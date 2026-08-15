@@ -207,9 +207,15 @@
         <label>Project Name <span style="color:var(--danger)">*</span></label>
         <input type="text" id="projectName" placeholder="e.g. Polland Hopia Sept" style="width:100%">
       </div>
-      <div class="field">
-        <label>Target Shoot Date <span style="text-transform:none;font-weight:400;color:var(--muted)"></span></label>
+      <div class="field" id="anchorSingleField">
+        <label>Target Shoot Date</label>
         <input type="date" id="anchor" value="2026-09-02" style="width:100%">
+      </div>
+      <div class="field" id="anchorSplitField" style="display:none">
+        <label>Target Photoshoot Date</label>
+        <input type="date" id="anchorPhoto" value="2026-09-02" style="width:100%;margin-bottom:10px">
+        <label>Target Videoshoot Date</label>
+        <input type="date" id="anchorVideo" value="2026-09-03" style="width:100%">
       </div>
       <div class="field" id="numShootDaysField">
         <label>Number of Shooting Days</label>
@@ -584,7 +590,9 @@ function setActiveProject(id){
   currentChain = state.chain;
   document.getElementById('projectName').value = state.name;
   document.getElementById('account').value = state.account;
-  document.getElementById('anchor').value = state.anchor;
+  document.getElementById('anchor').value = state.anchor || todayStr();
+  if(state.anchorPhoto) document.getElementById('anchorPhoto').value = state.anchorPhoto;
+  if(state.anchorVideo) document.getElementById('anchorVideo').value = state.anchorVideo;
   updateNumShootDaysField();
   document.getElementById('panel').classList.remove('open');
   renderProjectChips();
@@ -660,7 +668,7 @@ function timingsText(opt, letter){
     lines.push('');
     const sortedFlags = [...opt.flags].sort((a,b)=> (a.type==='real'?0:1) - (b.type==='real'?0:1));
     sortedFlags.forEach(f=>{
-      const prefix = f.type==='real' ? '❗️' : '⚠️ Soft Conflict,';
+      const prefix = f.type==='real' ? '❎' : '🟠';
       lines.push(prefix+' '+prettyDate(f.date)+': '+f.text);
     });
   }
@@ -882,7 +890,7 @@ function generateMaintenanceOptions(){
 
 function simpleFlagsHtml(flags){
   if(!flags.length) return '<div class="flag ok">No conflicts</div>';
-  return flags.map(f=>'<div class="flag warn"><i>!</i>'+prettyDate(f.date)+': Soft Conflict, '+f.text+'</div>').join('');
+  return flags.map(f=>'<div class="flag warn">🟠 '+prettyDate(f.date)+': '+f.text+'</div>').join('');
 }
 
 function renderMaintenanceOptions(){
@@ -928,16 +936,25 @@ function resolveStepDate(rawDate, step){
   return d;
 }
 
-function buildTimeline(targetShootDate, chain, prepBuffer, ownProjectId){
+function buildTimeline(targetShootDate, chain, prepBuffer, ownProjectId, anchors){
   const shootIdx = chain.findIndex(s=>s.isShoot);
   const steps = new Array(chain.length);
 
-  // Forward: from the fixed shoot date through subsequent shoot legs and turnovers.
-  // Same cascade logic as before — just now starting FROM the shoot day instead of CE.
+  // Forward pass: walk each step from the first shoot day onward.
+  // For split-anchor mode, each typed shoot leg starts from its own anchor.
   let cursor = targetShootDate;
   let prevDate = null;
   for(let i=shootIdx; i<chain.length; i++){
     const step = chain[i];
+    if(step.isShoot && anchors && anchors[step.shootType]){
+      const prevSameType = chain.slice(0,i).reverse().find(s=>s.isShoot && s.shootType===step.shootType);
+      if(!prevSameType){
+        cursor = resolveStepDate(shiftWeekend(anchors[step.shootType]), step);
+        steps[i] = {...step, date:cursor};
+        prevDate = cursor;
+        continue;
+      }
+    }
     if(i===shootIdx){
       cursor = resolveStepDate(shiftWeekend(targetShootDate), step);
     } else {
@@ -952,17 +969,30 @@ function buildTimeline(targetShootDate, chain, prepBuffer, ownProjectId){
     prevDate = cursor;
   }
 
-  // Backward: from the fixed shoot date back through Delivery, PPM, Product Request, CE.
-  // prepBuffer adds extra breathing room right before the shoot (Option B — safer variant).
-  let backCursor = steps[shootIdx].date;
-  for(let i=shootIdx-1; i>=0; i--){
-    const nextStep = chain[i+1];
-    let lead = nextStep.lead + (i===shootIdx-1 ? (prepBuffer||0) : 0);
-    let raw = shiftWeekendBackward(addDays(backCursor, -lead));
-    raw = resolveStepDateBackward(raw);
-    steps[i] = {...chain[i], date: raw};
-    backCursor = raw;
-  }
+  // Backward pass: for each shoot leg, cascade backward through the non-shoot steps
+  // that immediately precede it (stopping at a turnover/shoot boundary from a prior leg).
+  // This handles both single-anchor (one backward pass from shootIdx-1 to 0) and
+  // split-anchor mode (multiple per-leg backward passes, each from its leg's shoot day).
+  const shootIndices = chain.map((s,i)=>s.isShoot?i:-1).filter(i=>i>=0);
+  const processedByBackward = new Set();
+
+  shootIndices.forEach(sIdx=>{
+    if(!steps[sIdx]) return;
+    let backCursor = steps[sIdx].date;
+    const isFirstLeg = sIdx===shootIdx;
+    for(let i=sIdx-1; i>=0; i--){
+      if(processedByBackward.has(i)) break;
+      if(!isFirstLeg && chain[i].isShoot) break;
+      if(!isFirstLeg && chain[i].key && chain[i].key.includes('turnover')) break;
+      const nextStep = chain[i+1];
+      const lead = nextStep.lead + (i===sIdx-1 ? (prepBuffer||0) : 0);
+      let raw = shiftWeekendBackward(addDays(backCursor, -lead));
+      raw = resolveStepDateBackward(raw);
+      steps[i] = {...chain[i], date: raw};
+      processedByBackward.add(i);
+      backCursor = raw;
+    }
+  });
 
   const allFlags = computeAllFlags(steps, ownProjectId);
   return {steps, flags: allFlags};
@@ -1028,6 +1058,23 @@ function hasRealShootConflict(tl){
   const shootDates = tl.steps.filter(s=>s.isShoot).map(s=>s.date);
   return tl.flags.some(f=> f.type==='real' && shootDates.includes(f.date));
 }
+function hasRealShootConflictForType(tl, shootType){
+  const shootDates = tl.steps.filter(s=>s.isShoot && s.shootType===shootType).map(s=>s.date);
+  return tl.flags.some(f=> f.type==='real' && shootDates.includes(f.date));
+}
+function findNextCleanDateForType(startDate, chain, shootType, anchors, ownProjectId){
+  let tryDate = addDays(startDate, 1);
+  let guard = 0;
+  while(guard<60){
+    const testAnchors = {...anchors, [shootType]: tryDate};
+    const firstAnchor = testAnchors.photo || testAnchors.video || tryDate;
+    const tl = buildTimeline(firstAnchor, chain, 0, ownProjectId, testAnchors);
+    if(!hasRealShootConflictForType(tl, shootType)) return tryDate;
+    tryDate = addDays(tryDate, 1);
+    guard++;
+  }
+  return null;
+}
 
 function generateOptions(){
   if(!state){ showToast('Add a project first'); return; }
@@ -1045,49 +1092,72 @@ function generateOptions(){
     renumberShootDays(state.chain);
   }
   currentChain = state.chain;
-  const singleType = state.account==='nonsub_photo' || state.account==='nonsub_video' || state.account==='nonsub_combined';
+  const isSplit = state.account==='nonsub_both';
+  const singleType = !isSplit && (state.account==='nonsub_photo' || state.account==='nonsub_video' || state.account==='nonsub_combined');
   if(singleType){
     const wanted = Math.max(1, parseInt(document.getElementById('numShootDays').value,10) || 1);
     const shootType = state.account==='nonsub_photo' ? 'photo' : state.account==='nonsub_video' ? 'video' : 'combined';
     syncShootDayCount(currentChain, shootType, wanted);
-  } else if(state.account==='nonsub_both'){
+  } else if(isSplit){
     const wantedPhoto = Math.max(1, parseInt(document.getElementById('numPhotoDays').value,10) || 1);
     const wantedVideo = Math.max(1, parseInt(document.getElementById('numVideoDays').value,10) || 1);
     syncShootDayCount(currentChain, 'photo', wantedPhoto);
     syncShootDayCount(currentChain, 'video', wantedVideo);
   }
-  state.anchor = document.getElementById('anchor').value || todayStr();
-  const tlA = buildTimeline(state.anchor, currentChain, 0, state.id);
-  tlA.bufferUsed = 0;
-  tlA.targetDateRequested = state.anchor;
 
-  let tlB;
-  if(hasRealShootConflict(tlA)){
-    let altDate = addDays(state.anchor, 1);
-    let cleanFound = null;
-    let guard = 0;
-    while(!cleanFound && guard<60){
-      const candidate = buildTimeline(altDate, currentChain, 0, state.id);
-      if(!hasRealShootConflict(candidate)){ cleanFound = candidate; break; }
-      altDate = addDays(altDate, 1);
-      guard++;
+  if(isSplit){
+    state.anchorPhoto = document.getElementById('anchorPhoto').value || todayStr();
+    state.anchorVideo = document.getElementById('anchorVideo').value || addDays(state.anchorPhoto, 1);
+    state.anchor = state.anchorPhoto;
+    const anchorsA = {photo: state.anchorPhoto, video: state.anchorVideo};
+    const tlA = buildTimeline(state.anchorPhoto, currentChain, 0, state.id, anchorsA);
+    tlA.bufferUsed = 0; tlA.anchors = anchorsA; tlA.targetDateRequested = state.anchorPhoto;
+    let photoB = state.anchorPhoto;
+    let videoB = state.anchorVideo;
+    let isAlt = false;
+    if(hasRealShootConflictForType(tlA, 'photo')){
+      photoB = findNextCleanDateForType(state.anchorPhoto, currentChain, 'photo', anchorsA, state.id) || state.anchorPhoto;
+      isAlt = true;
     }
-    tlB = cleanFound || buildTimeline(state.anchor, currentChain, 5, state.id);
-    tlB.bufferUsed = cleanFound ? 0 : 5;
-    tlB.isAlternateDate = !!cleanFound;
+    if(hasRealShootConflictForType(tlA, 'video')){
+      videoB = findNextCleanDateForType(state.anchorVideo, currentChain, 'video', {photo:photoB, video:state.anchorVideo}, state.id) || state.anchorVideo;
+      isAlt = true;
+    }
+    const anchorsB = {photo: photoB, video: videoB};
+    const tlB = buildTimeline(photoB, currentChain, 0, state.id, anchorsB);
+    tlB.bufferUsed = 0; tlB.anchors = anchorsB; tlB.isAlternateDate = isAlt; tlB.targetDateRequested = state.anchorPhoto;
+    [tlA, tlB].forEach(tl=>{ tl.projectId = state.id; tl.projectName = state.name; tl.projectColor = state.color; });
+    state.options = [tlA, tlB];
+    document.getElementById('debug').textContent = 'debug — photo: '+state.anchorPhoto+' · video: '+state.anchorVideo+' · project: '+state.name;
+    renderProjectChips();
+    renderOptions();
+    renderFieldPanel(currentChain, state.anchorPhoto, 0);
   } else {
-    tlB = buildTimeline(state.anchor, currentChain, 5, state.id);
-    tlB.bufferUsed = 5;
+    state.anchor = document.getElementById('anchor').value || todayStr();
+    const tlA = buildTimeline(state.anchor, currentChain, 0, state.id);
+    tlA.bufferUsed = 0; tlA.targetDateRequested = state.anchor;
+    let tlB;
+    if(hasRealShootConflict(tlA)){
+      let altDate = addDays(state.anchor, 1); let cleanFound = null; let guard = 0;
+      while(!cleanFound && guard<60){
+        const candidate = buildTimeline(altDate, currentChain, 0, state.id);
+        if(!hasRealShootConflict(candidate)){ cleanFound = candidate; break; }
+        altDate = addDays(altDate, 1); guard++;
+      }
+      tlB = cleanFound || buildTimeline(state.anchor, currentChain, 5, state.id);
+      tlB.bufferUsed = cleanFound ? 0 : 5; tlB.isAlternateDate = !!cleanFound;
+    } else {
+      tlB = buildTimeline(state.anchor, currentChain, 5, state.id);
+      tlB.bufferUsed = 5;
+    }
+    tlB.targetDateRequested = state.anchor;
+    [tlA, tlB].forEach(tl=>{ tl.projectId = state.id; tl.projectName = state.name; tl.projectColor = state.color; });
+    state.options = [tlA, tlB];
+    document.getElementById('debug').textContent = 'debug — today: '+todayStr()+' · target shoot date: '+state.anchor+' · project: '+state.name;
+    renderProjectChips();
+    renderOptions();
+    renderFieldPanel(currentChain, state.anchor, state.options[0] ? state.options[0].bufferUsed : 0);
   }
-  tlB.targetDateRequested = state.anchor;
-
-  [tlA, tlB].forEach(tl=>{ tl.projectId = state.id; tl.projectName = state.name; tl.projectColor = state.color; });
-  const found = [tlA, tlB];
-  state.options = found;
-  document.getElementById('debug').textContent = 'debug — today: '+todayStr()+' · target shoot date (fixed): '+state.anchor+' · project: '+state.name+' · found: '+found.length;
-  renderProjectChips();
-  renderOptions();
-  renderFieldPanel(currentChain, state.anchor, found[0] ? found[0].bufferUsed : 0);
   renderChainPreview();
   recomputeAllProjectFlags();
   refreshPinnedCard();
@@ -1313,8 +1383,8 @@ function flagsHtmlFor(opt){
   return sorted.map(f=>{
     const cls = f.type==='real' ? 'flag real' : 'flag warn';
     return f.type==='real'
-      ? '<div class="'+cls+'">❗️ '+prettyDate(f.date)+': '+f.text+'</div>'
-      : '<div class="'+cls+'">! '+prettyDate(f.date)+': Soft Conflict, '+f.text+'</div>';
+      ? '<div class="'+cls+'">❎ '+prettyDate(f.date)+': '+f.text+'</div>'
+      : '<div class="'+cls+'">🟠 '+prettyDate(f.date)+': '+f.text+'</div>';
   }).join('');
 }
 
@@ -1341,7 +1411,7 @@ function pinOption(opt, letter){
 function targetDateBannerHtml(opt){
   if(!hasRealShootConflict(opt)) return '';
   const reqDate = opt.targetDateRequested ? prettyDate(opt.targetDateRequested) : '';
-  return '<div class="targetWarnBanner">⚠ Target Shoot Date'+(reqDate?' ('+reqDate+')':'')+' is not feasible for current production schedule</div>';
+  return '<div class="targetWarnBanner">🚨 Target Shoot Date'+(reqDate?' ('+reqDate+')':'')+' is not feasible for current production schedule</div>';
 }
 
 function altDateNoteHtml(opt){
@@ -1664,18 +1734,24 @@ function updateNumShootDaysField(){
   const acct = state.account;
   const singleField = document.getElementById('numShootDaysField');
   const splitField = document.getElementById('numPhotoVideoDaysField');
+  const anchorSingle = document.getElementById('anchorSingleField');
+  const anchorSplit = document.getElementById('anchorSplitField');
   const field = document.getElementById('numShootDays');
   const hint = document.getElementById('numShootDaysHint');
   const photoField = document.getElementById('numPhotoDays');
   const videoField = document.getElementById('numVideoDays');
 
   if(acct==='nonsub_both'){
+    anchorSingle.style.display = 'none';
+    anchorSplit.style.display = '';
     singleField.style.display = 'none';
     splitField.style.display = '';
     photoField.value = state.chain.filter(s=>s.isShoot && s.shootType==='photo').length || 1;
     videoField.value = state.chain.filter(s=>s.isShoot && s.shootType==='video').length || 1;
     return;
   }
+  anchorSingle.style.display = '';
+  anchorSplit.style.display = 'none';
   singleField.style.display = '';
   splitField.style.display = 'none';
 
@@ -1715,13 +1791,13 @@ document.getElementById('copyBtn').addEventListener('click', ()=>{
   if(activeTabKind==='logistics'){
     if(!logisticsTask.pinned){ showToast('Pin a logistics day first'); return; }
     text = 'LOGISTICS TASK\n\n'+logisticsTask.pinned.name+' — '+logisticsTask.pinned.person+'\n*'+prettyDateFull(logisticsTask.pinned.date)+'*'+
-      (logisticsTask.pinned.flags.length ? '\n\n'+logisticsTask.pinned.flags.map(f=>'⚠️ '+prettyDate(f.date)+': Soft Conflict, '+f.text).join('\n') : '');
+      (logisticsTask.pinned.flags.length ? '\n\n'+logisticsTask.pinned.flags.map(f=>'🟠 '+prettyDate(f.date)+': '+f.text).join('\n') : '');
   } else if(activeTabKind==='maintenance'){
     if(!maintenanceTask.pinned){ showToast('Pin a maintenance day first'); return; }
     const mEnd = maintenanceTask.pinned.endDate || maintenanceTask.pinned.date;
     const mRange = mEnd!==maintenanceTask.pinned.date ? prettyDateFull(maintenanceTask.pinned.date)+' – '+prettyDateFull(mEnd) : prettyDateFull(maintenanceTask.pinned.date);
     text = 'MAINTENANCE TASK\n\n'+maintenanceTask.pinned.name+'\n*'+mRange+'*'+
-      (maintenanceTask.pinned.flags.length ? '\n\n'+maintenanceTask.pinned.flags.map(f=>'⚠️ '+prettyDate(f.date)+': Soft Conflict, '+f.text).join('\n') : '');
+      (maintenanceTask.pinned.flags.length ? '\n\n'+maintenanceTask.pinned.flags.map(f=>'🟠 '+prettyDate(f.date)+': '+f.text).join('\n') : '');
   } else {
     if(!state || !state.pinned){ showToast('Pin an option first'); return; }
     text = timingsText(state.pinned, state.pinnedLetter || 'A');
