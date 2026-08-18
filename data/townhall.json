@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T06:29:25.821Z",
+  "generatedAt": "2026-08-18T07:19:56.292Z",
   "cards": [
     {
       "date": "2026-08-17",
@@ -18,6 +18,12 @@
       "title": "Aug 24: Polland Hopia Videoshoot PPM @ 3PM",
       "kind": "meeting",
       "time": "15:00"
+    },
+    {
+      "date": "2026-09-01",
+      "title": "Sep 1: CoCo PPM @ 2PM",
+      "kind": "meeting",
+      "time": "14:00"
     },
     {
       "date": "2026-08-18",
@@ -58,46 +64,9 @@
       "tentative": true
     },
     {
-      "date": "2026-09-07",
-      "title": "Sep 7-9: SM Nuvali Photo Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-09-15",
-      "title": "Sep 14-15: 8CUTS Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-09-14",
-      "title": "Sep 14-15: 8CUTS Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-09-08",
-      "title": "Sep 7-9: SM Nuvali Photo Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-09-09",
-      "title": "Sep 7-9: SM Nuvali Photo Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-09-10",
-      "title": "Sep 10-11: Coco Video Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-09-11",
-      "title": "Sep 10-11: Coco Video Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
+      "date": "2026-08-31",
+      "title": "Aug 31: Polland Hopia Video Shoot",
+      "kind": "shoot"
     },
     {
       "date": "2026-09-02",
@@ -118,9 +87,39 @@
       "tentative": true
     },
     {
-      "date": "2026-08-31",
-      "title": "Aug 31: Polland Hopia Video Shoot",
+      "date": "2026-09-07",
+      "title": "Sep 7-9: SM Nuvali Photo Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-08",
+      "title": "Sep 7-9: SM Nuvali Photo Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-09",
+      "title": "Sep 7-9: SM Nuvali Photo Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-11",
+      "title": "Sep 11: Coco Milk Tea Video Shoot",
       "kind": "shoot"
+    },
+    {
+      "date": "2026-09-14",
+      "title": "Sep 14-15: 8CUTS Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-15",
+      "title": "Sep 14-15: 8CUTS Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
     },
     {
       "date": "2026-09-15",
