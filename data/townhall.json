@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T00:37:52.950Z",
+  "generatedAt": "2026-08-20T02:10:42.328Z",
   "cards": [
     {
       "date": "2026-08-17",
@@ -41,27 +41,19 @@
       "kind": "shoot"
     },
     {
-      "date": "2026-08-25",
-      "title": "Aug 25: TMP Aug Subscription Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
       "date": "2026-08-26",
       "title": "Aug 26: LC Anya Shoot",
       "kind": "shoot"
     },
     {
       "date": "2026-08-27",
-      "title": "Aug 27-28: CTG Aug Subscription Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
+      "title": "Aug 27-28: CTG Aug Subscription Shoot [PHOTOS]",
+      "kind": "shoot"
     },
     {
       "date": "2026-08-28",
-      "title": "Aug 27-28: CTG Aug Subscription Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
+      "title": "Aug 27-28: CTG Aug Subscription Shoot [VIDEO]",
+      "kind": "shoot"
     },
     {
       "date": "2026-08-31",
