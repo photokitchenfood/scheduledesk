@@ -1,18 +1,6 @@
 {
-  "generatedAt": "2026-08-21T19:04:52.435Z",
+  "generatedAt": "2026-08-21T19:44:38.717Z",
   "cards": [
-    {
-      "date": "2026-08-17",
-      "title": "Aug 17: CTG Video Campaign Briefing @ 1PM",
-      "kind": "meeting",
-      "time": "13:00"
-    },
-    {
-      "date": "2026-08-17",
-      "title": "Aug 17: Polland Hopia Photoshoot PPM @ 3PM",
-      "kind": "meeting",
-      "time": "15:00"
-    },
     {
       "date": "2026-08-24",
       "title": "Aug 24: Polland Hopia Videoshoot PPM @ 3PM",
@@ -29,21 +17,6 @@
       "title": "Sep 1: CoCo PPM @ 2PM",
       "kind": "meeting",
       "time": "14:00"
-    },
-    {
-      "date": "2026-08-18",
-      "title": "Aug 18-19: LC Anya Shoot",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-08-19",
-      "title": "Aug 18-19: LC Anya Shoot",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-08-20",
-      "title": "Aug 20: Polland Hopia Photo Shoot",
-      "kind": "shoot"
     },
     {
       "date": "2026-08-26",
