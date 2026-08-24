@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T06:00:20.134Z",
+  "generatedAt": "2026-08-24T07:34:30.101Z",
   "cards": [
     {
       "date": "2026-08-24",
@@ -80,14 +80,20 @@
       "kind": "shoot"
     },
     {
-      "date": "2026-09-14",
-      "title": "Sep 14-15: 8CUTS Shoot [TENTATIVE]",
+      "date": "2026-09-07",
+      "title": "Sep 7-9: 8CUTS Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-15",
-      "title": "Sep 14-15: 8CUTS Shoot [TENTATIVE]",
+      "date": "2026-09-08",
+      "title": "Sep 7-9: 8CUTS Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-09",
+      "title": "Sep 7-9: 8CUTS Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
