@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T05:01:29.325Z",
+  "generatedAt": "2026-08-25T05:54:16.908Z",
   "cards": [
     {
       "date": "2026-08-24",
@@ -98,26 +98,32 @@
       "tentative": true
     },
     {
-      "date": "2026-09-15",
-      "title": "Sep 15-18: KLS Photo/Video Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
       "date": "2026-09-16",
-      "title": "Sep 15-18: KLS Photo/Video Shoot [TENTATIVE]",
+      "title": "Sep 16-18: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
       "date": "2026-09-17",
-      "title": "Sep 15-18: KLS Photo/Video Shoot [TENTATIVE]",
+      "title": "Sep 16-18: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
       "date": "2026-09-18",
-      "title": "Sep 18: TMP Sep Subscription Shoot [TENTATIVE]",
+      "title": "Sep 16-18: KLS Photo/Video Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-14",
+      "title": "Sep 14: TMP Sep Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-10",
+      "title": "Sep 10: TMP Sep Subscription Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -128,8 +134,8 @@
       "tentative": true
     },
     {
-      "date": "2026-09-21",
-      "title": "Sep 22: Nestle Goodnest Photo Shoot [TENTATIVE]",
+      "date": "2026-09-28",
+      "title": "Sep 29: Nestle Goodnest Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -210,11 +216,6 @@
       "title": "Nov 26-27: CTG Nov Subscription Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
-    },
-    {
-      "date": "2026-08-21",
-      "title": "Aug 21: Ninoy Aquino Day",
-      "kind": "holiday"
     },
     {
       "date": "2026-08-31",
@@ -309,6 +310,46 @@
     {
       "date": "2027-01-01",
       "title": "Dec 21-Jan 4: Company Break",
+      "kind": "holiday"
+    },
+    {
+      "date": "2027-03-25",
+      "title": "Mar 25: Maundy Thursday",
+      "kind": "holiday"
+    },
+    {
+      "date": "2027-01-01",
+      "title": "Jan 1: New Year's Day",
+      "kind": "holiday"
+    },
+    {
+      "date": "2027-02-25",
+      "title": "Feb 25: EDSA Revolution",
+      "kind": "holiday"
+    },
+    {
+      "date": "2027-03-26",
+      "title": "Mar 26: Good Friday",
+      "kind": "holiday"
+    },
+    {
+      "date": "2027-04-09",
+      "title": "Apr 9: Araw ng Kagitingan",
+      "kind": "holiday"
+    },
+    {
+      "date": "2027-08-21",
+      "title": "Aug 21: Ninoy Aquino Day",
+      "kind": "holiday"
+    },
+    {
+      "date": "2027-05-01",
+      "title": "May 1: Labor Day",
+      "kind": "holiday"
+    },
+    {
+      "date": "2027-06-12",
+      "title": "Jun 12: Independence Day",
       "kind": "holiday"
     }
   ],
