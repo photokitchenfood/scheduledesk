@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-26T06:38:19.913Z",
+  "generatedAt": "2026-08-26T07:37:36.125Z",
   "cards": [
     {
       "date": "2026-08-24",
@@ -55,6 +55,11 @@
       "title": "Sep 2-3: Knorr Packaging Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
+    },
+    {
+      "date": "2026-09-04",
+      "title": "Sep 4: TMP Sep Subscription Photoshoot",
+      "kind": "shoot"
     },
     {
       "date": "2026-09-07",
@@ -117,15 +122,8 @@
     },
     {
       "date": "2026-09-14",
-      "title": "Sep 14: TMP Sep Subscription Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-09-10",
-      "title": "Sep 10: TMP Sep Subscription Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
+      "title": "Sep 14: TMP Sep Subscription Videoshoot",
+      "kind": "shoot"
     },
     {
       "date": "2026-09-24",
