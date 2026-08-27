@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-26T23:50:40.213Z",
+  "generatedAt": "2026-08-27T05:41:20.725Z",
   "cards": [
     {
       "date": "2026-08-24",
@@ -39,20 +39,20 @@
       "kind": "shoot"
     },
     {
-      "date": "2026-09-02",
-      "title": "Sep 2-3: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "date": "2026-09-08",
+      "title": "Sep 8-10: Knorr Packaging Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-03",
-      "title": "Sep 2-3: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "date": "2026-09-09",
+      "title": "Sep 8-10: Knorr Packaging Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-04",
-      "title": "Sep 2-3: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "date": "2026-09-10",
+      "title": "Sep 8-10: Knorr Packaging Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -62,20 +62,20 @@
       "kind": "shoot"
     },
     {
-      "date": "2026-09-07",
-      "title": "Sep 7-9: SM Nuvali Photo Shoot [TENTATIVE]",
+      "date": "2026-09-16",
+      "title": "Sep 16-18: SM Nuvali Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-08",
-      "title": "Sep 7-9: SM Nuvali Photo Shoot [TENTATIVE]",
+      "date": "2026-09-17",
+      "title": "Sep 16-18: SM Nuvali Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-09",
-      "title": "Sep 7-9: SM Nuvali Photo Shoot [TENTATIVE]",
+      "date": "2026-09-18",
+      "title": "Sep 16-18: SM Nuvali Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -103,19 +103,19 @@
       "tentative": true
     },
     {
-      "date": "2026-09-16",
+      "date": "2026-09-21",
       "title": "Sep 16-18: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-17",
+      "date": "2026-09-22",
       "title": "Sep 16-18: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-18",
+      "date": "2026-09-23",
       "title": "Sep 16-18: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
