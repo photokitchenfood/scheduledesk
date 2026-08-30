@@ -1,11 +1,17 @@
 {
-  "generatedAt": "2026-08-30T02:20:43.502Z",
+  "generatedAt": "2026-08-30T08:25:34.187Z",
   "cards": [
     {
       "date": "2026-09-01",
       "title": "Sep 1: CoCo PPM @ 2PM",
       "kind": "meeting",
       "time": "14:00"
+    },
+    {
+      "date": "2026-09-02",
+      "title": "Sep 2: 8CUTs PPM @ 1PM",
+      "kind": "meeting",
+      "time": "13:00"
     },
     {
       "date": "2026-08-31",
@@ -18,14 +24,14 @@
       "kind": "shoot"
     },
     {
-      "date": "2026-09-08",
+      "date": "2026-09-07",
       "title": "Sep 8-9: 8CUTS Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-09",
-      "title": "Sep 7-9: 8CUTS Shoot [TENTATIVE]",
+      "date": "2026-09-08",
+      "title": "Sep 8-9: 8CUTS Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
