@@ -987,8 +987,9 @@ function buildTimeline(targetShootDate, chain, prepBuffer, ownProjectId, anchors
       if(!isFirstLeg && chain[i].isShoot) break;
       if(!isFirstLeg && chain[i].key && chain[i].key.includes('turnover')) break;
       const nextStep = chain[i+1];
-      const lead = nextStep.lead + (i===sIdx-1 ? (prepBuffer||0) : 0);
-      let raw = shiftWeekendBackward(addDays(backCursor, -lead));
+      const lead = chain[i+1].lead > 0 ? chain[i+1].lead : chain[i].lead;
+      const effectiveLead = lead + (i===sIdx-1 ? (prepBuffer||0) : 0);
+      let raw = shiftWeekendBackward(addDays(backCursor, -effectiveLead));
       raw = resolveStepDateBackward(raw);
       steps[i] = {...chain[i], date: raw};
       processedByBackward.add(i);
