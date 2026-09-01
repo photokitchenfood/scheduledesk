@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T23:58:58.545Z",
+  "generatedAt": "2026-09-01T01:26:01.827Z",
   "cards": [
     {
       "date": "2026-09-01",
@@ -24,13 +24,13 @@
       "kind": "shoot"
     },
     {
-      "date": "2026-09-07",
+      "date": "2026-09-08",
       "title": "Sep 8-9: 8CUTS Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-08",
+      "date": "2026-09-09",
       "title": "Sep 8-9: 8CUTS Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
@@ -112,7 +112,7 @@
       "tentative": true
     },
     {
-      "date": "2026-09-28",
+      "date": "2026-09-29",
       "title": "Sep 29: Nestle Goodnest Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
@@ -427,10 +427,6 @@
       "person": "Andi"
     },
     {
-      "date": "2026-11-17",
-      "person": "Andi"
-    },
-    {
       "date": "2026-11-18",
       "person": "Andi"
     },
@@ -439,7 +435,7 @@
       "person": "Andi"
     },
     {
-      "date": "2026-11-22",
+      "date": "2026-11-20",
       "person": "Andi"
     },
     {
@@ -451,7 +447,11 @@
       "person": "Andi"
     },
     {
-      "date": "2026-12-20",
+      "date": "2026-11-25",
+      "person": "Andi"
+    },
+    {
+      "date": "2026-12-21",
       "person": "Andi"
     },
     {
