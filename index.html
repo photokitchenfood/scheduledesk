@@ -512,7 +512,7 @@ const CHAINS = {
     {key:'product_request', label:'Product Request c/o PK', lead:2, src:'derived'},
     {key:'ppm', label:'PPM', lead:4, src:'derived', hasTime:'14:00', isPPM:true},
     {key:'delivery', label:'Delivery of Products to PK Studio', lead:1, src:'manual'},
-    {key:'shoot1', label:'Photoshoot Day', lead:1, src:'manual', isShoot:true, shootType:'photo'},
+    {key:'shoot1', label:'Photoshoot Day', lead:0, src:'manual', isShoot:true, shootType:'photo'},
     {key:'turnover_photos', label:'Submit Photos', lead:2, src:'derived'}
   ],
   nonsub_video: [
@@ -520,7 +520,7 @@ const CHAINS = {
     {key:'product_request', label:'Product Request c/o PK', lead:2, src:'derived'},
     {key:'ppm', label:'PPM', lead:6, src:'derived', hasTime:'14:00', isPPM:true},
     {key:'delivery', label:'Delivery of Products to PK Studio', lead:1, src:'manual'},
-    {key:'shoot1', label:'Videoshoot Day', lead:1, src:'manual', isShoot:true, shootType:'video'},
+    {key:'shoot1', label:'Videoshoot Day', lead:0, src:'manual', isShoot:true, shootType:'video'},
     {key:'turnover_videos', label:'Initial Draft of Videos', lead:9, src:'derived'}
   ],
   nonsub_both: [
@@ -528,7 +528,7 @@ const CHAINS = {
     {key:'product_request', label:'Product Request c/o PK', lead:2, src:'derived'},
     {key:'ppm', label:'PPM (Photo)', lead:4, src:'derived', hasTime:'14:00', isPPM:true},
     {key:'delivery', label:'Delivery of Products to PK Studio', lead:1, src:'manual'},
-    {key:'shoot1', label:'Photoshoot Day', lead:1, src:'manual', isShoot:true, shootType:'photo'},
+    {key:'shoot1', label:'Photoshoot Day', lead:0, src:'manual', isShoot:true, shootType:'photo'},
     {key:'turnover_photos', label:'Submit Photos', lead:2, src:'derived'},
     {key:'ppm_video', label:'PPM (Video)', lead:6, src:'borrowed', hasTime:'14:00', isPPM:true},
     {key:'delivery_video', label:'Delivery of Products to PK Studio', lead:1, src:'manual'},
@@ -540,7 +540,7 @@ const CHAINS = {
     {key:'product_request', label:'Product Request c/o PK', lead:2, src:'derived'},
     {key:'ppm', label:'PPM', lead:5, src:'manual', hasTime:'14:00', isPPM:true},
     {key:'delivery', label:'Delivery of Products to PK Studio', lead:1, src:'manual'},
-    {key:'shoot1', label:'Shoot Day', lead:1, src:'manual', isShoot:true, shootType:'combined'},
+    {key:'shoot1', label:'Shoot Day', lead:0, src:'manual', isShoot:true, shootType:'combined'},
     {key:'turnover_photos', label:'Submit Photos', lead:2, src:'derived'},
     {key:'turnover_videos', label:'Initial Draft of Videos', lead:9, src:'derived'}
   ]
@@ -949,14 +949,16 @@ function buildTimeline(targetShootDate, chain, prepBuffer, ownProjectId, anchors
     if(step.isShoot && anchors && anchors[step.shootType]){
       const prevSameType = chain.slice(0,i).reverse().find(s=>s.isShoot && s.shootType===step.shootType);
       if(!prevSameType){
-        cursor = resolveStepDate(shiftWeekend(anchors[step.shootType]), step);
+        // Anchor for this leg — stay on requested date, conflicts will be flagged
+        cursor = shiftWeekend(anchors[step.shootType]);
         steps[i] = {...step, date:cursor};
         prevDate = cursor;
         continue;
       }
     }
     if(i===shootIdx){
-      cursor = resolveStepDate(shiftWeekend(targetShootDate), step);
+      // Main anchor — stay on requested date, conflicts will be flagged not auto-resolved
+      cursor = shiftWeekend(targetShootDate);
     } else {
       let raw = shiftWeekend(addDays(cursor, step.lead), cursor, step.lead);
       if(step.lead>0){
