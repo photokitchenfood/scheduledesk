@@ -31,5 +31,8 @@ jobs:
           git config user.name "schedule-desk-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data/townhall.json
-          git diff --staged --quiet && echo "No changes, skipping commit." || git commit -m "Sync Town Hall data [automated]"
-          git push
+          git diff --staged --quiet && echo "No changes, skipping commit." || (
+            git commit -m "Sync Town Hall data [automated]" &&
+            git pull --rebase origin main &&
+            git push
+          )
