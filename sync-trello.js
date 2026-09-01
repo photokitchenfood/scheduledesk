@@ -49,7 +49,13 @@ const LISTS = {
 
 function toDateStr(dueIso) {
   if (!dueIso) return null;
-  return dueIso.slice(0, 10); // Trello 'due' is ISO 8601, e.g. 2026-08-21T00:00:00.000Z
+  const d = new Date(dueIso);
+  const manilaOffset = 8 * 60;
+  const local = new Date(d.getTime() + manilaOffset * 60 * 1000);
+  const y = local.getUTCFullYear();
+  const m = String(local.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(local.getUTCDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
 }
 
 function extractTime(name) {
