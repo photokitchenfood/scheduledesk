@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-02T00:39:37.252Z",
+  "generatedAt": "2026-09-02T05:14:07.591Z",
   "cards": [
     {
       "date": "2026-09-01",
@@ -9,7 +9,13 @@
     },
     {
       "date": "2026-09-02",
-      "title": "Sep 2: 8CUTs PPM @ 1PM",
+      "title": "Sep 2: 8CUTS Photoshoot PPM @ 11AM",
+      "kind": "meeting",
+      "time": "11:00"
+    },
+    {
+      "date": "2026-09-02",
+      "title": "Sep 2: 8CUTS Videshoot PPM @ 1PM",
       "kind": "meeting",
       "time": "13:00"
     },
@@ -25,13 +31,13 @@
     },
     {
       "date": "2026-09-08",
-      "title": "Sep 8-9: 8CUTS Shoot [TENTATIVE]",
+      "title": "Sep 8-9: 8CUTS Birthday Photoshoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
       "date": "2026-09-09",
-      "title": "Sep 8-9: 8CUTS Shoot [TENTATIVE]",
+      "title": "Sep 8-9: 8CUTS Birthday Videoshoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -335,6 +341,10 @@
     {
       "date": "2026-09-01",
       "person": "Shen"
+    },
+    {
+      "date": "2026-09-08",
+      "person": "Ikay"
     },
     {
       "date": "2026-09-21",
