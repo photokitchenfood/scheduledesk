@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-02T05:14:07.591Z",
+  "generatedAt": "2026-09-02T09:46:04.429Z",
   "cards": [
     {
       "date": "2026-09-01",
@@ -42,20 +42,20 @@
       "tentative": true
     },
     {
-      "date": "2026-09-08",
-      "title": "Sep 8-10: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "date": "2026-09-16",
+      "title": "Sep 16-18: Knorr Packaging Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-09",
-      "title": "Sep 8-10: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "date": "2026-09-17",
+      "title": "Sep 16-18: Knorr Packaging Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-10",
-      "title": "Sep 8-10: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "date": "2026-09-18",
+      "title": "Sep 16-18: Knorr Packaging Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -67,6 +67,11 @@
     {
       "date": "2026-09-14",
       "title": "Sep 14: TMP Sep Subscription Videoshoot",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-09-15",
+      "title": "Sep 15: TMP EAP Videoshoot",
       "kind": "shoot"
     },
     {
@@ -202,11 +207,6 @@
       "tentative": true
     },
     {
-      "date": "2026-08-31",
-      "title": "Aug 31: National Heroes Day",
-      "kind": "holiday"
-    },
-    {
       "date": "2026-11-02",
       "title": "Nov 2: All Souls’ Day",
       "kind": "holiday"
@@ -334,6 +334,11 @@
     {
       "date": "2027-06-12",
       "title": "Jun 12: Independence Day",
+      "kind": "holiday"
+    },
+    {
+      "date": "2027-08-30",
+      "title": "Aug 30: National Heroes Day",
       "kind": "holiday"
     }
   ],
