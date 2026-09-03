@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T00:50:42.734Z",
+  "generatedAt": "2026-09-03T05:19:53.850Z",
   "cards": [
     {
       "date": "2026-09-01",
@@ -40,24 +40,6 @@
       "kind": "shoot"
     },
     {
-      "date": "2026-09-16",
-      "title": "Sep 16-18: Knorr Packaging Photo Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-09-17",
-      "title": "Sep 16-18: Knorr Packaging Photo Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-09-18",
-      "title": "Sep 16-18: Knorr Packaging Photo Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
       "date": "2026-09-11",
       "title": "Sep 11: Coco Milk Tea Video Shoot",
       "kind": "shoot"
@@ -74,6 +56,18 @@
     },
     {
       "date": "2026-09-16",
+      "title": "Sep 16-18: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-17",
+      "title": "Sep 16-18: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-16",
       "title": "Sep 16-18: SM Nuvali Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
@@ -87,6 +81,12 @@
     {
       "date": "2026-09-18",
       "title": "Sep 16-18: SM Nuvali Photo Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-18",
+      "title": "Sep 16-18: Knorr Packaging Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
