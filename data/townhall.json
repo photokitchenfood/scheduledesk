@@ -1,34 +1,6 @@
 {
-  "generatedAt": "2026-09-04T17:15:33.793Z",
+  "generatedAt": "2026-09-04T19:43:23.980Z",
   "cards": [
-    {
-      "date": "2026-09-01",
-      "title": "Sep 1: CoCo PPM @ 2PM",
-      "kind": "meeting",
-      "time": "14:00"
-    },
-    {
-      "date": "2026-09-02",
-      "title": "Sep 2: 8CUTS Photoshoot PPM @ 11AM",
-      "kind": "meeting",
-      "time": "11:00"
-    },
-    {
-      "date": "2026-09-02",
-      "title": "Sep 2: 8CUTS Videshoot PPM @ 1PM",
-      "kind": "meeting",
-      "time": "13:00"
-    },
-    {
-      "date": "2026-08-31",
-      "title": "Aug 31: Polland Hopia Video Shoot",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-09-04",
-      "title": "Sep 4: TMP Sep Subscription Photoshoot",
-      "kind": "shoot"
-    },
     {
       "date": "2026-09-08",
       "title": "Sep 8-9: 8CUTS Birthday Photoshoot",
@@ -341,10 +313,6 @@
     }
   ],
   "leaves": [
-    {
-      "date": "2026-09-01",
-      "person": "Shen"
-    },
     {
       "date": "2026-09-08",
       "person": "Ikay"
