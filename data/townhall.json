@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T00:28:48.149Z",
+  "generatedAt": "2026-09-07T05:03:16.252Z",
   "cards": [
     {
       "date": "2026-09-08",
@@ -27,44 +27,38 @@
       "kind": "shoot"
     },
     {
-      "date": "2026-09-16",
-      "title": "Sep 16-18: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "date": "2026-09-30",
+      "title": "Sep 30-Oct 2: Knorr Packaging Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-17",
-      "title": "Sep 16-18: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "date": "2026-10-01",
+      "title": "Sep 30-Oct 2: Knorr Packaging Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-16",
-      "title": "Sep 16-18: SM Nuvali Photo Shoot [TENTATIVE]",
+      "date": "2026-09-22",
+      "title": "Sep 22-23: SM Nuvali Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-17",
-      "title": "Sep 16-18: SM Nuvali Photo Shoot [TENTATIVE]",
+      "date": "2026-09-23",
+      "title": "Sep 22-23: SM Nuvali Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-18",
-      "title": "Sep 16-18: SM Nuvali Photo Shoot [TENTATIVE]",
+      "date": "2026-10-02",
+      "title": "Sep 30-Oct 2: Knorr Packaging Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-18",
-      "title": "Sep 16-18: Knorr Packaging Photo Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-09-21",
-      "title": "Sep 16-18: KLS Photo/Video Shoot [TENTATIVE]",
+      "date": "2026-09-22",
+      "title": "Sep 22-23: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -75,14 +69,14 @@
       "tentative": true
     },
     {
-      "date": "2026-09-22",
-      "title": "Sep 16-18: KLS Photo/Video Shoot [TENTATIVE]",
+      "date": "2026-09-23",
+      "title": "Sep 22-23: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-23",
-      "title": "Sep 16-18: KLS Photo/Video Shoot [TENTATIVE]",
+      "date": "2026-09-29",
+      "title": "Sep 29: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -99,8 +93,8 @@
       "tentative": true
     },
     {
-      "date": "2026-09-30",
-      "title": "Sep 30: Nestle Goodnes Photo Shoot [TENTATIVE]",
+      "date": "2026-10-06",
+      "title": "Oct 6: Nestle Goodnes Photo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -316,6 +310,10 @@
     {
       "date": "2026-09-08",
       "person": "Ikay"
+    },
+    {
+      "date": "2026-09-15",
+      "person": "KC"
     },
     {
       "date": "2026-09-21",
