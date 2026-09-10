@@ -1,11 +1,23 @@
 {
-  "generatedAt": "2026-09-10T15:27:19.508Z",
+  "generatedAt": "2026-09-10T18:36:09.180Z",
   "cards": [
     {
       "date": "2026-09-10",
       "title": "Sep 10: Fiesta Proj Kilig Kick-Off Meeting @ 7PM",
       "kind": "meeting",
       "time": "19:00"
+    },
+    {
+      "date": "2026-09-11",
+      "title": "Sep 11: Fiesta Proj Kilig Feasib Meeting @ 4PM",
+      "kind": "meeting",
+      "time": "16:00"
+    },
+    {
+      "date": "2026-09-12",
+      "title": "Sep 12: Fiesta Proj Kilig PPM @ 9AM",
+      "kind": "meeting",
+      "time": "09:00"
     },
     {
       "date": "2026-09-14",
@@ -39,9 +51,8 @@
     },
     {
       "date": "2026-09-16",
-      "title": "Sep 16: Fiesta Proj Kilig Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
+      "title": "Sep 16: Fiesta Proj Kilig Shoot",
+      "kind": "shoot"
     },
     {
       "date": "2026-09-18",
