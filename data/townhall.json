@@ -1,6 +1,17 @@
 {
-  "generatedAt": "2026-09-10T06:10:03.592Z",
+  "generatedAt": "2026-09-10T11:34:32.227Z",
   "cards": [
+    {
+      "date": "2026-09-10",
+      "title": "Sep 10: Fiesta Proj Kilig Kick-Off Meeting @ 7PM",
+      "kind": "meeting",
+      "time": "19:00"
+    },
+    {
+      "date": "2026-09-14",
+      "title": "Sep 14: Nestle Briefing",
+      "kind": "meeting"
+    },
     {
       "date": "2026-09-08",
       "title": "Sep 8-9: 8CUTS Birthday Photoshoot",
@@ -27,38 +38,38 @@
       "kind": "shoot"
     },
     {
-      "date": "2026-09-30",
-      "title": "Sep 30-Oct 2: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "date": "2026-09-16",
+      "title": "Sep 16: Fiesta Proj Kilig Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-10-01",
-      "title": "Sep 30-Oct 2: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "date": "2026-09-18",
+      "title": "Sep 18: McCormick Demo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
       "date": "2026-09-29",
-      "title": "Sep 29-30: SM Nuvali Photo Shoot [TENTATIVE]",
+      "title": "Sep 29-Oct 1: Aguila Photoshoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
       "date": "2026-09-30",
-      "title": "Sep 29-30: SM Nuvali Photo Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-10-02",
-      "title": "Sep 30-Oct 2: Knorr Packaging Photo Shoot [TENTATIVE]",
+      "title": "Sep 29-Oct 1: Aguila Photoshoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
       "date": "2026-10-01",
-      "title": "Sep 30-Oct 2: KLS Photo/Video Shoot [TENTATIVE]",
+      "title": "Sep 29-Oct 1: Aguila Photoshoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-10-07",
+      "title": "Oct 7-8: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -69,14 +80,14 @@
       "tentative": true
     },
     {
-      "date": "2026-10-02",
-      "title": "Sep 30-Oct 2: KLS Photo/Video Shoot [TENTATIVE]",
+      "date": "2026-10-08",
+      "title": "Oct 7-8: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-09-30",
-      "title": "Sep 30-Oct 2: KLS Photo/Video Shoot [TENTATIVE]",
+      "date": "2026-10-02",
+      "title": "Oct 2: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -99,14 +110,14 @@
       "tentative": true
     },
     {
-      "date": "2026-10-20",
-      "title": "Oct 20-21: TMP Oct Subscription Shoot [TENTATIVE]",
+      "date": "2026-10-22",
+      "title": "Oct 22-23: TMP Oct Subscription Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-10-21",
-      "title": "Oct 20-21: TMP Oct Subscription Shoot [TENTATIVE]",
+      "date": "2026-10-23",
+      "title": "Oct 22-23: TMP Oct Subscription Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
