@@ -1,18 +1,6 @@
 {
-  "generatedAt": "2026-09-11T18:42:24.376Z",
+  "generatedAt": "2026-09-11T21:26:10.310Z",
   "cards": [
-    {
-      "date": "2026-09-10",
-      "title": "Sep 10: Fiesta Proj Kilig Kick-Off Meeting @ 7PM",
-      "kind": "meeting",
-      "time": "19:00"
-    },
-    {
-      "date": "2026-09-11",
-      "title": "Sep 11: Fiesta Proj Kilig Feasib Meeting @ 4PM",
-      "kind": "meeting",
-      "time": "16:00"
-    },
     {
       "date": "2026-09-12",
       "title": "Sep 12: Fiesta Proj Kilig PPM @ 9AM",
@@ -29,21 +17,6 @@
       "date": "2026-09-14",
       "title": "Sep 14: Nestle Briefing",
       "kind": "meeting"
-    },
-    {
-      "date": "2026-09-08",
-      "title": "Sep 8-9: 8CUTS Birthday Photoshoot",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-09-09",
-      "title": "Sep 8-9: 8CUTS Birthday Videoshoot",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-09-11",
-      "title": "Sep 11: Coco Milk Tea Video Shoot",
-      "kind": "shoot"
     },
     {
       "date": "2026-09-14",
@@ -340,10 +313,6 @@
     }
   ],
   "leaves": [
-    {
-      "date": "2026-09-08",
-      "person": "Ikay"
-    },
     {
       "date": "2026-09-15",
       "person": "KC"
