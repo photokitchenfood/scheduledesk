@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T01:14:52.779Z",
+  "generatedAt": "2026-09-11T06:13:01.993Z",
   "cards": [
     {
       "date": "2026-09-10",
@@ -59,6 +59,11 @@
       "title": "Sep 18: McCormick Demo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
+    },
+    {
+      "date": "2026-09-18",
+      "title": "Sep 18: PK Surface Catalog Update",
+      "kind": "shoot"
     },
     {
       "date": "2026-09-29",
