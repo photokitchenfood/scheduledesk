@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T11:36:00.752Z",
+  "generatedAt": "2026-09-11T15:29:33.512Z",
   "cards": [
     {
       "date": "2026-09-10",
@@ -72,6 +72,12 @@
       "kind": "shoot"
     },
     {
+      "date": "2026-09-21",
+      "title": "Sep 21: MANAM Christmas Photoshoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
       "date": "2026-09-29",
       "title": "Sep 29-Oct 1: Aguila Photoshoot [TENTATIVE]",
       "kind": "shoot",
@@ -92,12 +98,6 @@
     {
       "date": "2026-10-07",
       "title": "Oct 7-8: KLS Photo/Video Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-09-21",
-      "title": "Sep 21: MANAM Christmas Photoshoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
