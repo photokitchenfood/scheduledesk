@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T14:48:24.073Z",
+  "generatedAt": "2026-09-14T19:40:38.310Z",
   "cards": [
     {
       "date": "2026-09-12",
@@ -29,6 +29,11 @@
       "kind": "shoot"
     },
     {
+      "date": "2026-09-15",
+      "title": "Sep 18: PK Surface Catalog Update",
+      "kind": "shoot"
+    },
+    {
       "date": "2026-09-16",
       "title": "Sep 16: Fiesta Proj Kilig Shoot [ON-LOCATION]",
       "kind": "shoot"
@@ -38,11 +43,6 @@
       "title": "Sep 18: McCormick Demo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
-    },
-    {
-      "date": "2026-09-18",
-      "title": "Sep 18: PK Surface Catalog Update",
-      "kind": "shoot"
     },
     {
       "date": "2026-09-21",
