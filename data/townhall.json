@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T05:27:53.936Z",
+  "generatedAt": "2026-09-16T10:10:04.214Z",
   "cards": [
     {
       "date": "2026-09-12",
@@ -19,9 +19,10 @@
       "kind": "meeting"
     },
     {
-      "date": "2026-09-22",
-      "title": "Sep 22 or 24: Aguila Shoot PPM [TENTATIVE]",
-      "kind": "meeting"
+      "date": "2026-09-24",
+      "title": "Sep 24: Aguila Shoot PPM @ 3PM",
+      "kind": "meeting",
+      "time": "15:00"
     },
     {
       "date": "2026-09-14",
@@ -44,51 +45,13 @@
       "kind": "shoot"
     },
     {
-      "date": "2026-10-05",
-      "title": "Oct 5: McCormick Demo Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
       "date": "2026-09-21",
       "title": "Sep 21: MANAM Pasko ni Pancitan Shoot [ON-LOCATION]",
       "kind": "shoot"
     },
     {
-      "date": "2026-09-29",
-      "title": "Sep 29-Oct 2: Aguila Photoshoot",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-09-30",
-      "title": "Sep 29-Oct 2: Aguila Photoshoot",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-10-02",
-      "title": "Sep 29-Oct 2: Aguila Photoshoot",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-10-01",
-      "title": "Sep 29-Oct 2: Aguila Photoshoot",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-10-08",
-      "title": "Oct 7-8: KLS Photo/Video Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-10-06",
-      "title": "Oct 5: Mary Grace On-Location Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-10-07",
-      "title": "Oct 7-8: KLS Photo/Video Shoot [TENTATIVE]",
+      "date": "2026-09-24",
+      "title": "Sep 24: McCormick Demo Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -101,6 +64,44 @@
     {
       "date": "2026-09-25",
       "title": "Sep 24-25: CTG Sep Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-09-29",
+      "title": "Sep 29-Oct 2: Aguila Photoshoot",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-09-30",
+      "title": "Sep 29-Oct 2: Aguila Photoshoot",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-10-01",
+      "title": "Sep 29-Oct 2: Aguila Photoshoot",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-10-02",
+      "title": "Sep 29-Oct 2: Aguila Photoshoot",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-10-07",
+      "title": "Oct 7-8: KLS Photo/Video Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-10-06",
+      "title": "Oct 5: Mary Grace On-Location Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-10-08",
+      "title": "Oct 7-8: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
