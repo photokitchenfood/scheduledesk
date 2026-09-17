@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T23:57:34.457Z",
+  "generatedAt": "2026-09-17T03:13:08.963Z",
   "cards": [
     {
       "date": "2026-09-12",
@@ -51,21 +51,18 @@
     },
     {
       "date": "2026-09-24",
-      "title": "Sep 24: McCormick Demo Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
+      "title": "Sep 24-25: CTG Sep Subscription Shoot [PHOTO]",
+      "kind": "shoot"
     },
     {
       "date": "2026-09-24",
-      "title": "Sep 24-25: CTG Sep Subscription Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
+      "title": "Sep 24: McCormick Demo Shoot",
+      "kind": "shoot"
     },
     {
       "date": "2026-09-25",
-      "title": "Sep 24-25: CTG Sep Subscription Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
+      "title": "Sep 24-25: CTG Sep Subscription Shoot [VIDEO]",
+      "kind": "shoot"
     },
     {
       "date": "2026-09-29",
@@ -102,12 +99,6 @@
     {
       "date": "2026-10-08",
       "title": "Oct 7-8: KLS Photo/Video Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-10-20",
-      "title": "Oct 20: Nestle Ocular [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
