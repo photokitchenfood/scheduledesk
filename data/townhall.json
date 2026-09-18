@@ -1,23 +1,6 @@
 {
-  "generatedAt": "2026-09-18T18:35:00.577Z",
+  "generatedAt": "2026-09-18T21:21:18.061Z",
   "cards": [
-    {
-      "date": "2026-09-12",
-      "title": "Sep 12: Fiesta Proj Kilig PPM @ 9AM",
-      "kind": "meeting",
-      "time": "09:00"
-    },
-    {
-      "date": "2026-09-12",
-      "title": "Sep 12: Fiesta Proj Kilig Tech Meeting @ 10AM",
-      "kind": "meeting",
-      "time": "10:00"
-    },
-    {
-      "date": "2026-09-14",
-      "title": "Sep 14: Nestle Briefing",
-      "kind": "meeting"
-    },
     {
       "date": "2026-09-24",
       "title": "Sep 24: Aguila Shoot PPM @ 3PM",
@@ -48,26 +31,6 @@
     {
       "date": "2026-09-25",
       "title": "Sep 24-25: CTG Sep Subscription Shoot [VIDEO]",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-09-14",
-      "title": "Sep 14: TMP Sep Subscription Videoshoot",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-09-15",
-      "title": "Sep 15: TMP EAP Videoshoot",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-09-15",
-      "title": "Sep 15: PK Surface Catalog Update",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-09-16",
-      "title": "Sep 16: Fiesta Proj Kilig Shoot [ON-LOCATION]",
       "kind": "shoot"
     },
     {
@@ -323,14 +286,6 @@
     }
   ],
   "leaves": [
-    {
-      "date": "2026-09-15",
-      "person": "KC"
-    },
-    {
-      "date": "2026-09-16",
-      "person": "KC"
-    },
     {
       "date": "2026-09-21",
       "person": "Kyla"
