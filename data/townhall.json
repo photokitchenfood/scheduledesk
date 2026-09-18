@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T06:07:41.294Z",
+  "generatedAt": "2026-09-18T11:32:02.615Z",
   "cards": [
     {
       "date": "2026-09-12",
@@ -25,24 +25,10 @@
       "time": "15:00"
     },
     {
-      "date": "2026-09-14",
-      "title": "Sep 14: TMP Sep Subscription Videoshoot",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-09-15",
-      "title": "Sep 15: TMP EAP Videoshoot",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-09-15",
-      "title": "Sep 15: PK Surface Catalog Update",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-09-16",
-      "title": "Sep 16: Fiesta Proj Kilig Shoot [ON-LOCATION]",
-      "kind": "shoot"
+      "date": "2026-10-20",
+      "title": "Oct 20: Nestle PPM @ 3PM [TENTATIVE]",
+      "kind": "meeting",
+      "time": "15:00"
     },
     {
       "date": "2026-09-21",
@@ -62,6 +48,26 @@
     {
       "date": "2026-09-25",
       "title": "Sep 24-25: CTG Sep Subscription Shoot [VIDEO]",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-09-14",
+      "title": "Sep 14: TMP Sep Subscription Videoshoot",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-09-15",
+      "title": "Sep 15: TMP EAP Videoshoot",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-09-15",
+      "title": "Sep 15: PK Surface Catalog Update",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-09-16",
+      "title": "Sep 16: Fiesta Proj Kilig Shoot [ON-LOCATION]",
       "kind": "shoot"
     },
     {
