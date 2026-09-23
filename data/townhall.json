@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T01:34:52.555Z",
+  "generatedAt": "2026-09-23T06:56:40.718Z",
   "cards": [
     {
       "date": "2026-09-24",
@@ -158,6 +158,21 @@
     {
       "date": "2026-11-02",
       "title": "Nov 2: All Souls’ Day",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-11-16",
+      "title": "Nov 16-18: ASEAN Summit",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-11-17",
+      "title": "Nov 16-18: ASEAN Summit",
+      "kind": "holiday"
+    },
+    {
+      "date": "2026-11-18",
+      "title": "Nov 16-18: ASEAN Summit",
       "kind": "holiday"
     },
     {
