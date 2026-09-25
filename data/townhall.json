@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T13:59:05.066Z",
+  "generatedAt": "2026-09-25T18:14:49.504Z",
   "cards": [
     {
       "date": "2026-09-24",
@@ -9,13 +9,13 @@
     },
     {
       "date": "2026-09-28",
-      "title": "Sep 28: McCormick Briefing @ 2PM [TENTATIVE]",
+      "title": "Sep 28: McCormick Briefing @ 1PM",
       "kind": "meeting",
-      "time": "14:00"
+      "time": "13:00"
     },
     {
       "date": "2026-10-01",
-      "title": "Oct 1: McCormick PPM @ 4:30PM [TENTATIVE]",
+      "title": "Oct 1: McCormick PPM @ 4:30PM",
       "kind": "meeting",
       "time": "16:30"
     },
@@ -67,9 +67,8 @@
     },
     {
       "date": "2026-10-06",
-      "title": "Oct 6: McCormick Packaging Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
+      "title": "Oct 6: McCormick Packaging Shoot",
+      "kind": "shoot"
     },
     {
       "date": "2026-10-07",
