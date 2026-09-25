@@ -1,11 +1,23 @@
 {
-  "generatedAt": "2026-09-25T08:02:05.573Z",
+  "generatedAt": "2026-09-25T13:59:05.066Z",
   "cards": [
     {
       "date": "2026-09-24",
       "title": "Sep 24: Aguila Shoot PPM @ 3PM",
       "kind": "meeting",
       "time": "15:00"
+    },
+    {
+      "date": "2026-09-28",
+      "title": "Sep 28: McCormick Briefing @ 2PM [TENTATIVE]",
+      "kind": "meeting",
+      "time": "14:00"
+    },
+    {
+      "date": "2026-10-01",
+      "title": "Oct 1: McCormick PPM @ 4:30PM [TENTATIVE]",
+      "kind": "meeting",
+      "time": "16:30"
     },
     {
       "date": "2026-10-20",
