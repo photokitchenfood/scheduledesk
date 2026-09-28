@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T23:28:42.892Z",
+  "generatedAt": "2026-09-28T01:51:50.442Z",
   "cards": [
     {
       "date": "2026-09-28",
@@ -46,9 +46,8 @@
     },
     {
       "date": "2026-10-07",
-      "title": "Oct 7: TMP Oct Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
+      "title": "Oct 7: TMP Oct Shoot",
+      "kind": "shoot"
     },
     {
       "date": "2026-10-12",
@@ -292,22 +291,6 @@
     }
   ],
   "leaves": [
-    {
-      "date": "2026-09-24",
-      "person": "Alex"
-    },
-    {
-      "date": "2026-09-24",
-      "person": "Kyla"
-    },
-    {
-      "date": "2026-09-25",
-      "person": "Alex"
-    },
-    {
-      "date": "2026-09-25",
-      "person": "Kyla"
-    },
     {
       "date": "2026-09-28",
       "person": "Ysay"
