@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T07:55:39.663Z",
+  "generatedAt": "2026-09-28T16:15:57.630Z",
   "cards": [
     {
       "date": "2026-09-28",
@@ -8,10 +8,10 @@
       "time": "13:00"
     },
     {
-      "date": "2026-10-01",
-      "title": "Oct 1: McCormick PPM @ 4:30PM",
+      "date": "2026-10-02",
+      "title": "Oct 2: McCormick PPM @ 2PM",
       "kind": "meeting",
-      "time": "16:30"
+      "time": "14:00"
     },
     {
       "date": "2026-10-20",
@@ -41,19 +41,18 @@
     },
     {
       "date": "2026-10-06",
-      "title": "Oct 6: McCormick Packaging Shoot",
+      "title": "Oct 6: TMP Oct Shoot",
       "kind": "shoot"
     },
     {
       "date": "2026-10-07",
-      "title": "Oct 7: TMP Oct Shoot",
+      "title": "Oct 7: McCormick Packaging Shoot",
       "kind": "shoot"
     },
     {
       "date": "2026-10-12",
-      "title": "Oct 12: TMP Oct Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
+      "title": "Oct 12: TMP Oct Shoot",
+      "kind": "shoot"
     },
     {
       "date": "2026-10-21",
