@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T08:43:13.027Z",
+  "generatedAt": "2026-10-02T15:10:17.377Z",
   "cards": [
     {
       "date": "2026-09-28",
@@ -14,10 +14,10 @@
       "time": "14:00"
     },
     {
-      "date": "2026-10-30",
-      "title": "Oct 30: Nestle PPM @ 3PM [TENTATIVE]",
+      "date": "2026-11-04",
+      "title": "Nov 4: Nestle PPM @ 2PM [TENTATIVE]",
       "kind": "meeting",
-      "time": "15:00"
+      "time": "14:00"
     },
     {
       "date": "2026-11-04",
@@ -78,20 +78,20 @@
       "tentative": true
     },
     {
+      "date": "2026-10-27",
+      "title": "Oct 27-28: KLS Photo/Video Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
       "date": "2026-10-28",
-      "title": "Oct 29-30: KLS Photo/Video Shoot [TENTATIVE]",
+      "title": "Oct 27-28: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-10-29",
-      "title": "Oct 21-22: KLS Photo/Video Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-11-06",
-      "title": "Nov 6: Nestle Goodnes Photoshoot [TENTATIVE]",
+      "date": "2026-11-11",
+      "title": "Nov 11: Nestle Goodnes Photoshoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
