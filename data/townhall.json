@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T02:10:08.393Z",
+  "generatedAt": "2026-10-05T09:17:54.969Z",
   "cards": [
     {
       "date": "2026-11-04",
@@ -19,7 +19,7 @@
     },
     {
       "date": "2026-10-07",
-      "title": "Oct 7: McCormick Packaging Shoot",
+      "title": "Oct 7: McCormick Proj Sabor & Krispi Shoot",
       "kind": "shoot"
     },
     {
@@ -41,7 +41,13 @@
     },
     {
       "date": "2026-10-23",
-      "title": "Oct 23: Mary Grace On-Location Shoot [TENTATIVE]",
+      "title": "Oct 23: CDO Chicken Franks Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-10-30",
+      "title": "Oct 30: Mary Grace On-Location Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -64,14 +70,14 @@
       "tentative": true
     },
     {
-      "date": "2026-11-19",
-      "title": "Nov 19-20: TMP Nov Subscription Shoot [TENTATIVE]",
+      "date": "2026-11-24",
+      "title": "Nov 24-25: TMP Nov Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-11-20",
-      "title": "Nov 19-20: TMP Nov Subscription Shoot [TENTATIVE]",
+      "date": "2026-11-25",
+      "title": "Nov 24-25: TMP Nov Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -89,13 +95,13 @@
     },
     {
       "date": "2026-12-15",
-      "title": "Dec 15-16: TMP Dec Subscription Shoot [TENTATIVE]",
+      "title": "Dec 15-16: TMP Dec Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
       "date": "2026-12-16",
-      "title": "Dec 15-16: TMP Dec Subscription Shoot [TENTATIVE]",
+      "title": "Dec 15-16: TMP Dec Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -358,6 +364,10 @@
     {
       "date": "2026-11-20",
       "person": "Chin"
+    },
+    {
+      "date": "2026-11-23",
+      "person": "KC"
     },
     {
       "date": "2026-11-23",
