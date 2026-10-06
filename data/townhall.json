@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-06T06:40:35.992Z",
+  "generatedAt": "2026-10-06T13:45:50.301Z",
   "cards": [
     {
       "date": "2026-11-04",
-      "title": "Nov 4: Nestle PPM @ 2PM [TENTATIVE]",
+      "title": "Nov 4: Nestle PPM @ 2PM",
       "kind": "meeting",
       "time": "14:00"
     },
@@ -46,12 +46,6 @@
       "tentative": true
     },
     {
-      "date": "2026-10-30",
-      "title": "Oct 30: Mary Grace On-Location Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
       "date": "2026-10-27",
       "title": "Oct 27-28: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
@@ -64,10 +58,15 @@
       "tentative": true
     },
     {
-      "date": "2026-11-11",
-      "title": "Nov 11: Nestle Goodnes Shoot @ TFKIS Studio [TENTATIVE]",
+      "date": "2026-10-30",
+      "title": "Oct 30: Mary Grace On-Location Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
+    },
+    {
+      "date": "2026-11-11",
+      "title": "Nov 11: Nestle Goodnes Shoot @ TFKIS Studio",
+      "kind": "shoot"
     },
     {
       "date": "2026-11-24",
