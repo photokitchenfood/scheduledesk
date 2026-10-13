@@ -1,6 +1,18 @@
 {
-  "generatedAt": "2026-10-13T02:08:31.951Z",
+  "generatedAt": "2026-10-13T09:35:57.533Z",
   "cards": [
+    {
+      "date": "2026-10-13",
+      "title": "Oct 13: Crazy Curry Feasib @ 5PM",
+      "kind": "meeting",
+      "time": "17:00"
+    },
+    {
+      "date": "2026-10-14",
+      "title": "Oct 14: Crazy Curry PPM @ 5PM",
+      "kind": "meeting",
+      "time": "17:00"
+    },
     {
       "date": "2026-11-04",
       "title": "Nov 4: Nestle PPM @ 2PM",
@@ -16,6 +28,12 @@
       "date": "2026-10-12",
       "title": "Oct 12: TMP Social Media Oct Shoot (Batch 2)",
       "kind": "shoot"
+    },
+    {
+      "date": "2026-10-15",
+      "title": "Oct 15: Project Crazy Photoshoot (On-Loc)[TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
     },
     {
       "date": "2026-10-20",
@@ -257,14 +275,6 @@
   ],
   "leaves": [
     {
-      "date": "2026-10-09",
-      "person": "Mye"
-    },
-    {
-      "date": "2026-10-09",
-      "person": "Ikay"
-    },
-    {
       "date": "2026-10-13",
       "person": "Mye"
     },
@@ -278,19 +288,19 @@
     },
     {
       "date": "2026-10-12",
-      "person": "Ikay"
-    },
-    {
-      "date": "2026-10-14",
-      "person": "Mye"
-    },
-    {
-      "date": "2026-10-14",
       "person": "Ikay"
     },
     {
       "date": "2026-10-13",
       "person": "Shen"
+    },
+    {
+      "date": "2026-10-14",
+      "person": "Mye"
+    },
+    {
+      "date": "2026-10-14",
+      "person": "Ikay"
     },
     {
       "date": "2026-10-15",
