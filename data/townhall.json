@@ -1,11 +1,16 @@
 {
-  "generatedAt": "2026-10-17T04:44:25.020Z",
+  "generatedAt": "2026-10-17T08:55:17.552Z",
   "cards": [
     {
       "date": "2026-11-04",
       "title": "Nov 4: Nestle PPM @ 2PM",
       "kind": "meeting",
       "time": "14:00"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "Oct 23: Plate This Q3 Debriefing",
+      "kind": "meeting"
     },
     {
       "date": "2026-11-04",
