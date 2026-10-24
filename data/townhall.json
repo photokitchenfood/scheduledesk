@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T07:30:00.226Z",
+  "generatedAt": "2026-10-24T12:09:34.587Z",
   "cards": [
     {
       "date": "2026-11-04",
@@ -11,6 +11,24 @@
       "date": "2026-11-04",
       "title": "Nov 4: Q3 QBR [TENTATIVE]",
       "kind": "meeting"
+    },
+    {
+      "date": "2026-10-26",
+      "title": "Oct 26: San Marino Talent KV Briefing @ 9AM",
+      "kind": "meeting",
+      "time": "09:00"
+    },
+    {
+      "date": "2026-10-30",
+      "title": "Oct 30: San Marino Talent KV Feasib @ 11AM",
+      "kind": "meeting",
+      "time": "11:00"
+    },
+    {
+      "date": "2026-10-30",
+      "title": "Oct 30: San Marino Talent KV PPM @ 2PM",
+      "kind": "meeting",
+      "time": "14:00"
     },
     {
       "date": "2026-11-19",
