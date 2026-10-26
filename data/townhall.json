@@ -1,23 +1,11 @@
 {
-  "generatedAt": "2026-10-26T06:34:48.196Z",
+  "generatedAt": "2026-10-26T13:43:11.484Z",
   "cards": [
     {
       "date": "2026-10-26",
       "title": "Oct 26: San Marino Talent KV Briefing @ 9AM",
       "kind": "meeting",
       "time": "09:00"
-    },
-    {
-      "date": "2026-10-30",
-      "title": "Oct 30: San Marino Proj Brave Feasib @ 10AM",
-      "kind": "meeting",
-      "time": "10:00"
-    },
-    {
-      "date": "2026-10-30",
-      "title": "Oct 30: San Marino Proj Brave PPM @ 2PM",
-      "kind": "meeting",
-      "time": "14:00"
     },
     {
       "date": "2026-11-04",
@@ -29,11 +17,6 @@
       "date": "2026-11-06",
       "title": "Nov 6: Q3 QBR",
       "kind": "meeting"
-    },
-    {
-      "date": "2026-11-05",
-      "title": "Nov 5: San Marino Proj Brave Shoot (On-Location)",
-      "kind": "shoot"
     },
     {
       "date": "2026-11-19",
