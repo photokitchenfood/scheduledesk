@@ -1,17 +1,6 @@
 {
-  "generatedAt": "2026-10-26T01:25:31.486Z",
+  "generatedAt": "2026-10-26T06:34:48.196Z",
   "cards": [
-    {
-      "date": "2026-11-04",
-      "title": "Nov 4: Nestle PPM @ 2PM",
-      "kind": "meeting",
-      "time": "14:00"
-    },
-    {
-      "date": "2026-11-04",
-      "title": "Nov 4: Q3 QBR [TENTATIVE]",
-      "kind": "meeting"
-    },
     {
       "date": "2026-10-26",
       "title": "Oct 26: San Marino Talent KV Briefing @ 9AM",
@@ -20,15 +9,31 @@
     },
     {
       "date": "2026-10-30",
-      "title": "Oct 30: San Marino Talent KV Feasib @ 11AM",
+      "title": "Oct 30: San Marino Proj Brave Feasib @ 10AM",
       "kind": "meeting",
-      "time": "11:00"
+      "time": "10:00"
     },
     {
       "date": "2026-10-30",
-      "title": "Oct 30: San Marino Talent KV PPM @ 2PM",
+      "title": "Oct 30: San Marino Proj Brave PPM @ 2PM",
       "kind": "meeting",
       "time": "14:00"
+    },
+    {
+      "date": "2026-11-04",
+      "title": "Nov 4: Nestle PPM @ 2PM",
+      "kind": "meeting",
+      "time": "14:00"
+    },
+    {
+      "date": "2026-11-06",
+      "title": "Nov 6: Q3 QBR",
+      "kind": "meeting"
+    },
+    {
+      "date": "2026-11-05",
+      "title": "Nov 5: San Marino Proj Brave Shoot (On-Location)",
+      "kind": "shoot"
     },
     {
       "date": "2026-11-19",
@@ -39,12 +44,6 @@
     {
       "date": "2026-11-20",
       "title": "Nov 19-20: KLS Photo/Video Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-11-05",
-      "title": "Nov 5: San Marino KV Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
