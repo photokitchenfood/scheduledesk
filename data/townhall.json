@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T00:31:15.935Z",
+  "generatedAt": "2026-10-29T06:37:16.054Z",
   "cards": [
     {
       "date": "2026-10-26",
@@ -9,9 +9,19 @@
     },
     {
       "date": "2026-11-04",
+      "title": "Nov 4: Plate This Management Meeting",
+      "kind": "meeting"
+    },
+    {
+      "date": "2026-11-04",
       "title": "Nov 4: Nestle PPM @ 2PM",
       "kind": "meeting",
       "time": "14:00"
+    },
+    {
+      "date": "2026-11-05",
+      "title": "Nov 5: Photokitchen Management Meeting",
+      "kind": "meeting"
     },
     {
       "date": "2026-11-06",
@@ -255,15 +265,15 @@
     },
     {
       "date": "2026-10-29",
+      "person": "Shen"
+    },
+    {
+      "date": "2026-10-29",
       "person": "Chin"
     },
     {
       "date": "2026-10-30",
       "person": "Chin"
-    },
-    {
-      "date": "2026-10-29",
-      "person": "Shen"
     },
     {
       "date": "2026-11-12",
@@ -286,16 +296,8 @@
       "person": "Andi"
     },
     {
-      "date": "2026-11-19",
-      "person": "Chin"
-    },
-    {
       "date": "2026-11-20",
       "person": "Andi"
-    },
-    {
-      "date": "2026-11-20",
-      "person": "Chin"
     },
     {
       "date": "2026-11-23",
