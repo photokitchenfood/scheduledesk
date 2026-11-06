@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-06T10:05:39.492Z",
+  "generatedAt": "2026-11-06T17:36:02.691Z",
   "cards": [
     {
       "date": "2026-11-04",
@@ -21,13 +21,15 @@
     },
     {
       "date": "2026-11-11",
-      "title": "Nov 11: San Marino Proj Brave Feasib (Time TBC)",
-      "kind": "meeting"
+      "title": "Nov 11: San Marino Proj Brave Feasib @ 2PM [TENTATIVE]",
+      "kind": "meeting",
+      "time": "14:00"
     },
     {
       "date": "2026-11-13",
-      "title": "Nov 13: San Marino Proj Brave PPM (Time TBC)",
-      "kind": "meeting"
+      "title": "Nov 13: San Marino Proj Brave PPM @ 10AM [TENTATIVE]",
+      "kind": "meeting",
+      "time": "10:00"
     },
     {
       "date": "2026-11-12",
