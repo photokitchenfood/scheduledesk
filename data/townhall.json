@@ -1,24 +1,6 @@
 {
-  "generatedAt": "2026-11-06T17:36:02.691Z",
+  "generatedAt": "2026-11-06T22:30:19.089Z",
   "cards": [
-    {
-      "date": "2026-11-04",
-      "title": "Nov 4: Plate This Management Meeting @ 11AM",
-      "kind": "meeting",
-      "time": "11:00"
-    },
-    {
-      "date": "2026-11-04",
-      "title": "Nov 4: Nestle PPM @ 2PM",
-      "kind": "meeting",
-      "time": "14:00"
-    },
-    {
-      "date": "2026-11-05",
-      "title": "Nov 5: Photokitchen Management Meeting @ 11AM",
-      "kind": "meeting",
-      "time": "11:00"
-    },
     {
       "date": "2026-11-11",
       "title": "Nov 11: San Marino Proj Brave Feasib @ 2PM [TENTATIVE]",
@@ -105,11 +87,6 @@
       "title": "Dec 17-18: CTG Dec Subscription Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
-    },
-    {
-      "date": "2026-11-02",
-      "title": "Nov 2: All Souls’ Day",
-      "kind": "holiday"
     },
     {
       "date": "2026-11-16",
@@ -258,14 +235,6 @@
     }
   ],
   "leaves": [
-    {
-      "date": "2026-10-29",
-      "person": "Chin"
-    },
-    {
-      "date": "2026-10-30",
-      "person": "Chin"
-    },
     {
       "date": "2026-11-12",
       "person": "Alex"
