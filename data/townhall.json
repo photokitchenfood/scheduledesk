@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-05T22:28:20.327Z",
+  "generatedAt": "2026-11-06T02:42:40.384Z",
   "cards": [
     {
       "date": "2026-11-04",
@@ -20,18 +20,28 @@
       "time": "11:00"
     },
     {
+      "date": "2026-11-11",
+      "title": "Nov 11: San Marino Proj Brave Feasib (Time TBC)",
+      "kind": "meeting"
+    },
+    {
+      "date": "2026-11-13",
+      "title": "Nov 13: San Marino Proj Brave PPM (Time TBC)",
+      "kind": "meeting"
+    },
+    {
       "date": "2026-11-12",
       "title": "Nov 12: Nestle Goodnes Shoot @ TFKIS Studio",
       "kind": "shoot"
     },
     {
       "date": "2026-11-20",
-      "title": "Nov 20: San Marino Proj Brave - Talent Shoot (On-Location)",
+      "title": "Nov 20: San Marino Proj Brave - Talent Shoot @ Provill Studio",
       "kind": "shoot"
     },
     {
       "date": "2026-11-23",
-      "title": "Nov 23: San Marino Proj Brave - Food Shoot (PK Studio)",
+      "title": "Nov 23: San Marino Proj Brave - Food Shoot @ PK Studio",
       "kind": "shoot"
     },
     {
