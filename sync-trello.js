@@ -6,9 +6,11 @@
  * data/townhall.json in the exact shape Schedule Desk's dashboard expects
  * (see the MOCK object in scheduler_dashboard.html).
  *
- * Whitelist approach: only the lists below are ever read. Regie, Lins,
- * Gilbert, and Birthdays are never touched, by construction — they're
- * simply not in this list.
+ * Whitelist approach: only the lists below are ever read. Birthdays is
+ * never touched, by construction — it's simply not in this list. Regie,
+ * Lins, and Gilbert (Logistics team) ARE included as of this version,
+ * synced as "logistics" cards so Schedule Desk can schedule runner /
+ * maintenance tasks around them.
  *
  * Requires two GitHub Actions secrets:
  *   TRELLO_KEY   — Trello API key   (trello.com/app-key)
@@ -45,12 +47,20 @@ const LISTS = {
   holiday: [
     '5f3b5accb75c52146b2c1654', // Holidays
   ],
+  logistics: [
+    '6487fee9a4f3ca65b9639b04', // Regie
+    '63cbf90f5a01b30145bf614f', // Lins
+    '63cbf9104d024e0034aa64cf', // Gilbert
+  ],
 };
 
 function toDateStr(dueIso) {
   if (!dueIso) return null;
+  // Parse as UTC then convert to Asia/Manila (UTC+8) before extracting the date.
+  // Raw .slice(0,10) gives the UTC date, which is one day behind for Manila-timed
+  // cards set at midnight UTC (= 8am Manila the same day in Trello's UI).
   const d = new Date(dueIso);
-  const manilaOffset = 8 * 60;
+  const manilaOffset = 8 * 60; // UTC+8 in minutes
   const local = new Date(d.getTime() + manilaOffset * 60 * 1000);
   const y = local.getUTCFullYear();
   const m = String(local.getUTCMonth() + 1).padStart(2, '0');
@@ -81,6 +91,12 @@ function extractLeavePeople(name) {
     .map(s => s.trim())
     .filter(Boolean);
 }
+
+const LOGISTICS_PEOPLE = {
+  '6487fee9a4f3ca65b9639b04': 'Regie',
+  '63cbf90f5a01b30145bf614f': 'Lins',
+  '63cbf9104d024e0034aa64cf': 'Gilbert',
+};
 
 async function fetchList(listId) {
   const url = `https://api.trello.com/1/lists/${listId}/cards?key=${KEY}&token=${TOKEN}&filter=open&fields=name,due`;
@@ -113,6 +129,9 @@ async function main() {
         if (kind === 'meeting') {
           const time = extractTime(c.name);
           if (time) entry.time = time;
+        }
+        if (kind === 'logistics') {
+          entry.person = LOGISTICS_PEOPLE[listId] || null;
         }
         cards.push(entry);
       }
