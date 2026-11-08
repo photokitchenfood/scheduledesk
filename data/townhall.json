@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T09:41:22.755Z",
+  "generatedAt": "2026-11-08T12:55:12.386Z",
   "cards": [
     {
       "date": "2026-11-11",
@@ -232,6 +232,42 @@
       "date": "2027-08-30",
       "title": "Aug 30: National Heroes Day",
       "kind": "holiday"
+    },
+    {
+      "date": "2026-11-09",
+      "title": "Nov 9: Receive Nestle Godness Non-Perishable Groceries",
+      "kind": "logistics",
+      "person": "Regie"
+    },
+    {
+      "date": "2026-11-10",
+      "title": "Nov. 10: Thaw Checklist",
+      "kind": "logistics",
+      "person": "Regie"
+    },
+    {
+      "date": "2026-11-11",
+      "title": "Nov 11: Receive Nestle Goodnes Perishable Groceries",
+      "kind": "logistics",
+      "person": "Regie"
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Nov 19: Receive San Marino Proj Brave Groceries",
+      "kind": "logistics",
+      "person": "Regie"
+    },
+    {
+      "date": "2026-11-09",
+      "title": "Nov 9: Nestle Delivery",
+      "kind": "logistics",
+      "person": "Lins"
+    },
+    {
+      "date": "2026-11-19",
+      "title": "Nov 19: San Marino Delivery",
+      "kind": "logistics",
+      "person": "Lins"
     }
   ],
   "leaves": [
