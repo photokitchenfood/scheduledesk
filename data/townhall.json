@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T23:13:59.923Z",
+  "generatedAt": "2026-11-08T02:35:24.270Z",
   "cards": [
     {
       "date": "2026-11-11",
@@ -350,6 +350,62 @@
     {
       "date": "2027-03-16",
       "person": "Andi"
+    },
+    {
+      "date": "2027-01-21",
+      "person": "Lins"
+    },
+    {
+      "date": "2027-01-21",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2027-01-22",
+      "person": "Lins"
+    },
+    {
+      "date": "2027-01-22",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2027-01-25",
+      "person": "Lins"
+    },
+    {
+      "date": "2027-01-25",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2027-01-26",
+      "person": "Lins"
+    },
+    {
+      "date": "2027-01-26",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2027-01-27",
+      "person": "Lins"
+    },
+    {
+      "date": "2027-01-27",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2027-05-27",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2027-05-28",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2027-05-31",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2027-06-01",
+      "person": "Gilbert"
     }
   ]
 }
