@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-09T06:56:49.668Z",
+  "generatedAt": "2026-11-09T17:03:49.291Z",
   "cards": [
     {
       "date": "2026-11-10",
@@ -279,6 +279,12 @@
       "title": "Nov 19: San Marino Delivery",
       "kind": "logistics",
       "person": "Lins"
+    },
+    {
+      "date": "2026-11-10",
+      "title": "Nov 10: Grocery Shelf Price Tag Slot Height Measurements",
+      "kind": "logistics",
+      "person": "Gilbert"
     }
   ],
   "leaves": [
@@ -337,6 +343,10 @@
     {
       "date": "2026-12-02",
       "person": "Shen"
+    },
+    {
+      "date": "2026-12-01",
+      "person": "Regie"
     },
     {
       "date": "2026-12-07",
