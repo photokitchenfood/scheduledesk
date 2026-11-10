@@ -1,20 +1,21 @@
 {
-  "generatedAt": "2026-11-10T00:45:47.233Z",
+  "generatedAt": "2026-11-10T07:52:48.409Z",
   "cards": [
     {
       "date": "2026-11-10",
-      "title": "Nov 10: PK Website Revamp Huddle",
-      "kind": "meeting"
+      "title": "Nov 10: PK Website Revamp Huddle @ 1PM",
+      "kind": "meeting",
+      "time": "13:00"
     },
     {
       "date": "2026-11-11",
-      "title": "Nov 11: San Marino Proj Brave Feasib @ 2PM [TENTATIVE]",
+      "title": "Nov 11: San Marino Proj Brave Feasib @ 11AM",
       "kind": "meeting",
-      "time": "14:00"
+      "time": "11:00"
     },
     {
       "date": "2026-11-13",
-      "title": "Nov 13: San Marino Proj Brave PPM @ 10AM [TENTATIVE]",
+      "title": "Nov 13: San Marino Proj Brave PPM @ 10AM",
       "kind": "meeting",
       "time": "10:00"
     },
@@ -270,13 +271,13 @@
     },
     {
       "date": "2026-11-10",
-      "title": "Nov 9: Nestle Delivery (Batch 2)",
+      "title": "Nov 10: Nestle Delivery (Batch 2)",
       "kind": "logistics",
       "person": "Lins"
     },
     {
-      "date": "2026-11-19",
-      "title": "Nov 19: San Marino Delivery",
+      "date": "2026-11-11",
+      "title": "Nov 11: San Marino Delivery",
       "kind": "logistics",
       "person": "Lins"
     },
