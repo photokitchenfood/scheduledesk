@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T07:52:48.409Z",
+  "generatedAt": "2026-11-10T15:55:27.412Z",
   "cards": [
     {
       "date": "2026-11-10",
@@ -60,13 +60,19 @@
     },
     {
       "date": "2026-12-03",
-      "title": "Dec 3-4: KLS Photo/Video Shoot [TENTATIVE]",
+      "title": "Dec 3: CDO Franks Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
       "date": "2026-12-04",
-      "title": "Dec 3-4: KLS Photo/Video Shoot [TENTATIVE]",
+      "title": "Dec 4: KLS Photo/Video Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-12-07",
+      "title": "Dec 7: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
