@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T01:35:16.772Z",
+  "generatedAt": "2026-11-11T08:37:04.936Z",
   "cards": [
     {
       "date": "2026-11-10",
@@ -12,6 +12,12 @@
       "title": "Nov 11: San Marino Proj Brave Feasib @ 11AM",
       "kind": "meeting",
       "time": "11:00"
+    },
+    {
+      "date": "2026-11-11",
+      "title": "Nov 11: Nestle Huddle @ 4:30PM",
+      "kind": "meeting",
+      "time": "16:30"
     },
     {
       "date": "2026-11-13",
@@ -282,8 +288,8 @@
       "person": "Lins"
     },
     {
-      "date": "2026-11-11",
-      "title": "Nov 11: San Marino Delivery",
+      "date": "2026-11-13",
+      "title": "Nov 13: San Marino Delivery",
       "kind": "logistics",
       "person": "Lins"
     },
