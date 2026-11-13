@@ -1,35 +1,6 @@
 {
-  "generatedAt": "2026-11-13T16:36:12.705Z",
+  "generatedAt": "2026-11-13T22:17:27.324Z",
   "cards": [
-    {
-      "date": "2026-11-10",
-      "title": "Nov 10: PK Website Revamp Huddle @ 1PM",
-      "kind": "meeting",
-      "time": "13:00"
-    },
-    {
-      "date": "2026-11-11",
-      "title": "Nov 11: San Marino Proj Brave Feasib @ 11AM",
-      "kind": "meeting",
-      "time": "11:00"
-    },
-    {
-      "date": "2026-11-11",
-      "title": "Nov 11: Nestle Huddle @ 4:30PM",
-      "kind": "meeting",
-      "time": "16:30"
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Nov 13: San Marino Proj Brave PPM @ 10AM",
-      "kind": "meeting",
-      "time": "10:00"
-    },
-    {
-      "date": "2026-11-12",
-      "title": "Nov 12: Nestle Goodnes Shoot @ TFKIS Studio",
-      "kind": "shoot"
-    },
     {
       "date": "2026-11-20",
       "title": "Nov 20: San Marino Proj Brave Talent Shoot @ Provill Studio",
@@ -252,63 +223,19 @@
       "kind": "holiday"
     },
     {
-      "date": "2026-11-09",
-      "title": "Nov 9: Receive Nestle Godness Non-Perishable Groceries",
-      "kind": "logistics",
-      "person": "Regie"
-    },
-    {
-      "date": "2026-11-10",
-      "title": "Nov. 10: Thaw Checklist",
-      "kind": "logistics",
-      "person": "Regie"
-    },
-    {
-      "date": "2026-11-11",
-      "title": "Nov 11: Receive Nestle Goodnes Perishable Groceries",
-      "kind": "logistics",
-      "person": "Regie"
-    },
-    {
       "date": "2026-11-19",
       "title": "Nov 19: Receive San Marino Proj Brave Groceries",
       "kind": "logistics",
       "person": "Regie"
     },
     {
-      "date": "2026-11-09",
-      "title": "Nov 9: Nestle Delivery (Batch 1)",
-      "kind": "logistics",
-      "person": "Lins"
-    },
-    {
-      "date": "2026-11-10",
-      "title": "Nov 10: Nestle Delivery (Batch 2)",
-      "kind": "logistics",
-      "person": "Lins"
-    },
-    {
       "date": "2026-11-13",
       "title": "Nov 13: San Marino Delivery",
       "kind": "logistics",
       "person": "Lins"
-    },
-    {
-      "date": "2026-11-10",
-      "title": "Nov 10: Grocery Shelf Price Tag Slot Height Measurements",
-      "kind": "logistics",
-      "person": "Gilbert"
     }
   ],
   "leaves": [
-    {
-      "date": "2026-11-12",
-      "person": "Alex"
-    },
-    {
-      "date": "2026-11-13",
-      "person": "Alex"
-    },
     {
       "date": "2026-11-17",
       "person": "Andi"
