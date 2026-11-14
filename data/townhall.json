@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T22:17:27.324Z",
+  "generatedAt": "2026-11-14T02:32:27.527Z",
   "cards": [
     {
       "date": "2026-11-20",
@@ -12,28 +12,20 @@
       "kind": "shoot"
     },
     {
-      "date": "2026-11-24",
-      "title": "Nov 24-25: TMP Nov Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-11-25",
-      "title": "Nov 24-25: TMP Nov Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
       "date": "2026-11-26",
-      "title": "Nov 26-27: CTG Nov Subscription Shoot [TENTATIVE]",
+      "title": "Nov 26: TMP Nov Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
+    },
+    {
+      "date": "2026-12-02",
+      "title": "Dec 2: CTG Nov Subscription Shoot [PHOTOS]",
+      "kind": "shoot"
     },
     {
       "date": "2026-11-27",
-      "title": "Nov 26-27: CTG Nov Subscription Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
+      "title": "Nov 27: CTG Nov Subscription Shoot [VIDEOS]",
+      "kind": "shoot"
     },
     {
       "date": "2026-12-03",
@@ -227,12 +219,6 @@
       "title": "Nov 19: Receive San Marino Proj Brave Groceries",
       "kind": "logistics",
       "person": "Regie"
-    },
-    {
-      "date": "2026-11-13",
-      "title": "Nov 13: San Marino Delivery",
-      "kind": "logistics",
-      "person": "Lins"
     }
   ],
   "leaves": [
