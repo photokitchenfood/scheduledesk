@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T00:04:47.645Z",
+  "generatedAt": "2026-11-16T06:55:53.189Z",
   "cards": [
     {
       "date": "2026-11-20",
@@ -12,20 +12,20 @@
       "kind": "shoot"
     },
     {
+      "date": "2026-11-27",
+      "title": "Nov 27: CTG Nov Subscription Shoot",
+      "kind": "shoot"
+    },
+    {
+      "date": "2026-12-02",
+      "title": "Dec 2: CTG Nov Subscription Shoot",
+      "kind": "shoot"
+    },
+    {
       "date": "2026-11-26",
       "title": "Nov 26: TMP Nov Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
-    },
-    {
-      "date": "2026-12-02",
-      "title": "Dec 2: CTG Nov Subscription Shoot [PHOTOS]",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-11-27",
-      "title": "Nov 27: CTG Nov Subscription Shoot [VIDEOS]",
-      "kind": "shoot"
     },
     {
       "date": "2026-12-03",
