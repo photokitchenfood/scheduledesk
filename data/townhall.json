@@ -1,6 +1,11 @@
 {
-  "generatedAt": "2026-11-19T04:20:49.400Z",
+  "generatedAt": "2026-11-19T13:38:54.382Z",
   "cards": [
+    {
+      "date": "2026-12-15",
+      "title": "Dec 15: 2026 Christmas Party",
+      "kind": "meeting"
+    },
     {
       "date": "2026-11-20",
       "title": "Nov 20: San Marino Proj Brave Talent Shoot @ Provill Studio",
@@ -219,6 +224,18 @@
       "title": "Nov 19: Receive San Marino Proj Brave Groceries",
       "kind": "logistics",
       "person": "Regie"
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Nov 20: Nestle Invoice Delivery",
+      "kind": "logistics",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2026-11-23",
+      "title": "Nov 23: San Marino Set",
+      "kind": "logistics",
+      "person": "Gilbert"
     }
   ],
   "leaves": [
