@@ -1,6 +1,11 @@
 {
-  "generatedAt": "2026-11-20T02:44:32.012Z",
+  "generatedAt": "2026-11-20T10:42:32.036Z",
   "cards": [
+    {
+      "date": "2026-11-24",
+      "title": "Nov 24: Plate This Accounts Alignment",
+      "kind": "meeting"
+    },
     {
       "date": "2026-12-15",
       "title": "Dec 15: 2026 Christmas Party",
@@ -22,31 +27,43 @@
       "kind": "shoot"
     },
     {
+      "date": "2026-12-04",
+      "title": "Dec 3-4: TMP Nov Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
       "date": "2026-12-02",
       "title": "Dec 2: CTG Nov Subscription Shoot",
       "kind": "shoot"
     },
     {
-      "date": "2026-11-26",
-      "title": "Nov 26: TMP Nov Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
       "date": "2026-12-03",
-      "title": "Dec 3: CDO Franks Shoot [TENTATIVE]",
+      "title": "Dec 3-4: TMP Nov Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-12-04",
-      "title": "Dec 4: KLS Photo/Video Shoot [TENTATIVE]",
+      "date": "2026-12-10",
+      "title": "Dec 9-10: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-12-07",
-      "title": "Dec 7: KLS Photo/Video Shoot [TENTATIVE]",
+      "date": "2026-12-09",
+      "title": "Dec 9-10: KLS Photo/Video Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-12-09",
+      "title": "Dec 9-10: PK Website Revamp Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2026-12-10",
+      "title": "Dec 9-10: PK Website Revamp Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -71,6 +88,12 @@
     {
       "date": "2026-12-18",
       "title": "Dec 17-18: CTG Dec Subscription Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
+    },
+    {
+      "date": "2027-01-19",
+      "title": "Jan 19: CDO Franks Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
