@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T21:54:53.587Z",
+  "generatedAt": "2026-11-20T02:44:32.012Z",
   "cards": [
     {
       "date": "2026-12-15",
@@ -228,6 +228,12 @@
     {
       "date": "2026-11-20",
       "title": "Nov 20: Nestle Invoice Delivery",
+      "kind": "logistics",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2026-11-20",
+      "title": "Nov 20: Unilever Payment Pickup",
       "kind": "logistics",
       "person": "Gilbert"
     },
