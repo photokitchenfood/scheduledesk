@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T18:54:25.221Z",
+  "generatedAt": "2026-11-21T00:28:01.029Z",
   "cards": [
     {
       "date": "2026-11-24",
@@ -10,11 +10,6 @@
       "date": "2026-12-15",
       "title": "Dec 15: 2026 Christmas Party",
       "kind": "meeting"
-    },
-    {
-      "date": "2026-11-20",
-      "title": "Nov 20: San Marino Proj Brave Talent Shoot @ Provill Studio",
-      "kind": "shoot"
     },
     {
       "date": "2026-11-23",
@@ -96,21 +91,6 @@
       "title": "Jan 19: CDO Franks Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
-    },
-    {
-      "date": "2026-11-16",
-      "title": "Nov 16-18: ASEAN Summit",
-      "kind": "holiday"
-    },
-    {
-      "date": "2026-11-17",
-      "title": "Nov 16-18: ASEAN Summit",
-      "kind": "holiday"
-    },
-    {
-      "date": "2026-11-18",
-      "title": "Nov 16-18: ASEAN Summit",
-      "kind": "holiday"
     },
     {
       "date": "2026-11-30",
@@ -243,24 +223,6 @@
       "kind": "holiday"
     },
     {
-      "date": "2026-11-19",
-      "title": "Nov 19: Receive San Marino Proj Brave Groceries",
-      "kind": "logistics",
-      "person": "Regie"
-    },
-    {
-      "date": "2026-11-20",
-      "title": "Nov 20: Nestle Invoice Delivery",
-      "kind": "logistics",
-      "person": "Gilbert"
-    },
-    {
-      "date": "2026-11-20",
-      "title": "Nov 20: Unilever Payment Pickup",
-      "kind": "logistics",
-      "person": "Gilbert"
-    },
-    {
       "date": "2026-11-23",
       "title": "Nov 23: San Marino Set",
       "kind": "logistics",
@@ -268,22 +230,6 @@
     }
   ],
   "leaves": [
-    {
-      "date": "2026-11-17",
-      "person": "Andi"
-    },
-    {
-      "date": "2026-11-18",
-      "person": "Andi"
-    },
-    {
-      "date": "2026-11-19",
-      "person": "Andi"
-    },
-    {
-      "date": "2026-11-20",
-      "person": "Andi"
-    },
     {
       "date": "2026-11-25",
       "person": "KC"
