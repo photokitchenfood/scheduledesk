@@ -1,15 +1,17 @@
 {
-  "generatedAt": "2026-11-22T22:13:44.410Z",
+  "generatedAt": "2026-11-23T02:55:16.419Z",
   "cards": [
     {
       "date": "2026-11-24",
-      "title": "Nov 24: Plate This Accounts Alignment",
-      "kind": "meeting"
+      "title": "Nov 24: Plate This Accounts Alignment @ 10AM",
+      "kind": "meeting",
+      "time": "10:00"
     },
     {
       "date": "2026-11-24",
-      "title": "Nov 24: Website Video STB huddle",
-      "kind": "meeting"
+      "title": "Nov 24: PK Website Video STB Huddle @ 1PM",
+      "kind": "meeting",
+      "time": "13:00"
     },
     {
       "date": "2026-12-15",
@@ -17,41 +19,30 @@
       "kind": "meeting"
     },
     {
-      "date": "2026-11-23",
-      "title": "Nov 23: San Marino Proj Brave Food Shoot @ PK Studio",
+      "date": "2026-11-27",
+      "title": "Nov 27: CTG Nov Subscription Shoot [VIDEOS]",
       "kind": "shoot"
     },
     {
-      "date": "2026-11-27",
-      "title": "Nov 27: CTG Nov Subscription Shoot",
+      "date": "2026-12-02",
+      "title": "Dec 2: CTG Nov Subscription Shoot [PHOTOS]",
       "kind": "shoot"
     },
     {
       "date": "2026-12-04",
-      "title": "Dec 3-4: TMP Nov Shoot [TENTATIVE]",
+      "title": "Dec 4: TMP Nov Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
-      "date": "2026-12-02",
-      "title": "Dec 2: CTG Nov Subscription Shoot",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-12-03",
-      "title": "Dec 3-4: TMP Nov Shoot [TENTATIVE]",
+      "date": "2026-12-11",
+      "title": "Dec 10-11: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
     {
       "date": "2026-12-10",
-      "title": "Dec 9-10: KLS Photo/Video Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
-      "date": "2026-12-09",
-      "title": "Dec 9-10: KLS Photo/Video Shoot [TENTATIVE]",
+      "title": "Dec 10-11: KLS Photo/Video Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -129,57 +120,57 @@
     },
     {
       "date": "2026-12-21",
-      "title": "Dec 21-Jan 4: Company Break [TENTATIVE]",
+      "title": "Dec 21-23: Company Break [TENTATIVE]",
       "kind": "holiday"
     },
     {
       "date": "2026-12-22",
-      "title": "Dec 21-Jan 4: Company Break [TENTATIVE]",
+      "title": "Dec 21-23: Company Break [TENTATIVE]",
       "kind": "holiday"
     },
     {
       "date": "2026-12-23",
-      "title": "Dec 21-Jan 4: Company Break [TENTATIVE]",
+      "title": "Dec 21-23: Company Break [TENTATIVE]",
       "kind": "holiday"
     },
     {
       "date": "2026-12-24",
-      "title": "Dec 21-Jan 4: Company Break",
+      "title": "Dec 24 -Jan 4: Company Break",
       "kind": "holiday"
     },
     {
       "date": "2026-12-25",
-      "title": "Dec 21-Jan 4: Company Break",
+      "title": "Dec 24 -Jan 4: Company Break",
       "kind": "holiday"
     },
     {
       "date": "2026-12-28",
-      "title": "Dec 21-Jan 4: Company Break",
+      "title": "Dec 24 -Jan 4: Company Break",
       "kind": "holiday"
     },
     {
       "date": "2026-12-29",
-      "title": "Dec 21-Jan 4: Company Break",
+      "title": "Dec 24 -Jan 4: Company Break",
       "kind": "holiday"
     },
     {
       "date": "2026-12-30",
-      "title": "Dec 21-Jan 4: Company Break",
+      "title": "Dec 24 -Jan 4: Company Break",
       "kind": "holiday"
     },
     {
       "date": "2026-12-31",
-      "title": "Dec 21-Jan 4: Company Break",
+      "title": "Dec 24 -Jan 4: Company Break",
       "kind": "holiday"
     },
     {
       "date": "2027-01-04",
-      "title": "Dec 21-Jan 4: Company Break",
+      "title": "Dec 24 -Jan 4: Company Break",
       "kind": "holiday"
     },
     {
       "date": "2027-01-01",
-      "title": "Dec 21-Jan 4: Company Break",
+      "title": "Dec 24 -Jan 4: Company Break",
       "kind": "holiday"
     },
     {
