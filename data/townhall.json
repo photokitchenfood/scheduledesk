@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-23T11:29:17.180Z",
+  "generatedAt": "2026-11-23T22:50:15.218Z",
   "cards": [
     {
       "date": "2026-11-24",
@@ -228,6 +228,12 @@
       "title": "Nov 26: CTG Day 1 Shoot Sourcing",
       "kind": "logistics",
       "person": "Regie"
+    },
+    {
+      "date": "2026-12-01",
+      "title": "Dec 1: TMP Products Pick-Up @ Rockwell",
+      "kind": "logistics",
+      "person": "Lins"
     },
     {
       "date": "2026-12-04",
