@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T06:34:59.168Z",
+  "generatedAt": "2026-11-24T18:27:06.960Z",
   "cards": [
     {
       "date": "2026-11-24",
@@ -14,13 +14,13 @@
       "time": "13:00"
     },
     {
-      "date": "2026-12-15",
-      "title": "Dec 15: 2026 Christmas Party",
+      "date": "2026-11-26",
+      "title": "Nov 26: CTG Alignment Meeting for Remaining Values [INT]",
       "kind": "meeting"
     },
     {
-      "date": "2027-01-05",
-      "title": "Jan 5: PK Website Revamp Photoshoot",
+      "date": "2026-12-15",
+      "title": "Dec 15: 2026 Christmas Party",
       "kind": "meeting"
     },
     {
@@ -90,6 +90,11 @@
       "title": "Dec 17-18: CTG Dec Subscription Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
+    },
+    {
+      "date": "2027-01-05",
+      "title": "Jan 5: PK Website Revamp Photoshoot",
+      "kind": "shoot"
     },
     {
       "date": "2027-01-19",
@@ -234,6 +239,12 @@
       "person": "Regie"
     },
     {
+      "date": "2026-12-03",
+      "title": "Dec 3: TMP Shoot Sourcing",
+      "kind": "logistics",
+      "person": "Regie"
+    },
+    {
       "date": "2026-12-11",
       "title": "Dec 11: PK Website Revamp Sourcing",
       "kind": "logistics",
@@ -278,6 +289,12 @@
     {
       "date": "2026-12-03",
       "title": "Dec 3: Client Gift Distribution (Batch 1)",
+      "kind": "logistics",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2026-12-07",
+      "title": "Dec 7: Client Gift Distribution (Batch 2)",
       "kind": "logistics",
       "person": "Gilbert"
     },
