@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-23T22:50:15.218Z",
+  "generatedAt": "2026-11-24T06:34:59.168Z",
   "cards": [
     {
       "date": "2026-11-24",
@@ -19,6 +19,11 @@
       "kind": "meeting"
     },
     {
+      "date": "2027-01-05",
+      "title": "Jan 5: PK Website Revamp Photoshoot",
+      "kind": "meeting"
+    },
+    {
       "date": "2026-11-23",
       "title": "Nov 23: San Marino Proj Brave Food Shoot @ PK Studio",
       "kind": "shoot"
@@ -35,9 +40,8 @@
     },
     {
       "date": "2026-12-04",
-      "title": "Dec 4: TMP Nov Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
+      "title": "Dec 4: TMP Nov Shoot",
+      "kind": "shoot"
     },
     {
       "date": "2026-12-11",
@@ -230,14 +234,56 @@
       "person": "Regie"
     },
     {
+      "date": "2026-12-11",
+      "title": "Dec 11: PK Website Revamp Sourcing",
+      "kind": "logistics",
+      "person": "Regie"
+    },
+    {
+      "date": "2026-11-25",
+      "title": "Nov 25: CTG Products Delivery (Video)",
+      "kind": "logistics",
+      "person": "Lins"
+    },
+    {
+      "date": "2026-11-27",
+      "title": "Nov 27: CTG Products Delivery (Photo)",
+      "kind": "logistics",
+      "person": "Lins"
+    },
+    {
       "date": "2026-12-01",
       "title": "Dec 1: TMP Products Pick-Up @ Rockwell",
       "kind": "logistics",
       "person": "Lins"
     },
     {
+      "date": "2026-11-24",
+      "title": "Nov 24: Storing Market shelf in Wackwack Storage Room",
+      "kind": "logistics",
+      "person": "Lins"
+    },
+    {
+      "date": "2026-11-25",
+      "title": "Nov 25: TMP Invoice Revision",
+      "kind": "logistics",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2026-11-25",
+      "title": "Nov 25: Return of Provill Props",
+      "kind": "logistics",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2026-12-03",
+      "title": "Dec 3: Client Gift Distribution (Batch 1)",
+      "kind": "logistics",
+      "person": "Gilbert"
+    },
+    {
       "date": "2026-12-04",
-      "title": "Dec 4: The Moment Group Payment Pick-Up [TENT]",
+      "title": "Dec 4: The Moment Group Payment Pick-Up [TENTATIVE]",
       "kind": "logistics",
       "person": "Gilbert"
     },
@@ -250,16 +296,16 @@
   ],
   "leaves": [
     {
-      "date": "2026-11-25",
-      "person": "KC"
-    },
-    {
       "date": "2026-11-23",
       "person": "Andi"
     },
     {
       "date": "2026-11-24",
       "person": "Andi"
+    },
+    {
+      "date": "2026-11-25",
+      "person": "KC"
     },
     {
       "date": "2026-11-25",
