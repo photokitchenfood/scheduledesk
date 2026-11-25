@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T11:52:04.575Z",
+  "generatedAt": "2026-11-25T20:49:34.090Z",
   "cards": [
     {
       "date": "2026-11-24",
@@ -48,6 +48,12 @@
       "date": "2026-12-04",
       "title": "Dec 4: TMP Nov Shoot",
       "kind": "shoot"
+    },
+    {
+      "date": "2026-12-07",
+      "title": "Dec 7: Project Munchies On-Location Shoot [TENTATIVE]",
+      "kind": "shoot",
+      "tentative": true
     },
     {
       "date": "2026-12-11",
