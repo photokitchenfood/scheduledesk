@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T02:41:12.387Z",
+  "generatedAt": "2026-11-25T11:52:04.575Z",
   "cards": [
     {
       "date": "2026-11-24",
@@ -17,6 +17,12 @@
       "date": "2026-11-26",
       "title": "Nov 26: CTG Alignment Meeting for Remaining Values [INT]",
       "kind": "meeting"
+    },
+    {
+      "date": "2026-12-03",
+      "title": "Dec 3: PK Website Revamp PPM @ 2PM",
+      "kind": "meeting",
+      "time": "14:00"
     },
     {
       "date": "2026-12-15",
@@ -252,7 +258,13 @@
     },
     {
       "date": "2026-11-25",
-      "title": "Nov 25: CTG Products Delivery",
+      "title": "Nov 25: CTG Products Delivery (Batch 1)",
+      "kind": "logistics",
+      "person": "Lins"
+    },
+    {
+      "date": "2026-11-26",
+      "title": "Nov 26: CTG Products Delivery (Batch 2)",
       "kind": "logistics",
       "person": "Lins"
     },
@@ -344,6 +356,14 @@
     },
     {
       "date": "2026-12-07",
+      "person": "Kyla"
+    },
+    {
+      "date": "2026-12-08",
+      "person": "Kyla"
+    },
+    {
+      "date": "2026-12-07",
       "person": "Shen"
     },
     {
@@ -361,6 +381,10 @@
     {
       "date": "2026-12-11",
       "person": "Shen"
+    },
+    {
+      "date": "2026-12-18",
+      "person": "Ysay"
     },
     {
       "date": "2026-12-21",
