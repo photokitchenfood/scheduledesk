@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T18:27:06.960Z",
+  "generatedAt": "2026-11-25T02:41:12.387Z",
   "cards": [
     {
       "date": "2026-11-24",
@@ -252,13 +252,7 @@
     },
     {
       "date": "2026-11-25",
-      "title": "Nov 25: CTG Products Delivery (Video)",
-      "kind": "logistics",
-      "person": "Lins"
-    },
-    {
-      "date": "2026-11-27",
-      "title": "Nov 27: CTG Products Delivery (Photo)",
+      "title": "Nov 25: CTG Products Delivery",
       "kind": "logistics",
       "person": "Lins"
     },
@@ -322,11 +316,11 @@
     },
     {
       "date": "2026-11-25",
-      "person": "KC"
+      "person": "Andi"
     },
     {
       "date": "2026-11-25",
-      "person": "Andi"
+      "person": "KC"
     },
     {
       "date": "2026-11-27",
