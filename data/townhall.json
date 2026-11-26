@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T20:49:34.090Z",
+  "generatedAt": "2026-11-26T03:16:51.991Z",
   "cards": [
     {
       "date": "2026-11-24",
@@ -15,8 +15,15 @@
     },
     {
       "date": "2026-11-26",
-      "title": "Nov 26: CTG Alignment Meeting for Remaining Values [INT]",
-      "kind": "meeting"
+      "title": "Nov 26: FS Team Alignment Meeting @ 1PM [INT]",
+      "kind": "meeting",
+      "time": "13:00"
+    },
+    {
+      "date": "2026-11-26",
+      "title": "Nov 26: CTG Alignment Meeting for Remaining Values @ 2PM [INT]",
+      "kind": "meeting",
+      "time": "14:00"
     },
     {
       "date": "2026-12-03",
@@ -51,7 +58,7 @@
     },
     {
       "date": "2026-12-07",
-      "title": "Dec 7: Project Munchies On-Location Shoot [TENTATIVE]",
+      "title": "Dec 7: Quaker Proj Munchies On-Location Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -257,8 +264,14 @@
       "person": "Regie"
     },
     {
+      "date": "2026-12-04",
+      "title": "Dec 4: Receive Quaker Proj Munchies Groceries [TENTATIVE]",
+      "kind": "logistics",
+      "person": "Regie"
+    },
+    {
       "date": "2026-12-11",
-      "title": "Dec 11: PK Website Revamp Sourcing",
+      "title": "Dec 11: Receive PK Website Revamp Groceries",
       "kind": "logistics",
       "person": "Regie"
     },
