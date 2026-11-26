@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-26T03:16:51.991Z",
+  "generatedAt": "2026-11-26T12:56:19.438Z",
   "cards": [
     {
       "date": "2026-11-24",
@@ -26,10 +26,20 @@
       "time": "14:00"
     },
     {
+      "date": "2026-12-01",
+      "title": "Dec 1: Quaker Proj Muchies Feasib [TENTATIVE]",
+      "kind": "meeting"
+    },
+    {
       "date": "2026-12-03",
       "title": "Dec 3: PK Website Revamp PPM @ 2PM",
       "kind": "meeting",
       "time": "14:00"
+    },
+    {
+      "date": "2026-12-03",
+      "title": "Dec 3: Quaker Proj Muchies PPM [TENTATIVE]",
+      "kind": "meeting"
     },
     {
       "date": "2026-12-15",
@@ -264,8 +274,14 @@
       "person": "Regie"
     },
     {
+      "date": "2026-12-03",
+      "title": "Dec 3: Receive Quaker Proj Munchies Groceries [TENTATIVE] [Non-Perishables]",
+      "kind": "logistics",
+      "person": "Regie"
+    },
+    {
       "date": "2026-12-04",
-      "title": "Dec 4: Receive Quaker Proj Munchies Groceries [TENTATIVE]",
+      "title": "Dec 4: Receive Quaker Proj Munchies Groceries [TENTATIVE] [Perishables]",
       "kind": "logistics",
       "person": "Regie"
     },
@@ -326,6 +342,12 @@
     {
       "date": "2026-12-04",
       "title": "Dec 4: The Moment Group Payment Pick-Up [TENTATIVE]",
+      "kind": "logistics",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2026-11-26",
+      "title": "Nov 26: CTG Set Design",
       "kind": "logistics",
       "person": "Gilbert"
     },
