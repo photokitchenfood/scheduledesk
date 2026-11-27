@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-27T04:21:14.678Z",
+  "generatedAt": "2026-11-27T14:04:55.999Z",
   "cards": [
     {
       "date": "2026-11-24",
@@ -49,7 +49,7 @@
     },
     {
       "date": "2026-12-15",
-      "title": "Dec 15: 2026 Christmas Party",
+      "title": "Dec 15: 2026 Christmas Party 🎄",
       "kind": "meeting"
     },
     {
@@ -103,14 +103,8 @@
       "tentative": true
     },
     {
-      "date": "2026-12-15",
-      "title": "Dec 15-16: TMP Dec Shoot [TENTATIVE]",
-      "kind": "shoot",
-      "tentative": true
-    },
-    {
       "date": "2026-12-16",
-      "title": "Dec 15-16: TMP Dec Shoot [TENTATIVE]",
+      "title": "Dec 16: TMP Dec Shoot [TENTATIVE]",
       "kind": "shoot",
       "tentative": true
     },
@@ -168,58 +162,38 @@
       "kind": "holiday"
     },
     {
-      "date": "2026-12-21",
-      "title": "Dec 21-23: Company Break [TENTATIVE]",
-      "kind": "holiday"
-    },
-    {
-      "date": "2026-12-22",
-      "title": "Dec 21-23: Company Break [TENTATIVE]",
-      "kind": "holiday"
-    },
-    {
       "date": "2026-12-23",
-      "title": "Dec 21-23: Company Break [TENTATIVE]",
+      "title": "Dec 23-25: Company Break",
       "kind": "holiday"
     },
     {
       "date": "2026-12-24",
-      "title": "Dec 24 -Jan 4: Company Break",
+      "title": "Dec 23-25: Company Break",
       "kind": "holiday"
     },
     {
       "date": "2026-12-25",
-      "title": "Dec 24 -Jan 4: Company Break",
-      "kind": "holiday"
-    },
-    {
-      "date": "2026-12-28",
-      "title": "Dec 24 -Jan 4: Company Break",
-      "kind": "holiday"
-    },
-    {
-      "date": "2026-12-29",
-      "title": "Dec 24 -Jan 4: Company Break",
+      "title": "Dec 23-25: Company Break",
       "kind": "holiday"
     },
     {
       "date": "2026-12-30",
-      "title": "Dec 24 -Jan 4: Company Break",
+      "title": "Dec 30-Jan 4: Company Break",
       "kind": "holiday"
     },
     {
       "date": "2026-12-31",
-      "title": "Dec 24 -Jan 4: Company Break",
+      "title": "Dec 30-Jan 4: Company Break",
       "kind": "holiday"
     },
     {
       "date": "2027-01-04",
-      "title": "Dec 24 -Jan 4: Company Break",
+      "title": "Dec 30-Jan 4: Company Break",
       "kind": "holiday"
     },
     {
       "date": "2027-01-01",
-      "title": "Dec 24 -Jan 4: Company Break",
+      "title": "Dec 30-Jan 4: Company Break",
       "kind": "holiday"
     },
     {
@@ -334,8 +308,32 @@
       "person": "Gilbert"
     },
     {
+      "date": "2026-12-01",
+      "title": "Dec 1: CTG Invoice Delivery",
+      "kind": "logistics",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2026-12-03",
+      "title": "Dec 3: San Marino Invoice Delivery",
+      "kind": "logistics",
+      "person": "Gilbert"
+    },
+    {
       "date": "2026-12-03",
       "title": "Dec 3: Client Gift Distribution (Batch 1)",
+      "kind": "logistics",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2026-12-04",
+      "title": "Dec 4: Aguila Payments Pickup",
+      "kind": "logistics",
+      "person": "Gilbert"
+    },
+    {
+      "date": "2026-12-07",
+      "title": "Dec 7: The Moment Group Payments Pickup",
       "kind": "logistics",
       "person": "Gilbert"
     },
@@ -346,8 +344,8 @@
       "person": "Gilbert"
     },
     {
-      "date": "2026-12-04",
-      "title": "Dec 4: The Moment Group Payment Pick-Up [TENTATIVE]",
+      "date": "2026-12-18",
+      "title": "Dec 18: CTG Invoice Delivery [TENTATIVE]",
       "kind": "logistics",
       "person": "Gilbert"
     },
@@ -468,6 +466,30 @@
     {
       "date": "2026-12-28",
       "person": "Ikay"
+    },
+    {
+      "date": "2026-12-28",
+      "person": "KC"
+    },
+    {
+      "date": "2026-12-29",
+      "person": "KC"
+    },
+    {
+      "date": "2026-12-30",
+      "person": "KC"
+    },
+    {
+      "date": "2026-12-31",
+      "person": "KC"
+    },
+    {
+      "date": "2027-01-01",
+      "person": "KC"
+    },
+    {
+      "date": "2027-01-04",
+      "person": "KC"
     },
     {
       "date": "2027-03-16",
