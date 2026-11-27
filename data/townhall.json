@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-26T22:02:56.610Z",
+  "generatedAt": "2026-11-27T04:21:14.678Z",
   "cards": [
     {
       "date": "2026-11-24",
@@ -24,6 +24,12 @@
       "title": "Nov 26: CTG Alignment Meeting for Remaining Values @ 2PM [INT]",
       "kind": "meeting",
       "time": "14:00"
+    },
+    {
+      "date": "2026-11-30",
+      "title": "Nov 30: PT Day Rate Proposal Internal Huddle @ 4PM",
+      "kind": "meeting",
+      "time": "16:00"
     },
     {
       "date": "2026-12-01",
