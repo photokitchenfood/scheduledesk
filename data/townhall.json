@@ -1,30 +1,6 @@
 {
-  "generatedAt": "2026-11-27T14:04:55.999Z",
+  "generatedAt": "2026-11-27T22:48:28.050Z",
   "cards": [
-    {
-      "date": "2026-11-24",
-      "title": "Nov 24: Plate This Accounts Alignment @ 10AM",
-      "kind": "meeting",
-      "time": "10:00"
-    },
-    {
-      "date": "2026-11-24",
-      "title": "Nov 24: PK Website Video STB Huddle @ 1PM",
-      "kind": "meeting",
-      "time": "13:00"
-    },
-    {
-      "date": "2026-11-26",
-      "title": "Nov 26: FS Team Alignment Meeting @ 1PM [INT]",
-      "kind": "meeting",
-      "time": "13:00"
-    },
-    {
-      "date": "2026-11-26",
-      "title": "Nov 26: CTG Alignment Meeting for Remaining Values @ 2PM [INT]",
-      "kind": "meeting",
-      "time": "14:00"
-    },
     {
       "date": "2026-11-30",
       "title": "Nov 30: PT Day Rate Proposal Internal Huddle @ 4PM",
@@ -51,16 +27,6 @@
       "date": "2026-12-15",
       "title": "Dec 15: 2026 Christmas Party 🎄",
       "kind": "meeting"
-    },
-    {
-      "date": "2026-11-23",
-      "title": "Nov 23: San Marino Proj Brave Food Shoot @ PK Studio",
-      "kind": "shoot"
-    },
-    {
-      "date": "2026-11-27",
-      "title": "Nov 27: CTG Nov Subscription Shoot [VIDEOS]",
-      "kind": "shoot"
     },
     {
       "date": "2026-12-02",
@@ -242,12 +208,6 @@
       "kind": "holiday"
     },
     {
-      "date": "2026-11-26",
-      "title": "Nov 26: CTG Day 1 Shoot Sourcing",
-      "kind": "logistics",
-      "person": "Regie"
-    },
-    {
       "date": "2026-12-03",
       "title": "Dec 3: TMP Shoot Sourcing",
       "kind": "logistics",
@@ -272,40 +232,10 @@
       "person": "Regie"
     },
     {
-      "date": "2026-11-25",
-      "title": "Nov 25: CTG Products Delivery (Batch 1)",
-      "kind": "logistics",
-      "person": "Lins"
-    },
-    {
-      "date": "2026-11-26",
-      "title": "Nov 26: CTG Products Delivery (Batch 2)",
-      "kind": "logistics",
-      "person": "Lins"
-    },
-    {
       "date": "2026-12-01",
       "title": "Dec 1: TMP Products Pick-Up @ Rockwell",
       "kind": "logistics",
       "person": "Lins"
-    },
-    {
-      "date": "2026-11-24",
-      "title": "Nov 24: Storing Market shelf in Wackwack Storage Room",
-      "kind": "logistics",
-      "person": "Lins"
-    },
-    {
-      "date": "2026-11-25",
-      "title": "Nov 25: TMP Invoice Revision",
-      "kind": "logistics",
-      "person": "Gilbert"
-    },
-    {
-      "date": "2026-11-25",
-      "title": "Nov 25: Return of Provill Props",
-      "kind": "logistics",
-      "person": "Gilbert"
     },
     {
       "date": "2026-12-01",
@@ -348,41 +278,9 @@
       "title": "Dec 18: CTG Invoice Delivery [TENTATIVE]",
       "kind": "logistics",
       "person": "Gilbert"
-    },
-    {
-      "date": "2026-11-26",
-      "title": "Nov 26: CTG Set Design",
-      "kind": "logistics",
-      "person": "Gilbert"
-    },
-    {
-      "date": "2026-11-23",
-      "title": "Nov 23: San Marino Set",
-      "kind": "logistics",
-      "person": "Gilbert"
     }
   ],
   "leaves": [
-    {
-      "date": "2026-11-23",
-      "person": "Andi"
-    },
-    {
-      "date": "2026-11-24",
-      "person": "Andi"
-    },
-    {
-      "date": "2026-11-25",
-      "person": "Andi"
-    },
-    {
-      "date": "2026-11-25",
-      "person": "KC"
-    },
-    {
-      "date": "2026-11-27",
-      "person": "Shen"
-    },
     {
       "date": "2026-11-30",
       "person": "Shen"
